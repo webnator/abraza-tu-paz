@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
-import { ArrowLeft, ArrowRight, Compass, Menu, Plus, X } from 'lucide-react';
+import { ArrowRight, Compass, Menu, Plus, X } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 
@@ -27,13 +27,27 @@ type Scene = {
   discoveries: Discovery[];
 };
 
+type PassageTransition = {
+  toIndex: number;
+  x: string;
+  y: string;
+};
+
+const passageOrigins = {
+  entrada: { x: '54%', y: '51%' },
+  jardin: { x: '49%', y: '36%' },
+  refugio: { x: '55%', y: '38%' },
+};
+
+const gardenReturnOrigin = { x: '31%', y: '82%' };
+
 const scenes: Scene[] = [
   {
     id: 'entrada',
     number: '01',
     name: 'El umbral',
-    image: '/images/entrada-base.avif',
-    foreground: '/images/entrada-primer-plano-v2.avif',
+    image: '/images/entrada-base.jpg',
+    foreground: '/images/entrada-primer-plano-v2.png',
     alt: 'Una verja abierta bajo un arco de piedra cubierto de buganvilla.',
     prompt: 'No tienes que ver el camino entero para poder dar el primer paso.',
     action: 'Abrir la verja',
@@ -43,8 +57,8 @@ const scenes: Scene[] = [
     id: 'jardin',
     number: '02',
     name: 'El jardín',
-    image: '/images/jardin-base.avif',
-    foreground: '/images/jardin-primer-plano.avif',
+    image: '/images/jardin-base.jpg',
+    foreground: '/images/jardin-primer-plano.png',
     alt: 'Un sendero íntimo rodea un pequeño estanque entre plantas silvestres.',
     prompt: '¿Qué necesita encontrar un poco de espacio hoy?',
     action: 'Seguir el sendero',
@@ -73,8 +87,8 @@ const scenes: Scene[] = [
     id: 'refugio',
     number: '03',
     name: 'El refugio',
-    image: '/images/refugio-base.avif',
-    foreground: '/images/refugio-primer-plano.avif',
+    image: '/images/refugio-base.jpg',
+    foreground: '/images/refugio-primer-plano.png',
     alt: 'Dos sillones de mimbre y una mesa esperan en una estancia abierta al jardín.',
     prompt: 'Hay lugares en los que también está bien no saber.',
     action: 'Volver al jardín',
@@ -110,23 +124,63 @@ const scenes: Scene[] = [
   },
 ];
 
+function SceneLayers({ scene }: { scene: Scene }) {
+  return (
+    <>
+      <div className="depth-layer depth-layer--back" aria-hidden="true">
+        <img src={scene.image} alt="" />
+      </div>
+      <div className="scene-shade" aria-hidden="true" />
+      <div className="depth-layer depth-layer--mid" aria-hidden="true">
+        <span className="light-orb light-orb--one" />
+        <span className="light-orb light-orb--two" />
+      </div>
+      {scene.foreground ? (
+        <div className="depth-layer depth-layer--front" aria-hidden="true">
+          <img src={scene.foreground} alt="" />
+        </div>
+      ) : null}
+    </>
+  );
+}
+
 export default function Home() {
   const [sceneIndex, setSceneIndex] = useState(0);
   const [discovery, setDiscovery] = useState<Discovery | null>(null);
   const [mapOpen, setMapOpen] = useState(false);
+  const [transition, setTransition] = useState<PassageTransition | null>(null);
   const stageRef = useRef<HTMLElement>(null);
   const scene = scenes[sceneIndex];
 
-  const goTo = (nextIndex: number) => {
+  const goTo = (nextIndex: number, origin = { x: '50%', y: '50%' }) => {
     setDiscovery(null);
     setMapOpen(false);
-    setSceneIndex(nextIndex);
+    if (nextIndex === sceneIndex || transition) return;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setSceneIndex(nextIndex);
+      return;
+    }
+
+    setTransition({ toIndex: nextIndex, ...origin });
   };
 
   const goForward = () => {
-    if (sceneIndex === scenes.length - 1) goTo(1);
-    else goTo(sceneIndex + 1);
+    const nextIndex = sceneIndex === scenes.length - 1 ? 1 : sceneIndex + 1;
+    goTo(nextIndex, passageOrigins[scene.id as keyof typeof passageOrigins]);
   };
+
+  const finishTransition = () => {
+    if (!transition) return;
+    setSceneIndex(transition.toIndex);
+    setTransition(null);
+  };
+
+  useEffect(() => {
+    if (!transition) return;
+    const fallback = window.setTimeout(finishTransition, 1500);
+    return () => window.clearTimeout(fallback);
+  }, [transition]);
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -134,16 +188,19 @@ export default function Home() {
         setDiscovery(null);
         setMapOpen(false);
       }
-      if (event.key === 'ArrowRight' && !discovery && !mapOpen) {
-        goTo(Math.min(sceneIndex + 1, scenes.length - 1));
+      if (event.key === 'ArrowRight' && !discovery && !mapOpen && !transition) {
+        goTo(
+          Math.min(sceneIndex + 1, scenes.length - 1),
+          passageOrigins[scene.id as keyof typeof passageOrigins],
+        );
       }
-      if (event.key === 'ArrowLeft' && !discovery && !mapOpen) {
-        goTo(Math.max(sceneIndex - 1, 0));
+      if (event.key === 'ArrowLeft' && !discovery && !mapOpen && !transition) {
+        goTo(Math.max(sceneIndex - 1, 0), sceneIndex === 1 ? gardenReturnOrigin : undefined);
       }
     };
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [discovery, mapOpen, sceneIndex]);
+  }, [discovery, mapOpen, scene, sceneIndex, transition]);
 
   const handlePointerMove = (event: React.PointerEvent<HTMLElement>) => {
     if (event.pointerType === 'touch' || !stageRef.current) return;
@@ -174,23 +231,32 @@ export default function Home() {
       ref={stageRef}
       onPointerMove={handlePointerMove}
       onPointerLeave={resetParallax}
-      className="experience"
+      className={`experience${transition ? ' is-transitioning' : ''}`}
+      aria-busy={transition ? 'true' : undefined}
       style={{ '--scene-accent': sceneIndex === 0 ? '#c83d72' : '#f2c84b' } as CSSProperties}
     >
-      <section key={scene.id} className="scene" aria-labelledby="scene-title">
-        <div className="depth-layer depth-layer--back" aria-hidden="true">
-          <img src={scene.image} alt="" />
-        </div>
-        <div className="scene-shade" aria-hidden="true" />
-        <div className="depth-layer depth-layer--mid" aria-hidden="true">
-          <span className="light-orb light-orb--one" />
-          <span className="light-orb light-orb--two" />
-        </div>
-        {scene.foreground ? (
-          <div className="depth-layer depth-layer--front" aria-hidden="true">
-            <img src={scene.foreground} alt="" />
-          </div>
-        ) : null}
+      {transition ? (
+        <section
+          className="scene scene--arriving"
+          style={{ '--passage-x': transition.x, '--passage-y': transition.y } as CSSProperties}
+          aria-hidden="true"
+        >
+          <SceneLayers scene={scenes[transition.toIndex]} />
+        </section>
+      ) : null}
+
+      <section
+        key={scene.id}
+        className={`scene${transition ? ' scene--departing' : ''}`}
+        style={transition ? { '--passage-x': transition.x, '--passage-y': transition.y } as CSSProperties : undefined}
+        aria-labelledby="scene-title"
+        onAnimationEnd={(event) => {
+          if (event.currentTarget === event.target && event.animationName === 'passage-through') {
+            finishTransition();
+          }
+        }}
+      >
+        <SceneLayers scene={scene} />
 
         <p className="sr-only">{scene.alt}</p>
 
@@ -215,21 +281,21 @@ export default function Home() {
         </header>
 
         <div className={`scene-copy scene-copy--${scene.id}`}>
-          <span className="scene-copy__kicker">
-            {sceneIndex === 0 ? 'Un lugar para empezar' : `Capa ${scene.number}`}
-          </span>
           <h1>{scene.prompt}</h1>
-          {sceneIndex === 0 ? (
-            <p>
-              Un espacio para atravesar ansiedad y cambios vitales con más calma,
-              menos juicio y acompañamiento psicológico transpersonal.
-            </p>
-          ) : null}
-          <Button className="path-button" onClick={goForward}>
-            {scene.action}
-            <ArrowRight aria-hidden="true" />
-          </Button>
         </div>
+
+        <button
+          className={`passage-zone passage-zone--${scene.id}`}
+          onClick={goForward}
+          aria-label={`${scene.action} desde el paisaje`}
+        />
+        {scene.id === 'jardin' ? (
+          <button
+            className="passage-zone passage-zone--jardin-back"
+            onClick={() => goTo(0, gardenReturnOrigin)}
+            aria-label="Volver a la verja siguiendo el sendero"
+          />
+        ) : null}
 
         {scene.discoveries.map((item) => (
           <button
@@ -245,19 +311,6 @@ export default function Home() {
           </button>
         ))}
 
-        <div className="journey-controls" aria-label="Navegación por el jardín">
-          <Button variant="ghost" size="icon" onClick={() => goTo(Math.max(sceneIndex - 1, 0))} disabled={sceneIndex === 0} aria-label="Ir a la capa anterior">
-            <ArrowLeft />
-          </Button>
-          <div className="journey-progress" aria-hidden="true">
-            {scenes.map((item, index) => <span key={item.id} className={index === sceneIndex ? 'is-active' : ''} />)}
-          </div>
-          <Button variant="ghost" size="icon" onClick={() => goTo(Math.min(sceneIndex + 1, scenes.length - 1))} disabled={sceneIndex === scenes.length - 1} aria-label="Ir a la siguiente capa">
-            <ArrowRight />
-          </Button>
-        </div>
-
-        <div className="move-hint" aria-hidden="true"><span /> Mueve el cursor para mirar alrededor</div>
       </section>
 
       {discovery ? (
