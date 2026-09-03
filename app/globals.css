@@ -81,7 +81,13 @@
 }
 
 .experience {
-  --back-x: 0px; --back-y: 0px; --mid-x: 0px; --mid-y: 0px; --front-x: 0px; --front-y: 0px;
+  --back-x: 0px; --back-y: 0px; --mid-x: 0px; --mid-y: 0px; --front-x: 0px; --front-y: 0px; --portal-x: 0px; --portal-y: 0px;
+  --portal-rest-scale: .62;
+  --portal-recede-scale: .599;
+  --threshold-duration: 1.4s;
+  --threshold-ease: cubic-bezier(.65,0,.35,1);
+  --garden-passage-duration: 1.65s;
+  --garden-passage-ease: cubic-bezier(.62,0,.28,1);
   position: fixed; inset: 0; isolation: isolate; overflow: hidden; background: #172018;
 }
 
@@ -91,13 +97,46 @@
 .scene--departing .masthead,.scene--departing .scene-copy,.scene--departing .hotspot { animation: passage-ui-out 260ms ease-out both; }
 .scene--departing .depth-layer--front img { animation: passage-foreground 1.25s cubic-bezier(.76,0,.24,1) both; will-change: transform,filter,opacity; }
 .scene--departing .scene-shade { animation: passage-shade-out 1.25s ease-in both; }
+.scene--departing[data-scene='entrada'] { animation: none; }
+.scene--departing[data-scene='entrada'] .portal-world { animation: portal-world-settle var(--threshold-duration) var(--threshold-ease) both; will-change: transform,filter; }
+.scene--departing[data-scene='entrada'] .depth-layer--threshold { z-index: 3; animation: threshold-through var(--threshold-duration) var(--threshold-ease) both; transform-origin: var(--passage-x) var(--passage-y); will-change: transform,filter,opacity; }
+.scene--departing[data-scene='entrada'] .depth-layer--front { animation: threshold-flowers var(--threshold-duration) var(--threshold-ease) both; transform-origin: var(--passage-x) var(--passage-y); will-change: transform,filter,opacity; }
+.scene--departing[data-scene='entrada'] .depth-layer--front img { animation: none; }
+.scene--departing[data-destination='entrada'] { z-index: 1; animation: garden-recede var(--threshold-duration) var(--threshold-ease) both; }
+.scene--departing[data-destination='entrada'] .depth-layer--front img { animation: none; }
+.scene--arriving[data-scene='entrada'] { z-index: 4; animation: none; pointer-events: none; }
+.scene--arriving[data-scene='entrada'] .portal-world { opacity: 0; }
+.scene--arriving[data-scene='entrada'] .depth-layer--threshold { z-index: 3; animation: threshold-return var(--threshold-duration) var(--threshold-ease) both; transform-origin: var(--passage-x) var(--passage-y); will-change: transform,filter,opacity; }
+.scene--arriving[data-scene='entrada'] .depth-layer--front { animation: threshold-flowers-return var(--threshold-duration) var(--threshold-ease) both; transform-origin: var(--passage-x) var(--passage-y); will-change: transform,filter,opacity; }
+.scene--arriving[data-scene='entrada'] .scene-shade { animation: threshold-shade-in var(--threshold-duration) var(--threshold-ease) both; }
+.scene--departing[data-scene='jardin'][data-destination='refugio'],
+.scene--departing[data-scene='refugio'][data-destination='jardin'] { z-index: 3; animation: garden-passage-out var(--garden-passage-duration) var(--garden-passage-ease) both; }
+.scene--arriving[data-origin='jardin'][data-scene='refugio'],
+.scene--arriving[data-origin='refugio'][data-scene='jardin'] { z-index: 2; animation: garden-passage-in var(--garden-passage-duration) var(--garden-passage-ease) both; }
+.scene--departing[data-scene='jardin'][data-destination='refugio'] .depth-layer--front,
+.scene--departing[data-scene='refugio'][data-destination='jardin'] .depth-layer--front { animation: garden-passage-foreground-out var(--garden-passage-duration) var(--garden-passage-ease) both; transform-origin: var(--passage-x) var(--passage-y); }
+.scene--arriving[data-origin='jardin'][data-scene='refugio'] .depth-layer--front,
+.scene--arriving[data-origin='refugio'][data-scene='jardin'] .depth-layer--front { animation: garden-passage-foreground-in var(--garden-passage-duration) var(--garden-passage-ease) both; transform-origin: var(--passage-x) var(--passage-y); }
+.scene--departing[data-scene='jardin'][data-destination='refugio'] .depth-layer--front img,
+.scene--departing[data-scene='refugio'][data-destination='jardin'] .depth-layer--front img { animation: none; }
 .depth-layer, .scene-shade { position: absolute; inset: -5%; pointer-events: none; }
 .depth-layer { transition: transform 850ms cubic-bezier(.16,1,.3,1); will-change: transform; }
 .depth-layer img { width: 100%; height: 100%; object-fit: cover; }
+.portal-world { position: absolute; z-index: 0; inset: -5%; pointer-events: none; transform: translate3d(var(--portal-x),var(--portal-y),0) scale(var(--portal-rest-scale)); transform-origin: 54% 51%; filter: blur(.8px) brightness(.84) saturate(.9); transition: transform 950ms cubic-bezier(.16,1,.3,1), filter 950ms cubic-bezier(.16,1,.3,1); }
+.portal-world img { width: 100%; height: 100%; object-fit: cover; }
 .depth-layer--back { z-index: 0; transform: translate3d(var(--back-x),var(--back-y),0) scale(1.035); }
+.depth-layer--threshold { z-index: 0; transform: translate3d(var(--back-x),var(--back-y),0) scale(1.035); }
 .depth-layer--mid { z-index: 2; transform: translate3d(var(--mid-x),var(--mid-y),0); }
 .depth-layer--front { z-index: 8; inset: -7%; transform: translate3d(var(--front-x),var(--front-y),0) scale(1.08); }
 .scene-shade { z-index: 1; inset: 0; background: linear-gradient(180deg,rgb(10 19 12 / 38%),transparent 32%,rgb(12 16 10 / 8%) 62%,rgb(8 11 7 / 58%)),linear-gradient(90deg,rgb(7 12 8 / 24%),transparent 42%,transparent 67%,rgb(7 12 8 / 18%)); }
+.foliage-occlusion { position: fixed; z-index: 40; inset: -16%; overflow: hidden; pointer-events: none; }
+.foliage-occlusion__shadow { position: absolute; z-index: 0; inset: 0; background: #071008; opacity: 0; animation: foliage-shadow var(--garden-passage-duration) linear both; }
+.foliage-occlusion__piece { position: absolute; z-index: 1; inset: 0; opacity: 0; will-change: transform,filter,opacity; }
+.foliage-occlusion__piece img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.foliage-occlusion__piece--northwest { animation: foliage-northwest var(--garden-passage-duration) var(--garden-passage-ease) both; }
+.foliage-occlusion__piece--northeast { animation: foliage-northeast var(--garden-passage-duration) var(--garden-passage-ease) both; }
+.foliage-occlusion__piece--southwest { animation: foliage-southwest var(--garden-passage-duration) var(--garden-passage-ease) both; }
+.foliage-occlusion__piece--southeast { animation: foliage-southeast var(--garden-passage-duration) var(--garden-passage-ease) both; }
 
 .light-orb { position: absolute; border-radius: 999px; background: rgb(255 239 178 / 16%); filter: blur(24px); animation: breathe 7s ease-in-out infinite alternate; }
 .light-orb--one { width: 9rem; height: 9rem; top: 18%; left: 64%; }
@@ -173,6 +212,22 @@
 @keyframes passage-foreground { 0% { opacity: 1; filter: blur(0); transform: scale(1); } 62% { opacity: 1; filter: blur(0); } 100% { opacity: .18; filter: blur(7px); transform: scale(1.2); } }
 @keyframes passage-shade-out { 0%,55% { opacity: 1; } 100% { opacity: 0; } }
 @keyframes passage-ui-out { to { opacity: 0; filter: blur(3px); transform: scale(.985); } }
+@keyframes portal-world-settle { from { filter: blur(.8px) brightness(.84) saturate(.9); transform: translate3d(var(--portal-x),var(--portal-y),0) scale(var(--portal-rest-scale)); } to { filter: blur(0) brightness(1) saturate(1); transform: translate3d(0,0,0) scale(1.035); } }
+@keyframes threshold-through { 0% { opacity: 1; filter: blur(0); transform: translate3d(var(--back-x),var(--back-y),0) scale(1.035); } 62% { opacity: 1; filter: blur(0); } 100% { opacity: 0; filter: blur(5px); transform: translate3d(0,0,0) scale(2.55); } }
+@keyframes threshold-flowers { 0% { opacity: 1; filter: blur(0); transform: translate3d(var(--front-x),var(--front-y),0) scale(1.08); } 52% { opacity: 1; filter: blur(0); } 100% { opacity: 0; filter: blur(9px); transform: translate3d(0,0,0) scale(3); } }
+@keyframes garden-recede { from { filter: blur(0) brightness(1) saturate(1); transform: scale(1); } to { filter: blur(.8px) brightness(.84) saturate(.9); transform: scale(var(--portal-recede-scale)); } }
+@keyframes threshold-return { from { opacity: 0; filter: blur(5px); transform: translate3d(0,0,0) scale(2.55); } 38% { opacity: 1; } to { opacity: 1; filter: blur(0); transform: translate3d(0,0,0) scale(1.035); } }
+@keyframes threshold-flowers-return { from { opacity: 0; filter: blur(9px); transform: translate3d(0,0,0) scale(3); } 42% { opacity: 1; } to { opacity: 1; filter: blur(0); transform: translate3d(0,0,0) scale(1.08); } }
+@keyframes threshold-shade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes garden-passage-out { 0% { opacity: 1; filter: blur(0); transform: scale(1); } 48% { opacity: 1; filter: blur(0); transform: scale(1.36); } 55%,100% { opacity: 0; filter: blur(5px); transform: scale(1.46); } }
+@keyframes garden-passage-in { 0%,55% { opacity: 0; filter: blur(5px) brightness(.78); transform: scale(1.1); } 65% { opacity: 1; } 100% { opacity: 1; filter: blur(0) brightness(1); transform: scale(1); } }
+@keyframes garden-passage-foreground-out { 0% { opacity: 1; filter: blur(0); transform: translate3d(var(--front-x),var(--front-y),0) scale(1.08); } 48% { opacity: .82; } 56%,100% { opacity: 0; filter: blur(10px); transform: translate3d(0,0,0) scale(1.7); } }
+@keyframes garden-passage-foreground-in { 0%,55% { opacity: 0; filter: blur(8px); transform: translate3d(0,0,0) scale(1.24); } 67% { opacity: .72; } 100% { opacity: 1; filter: blur(0); transform: translate3d(var(--front-x),var(--front-y),0) scale(1.08); } }
+@keyframes foliage-northwest { 0% { opacity: 0; filter: blur(10px) brightness(.9) saturate(.68); transform: translate3d(-6%,-6%,0) scale(1.01); } 18% { opacity: .12; } 48%,58% { opacity: 1; filter: blur(4px) brightness(.48) saturate(.58); transform: translate3d(12%,12%,0) scale(1.03); } 78% { opacity: .12; } 100% { opacity: 0; filter: blur(10px) brightness(.9) saturate(.68); transform: translate3d(-6%,-6%,0) scale(1.01); } }
+@keyframes foliage-northeast { 0% { opacity: 0; filter: blur(10px) brightness(.9) saturate(.68); transform: translate3d(6%,-6%,0) scale(1.01); } 18% { opacity: .12; } 48%,58% { opacity: 1; filter: blur(4px) brightness(.48) saturate(.58); transform: translate3d(-12%,12%,0) scale(1.03); } 78% { opacity: .12; } 100% { opacity: 0; filter: blur(10px) brightness(.9) saturate(.68); transform: translate3d(6%,-6%,0) scale(1.01); } }
+@keyframes foliage-southwest { 0% { opacity: 0; filter: blur(10px) brightness(.9) saturate(.68); transform: translate3d(-6%,6%,0) scale(1.01); } 18% { opacity: .12; } 48%,58% { opacity: 1; filter: blur(4px) brightness(.48) saturate(.58); transform: translate3d(12%,-12%,0) scale(1.03); } 78% { opacity: .12; } 100% { opacity: 0; filter: blur(10px) brightness(.9) saturate(.68); transform: translate3d(-6%,6%,0) scale(1.01); } }
+@keyframes foliage-southeast { 0% { opacity: 0; filter: blur(10px) brightness(.9) saturate(.68); transform: translate3d(6%,6%,0) scale(1.01); } 18% { opacity: .12; } 48%,58% { opacity: 1; filter: blur(4px) brightness(.48) saturate(.58); transform: translate3d(-12%,-12%,0) scale(1.03); } 78% { opacity: .12; } 100% { opacity: 0; filter: blur(10px) brightness(.9) saturate(.68); transform: translate3d(6%,6%,0) scale(1.01); } }
+@keyframes foliage-shadow { 0%,43% { opacity: 0; } 49%,59% { opacity: 1; } 68% { opacity: .42; } 76%,100% { opacity: 0; } }
 @keyframes breathe { to { opacity: .45; transform: translate(1rem,-.8rem) scale(1.2); } }
 @keyframes pulse { 0% { opacity: .7; transform: scale(.8); } 80%,100% { opacity: 0; transform: scale(1.85); } }
 @keyframes fade-in { from { opacity: 0; } }
@@ -194,7 +249,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .scene--arriving,.scene--departing,.scene--departing .masthead,.scene--departing .scene-copy,.scene--departing .hotspot,.scene--departing .depth-layer--front img,.scene--departing .scene-shade,.light-orb,.hotspot__pulse,.reveal__backdrop,.map-panel__backdrop,.reveal__card,.map-panel__sheet { animation: none !important; }
-  .depth-layer,.scene-copy,.passage-zone,.hotspot__dot,.hotspot__label { transition: none !important; }
+  .scene--arriving,.scene--departing,.scene--departing .masthead,.scene--departing .scene-copy,.scene--departing .hotspot,.scene--departing .depth-layer--front,.scene--departing .depth-layer--front img,.scene--departing .depth-layer--threshold,.scene--departing .portal-world,.scene--departing .scene-shade,.foliage-occlusion__shadow,.foliage-occlusion__piece,.light-orb,.hotspot__pulse,.reveal__backdrop,.map-panel__backdrop,.reveal__card,.map-panel__sheet { animation: none !important; }
+  .depth-layer,.portal-world,.scene-copy,.passage-zone,.hotspot__dot,.hotspot__label { transition: none !important; }
   .depth-layer,.scene-copy { transform: none !important; }
 }

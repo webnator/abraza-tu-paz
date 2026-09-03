@@ -39,7 +39,7 @@ const passageOrigins = {
   refugio: { x: '55%', y: '38%' },
 };
 
-const gardenReturnOrigin = { x: '31%', y: '82%' };
+const gardenReturnOrigin = { x: '54%', y: '51%' };
 
 const scenes: Scene[] = [
   {
@@ -127,9 +127,20 @@ const scenes: Scene[] = [
 function SceneLayers({ scene }: { scene: Scene }) {
   return (
     <>
-      <div className="depth-layer depth-layer--back" aria-hidden="true">
-        <img src={scene.image} alt="" />
-      </div>
+      {scene.id === 'entrada' ? (
+        <>
+          <div className="portal-world" aria-hidden="true">
+            <img src={scenes[1].image} alt="" fetchPriority="high" />
+          </div>
+          <div className="depth-layer depth-layer--threshold" aria-hidden="true">
+            <img src="/images/entrada-umbral-v2.webp" alt="" fetchPriority="high" />
+          </div>
+        </>
+      ) : (
+        <div className="depth-layer depth-layer--back" aria-hidden="true">
+          <img src={scene.image} alt="" />
+        </div>
+      )}
       <div className="scene-shade" aria-hidden="true" />
       <div className="depth-layer depth-layer--mid" aria-hidden="true">
         <span className="light-orb light-orb--one" />
@@ -151,11 +162,19 @@ export default function Home() {
   const [transition, setTransition] = useState<PassageTransition | null>(null);
   const stageRef = useRef<HTMLElement>(null);
   const scene = scenes[sceneIndex];
+  const transitionTarget = transition ? scenes[transition.toIndex] : null;
+  const isGardenRefugePassage = Boolean(
+    transitionTarget
+    && ((scene.id === 'jardin' && transitionTarget.id === 'refugio')
+      || (scene.id === 'refugio' && transitionTarget.id === 'jardin')),
+  );
 
   const goTo = (nextIndex: number, origin = { x: '50%', y: '50%' }) => {
     setDiscovery(null);
     setMapOpen(false);
     if (nextIndex === sceneIndex || transition) return;
+
+    resetParallax();
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       setSceneIndex(nextIndex);
@@ -178,9 +197,9 @@ export default function Home() {
 
   useEffect(() => {
     if (!transition) return;
-    const fallback = window.setTimeout(finishTransition, 1500);
+    const fallback = window.setTimeout(finishTransition, isGardenRefugePassage ? 1800 : 1500);
     return () => window.clearTimeout(fallback);
-  }, [transition]);
+  }, [transition, isGardenRefugePassage]);
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -214,6 +233,8 @@ export default function Home() {
     style.setProperty('--mid-y', `${y * -26}px`);
     style.setProperty('--front-x', `${x * -58}px`);
     style.setProperty('--front-y', `${y * -38}px`);
+    style.setProperty('--portal-x', `${x * -10}px`);
+    style.setProperty('--portal-y', `${y * -7}px`);
   };
 
   const resetParallax = () => {
@@ -224,6 +245,8 @@ export default function Home() {
     style?.setProperty('--mid-y', '0px');
     style?.setProperty('--front-x', '0px');
     style?.setProperty('--front-y', '0px');
+    style?.setProperty('--portal-x', '0px');
+    style?.setProperty('--portal-y', '0px');
   };
 
   return (
@@ -238,6 +261,8 @@ export default function Home() {
       {transition ? (
         <section
           className="scene scene--arriving"
+          data-scene={scenes[transition.toIndex].id}
+          data-origin={scene.id}
           style={{ '--passage-x': transition.x, '--passage-y': transition.y } as CSSProperties}
           aria-hidden="true"
         >
@@ -248,10 +273,17 @@ export default function Home() {
       <section
         key={scene.id}
         className={`scene${transition ? ' scene--departing' : ''}`}
+        data-scene={scene.id}
+        data-destination={transition ? scenes[transition.toIndex].id : undefined}
         style={transition ? { '--passage-x': transition.x, '--passage-y': transition.y } as CSSProperties : undefined}
         aria-labelledby="scene-title"
         onAnimationEnd={(event) => {
-          if (event.currentTarget === event.target && event.animationName === 'passage-through') {
+          if (
+            event.currentTarget === event.target
+            && (event.animationName === 'passage-through'
+              || event.animationName === 'garden-recede'
+              || event.animationName === 'garden-passage-out')
+          ) {
             finishTransition();
           }
         }}
@@ -312,6 +344,17 @@ export default function Home() {
         ))}
 
       </section>
+
+      {isGardenRefugePassage ? (
+        <div className="foliage-occlusion" aria-hidden="true">
+          <span className="foliage-occlusion__shadow" />
+          {(['northwest', 'northeast', 'southwest', 'southeast'] as const).map((corner) => (
+            <span className={`foliage-occlusion__piece foliage-occlusion__piece--${corner}`} key={corner}>
+              <img src="/images/transicion-hojas-v4.webp" alt="" />
+            </span>
+          ))}
+        </div>
+      ) : null}
 
       {discovery ? (
         <div className="reveal" role="dialog" aria-modal="true" aria-labelledby="reveal-title">
