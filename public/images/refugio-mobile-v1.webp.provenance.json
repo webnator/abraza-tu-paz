@@ -1,0 +1,171 @@
+{
+  "asset": "refuge-mobile-v1.png",
+  "method": "built-in image_gen",
+  "tool": "image_gen.imagegen",
+  "model": "not exposed by the built-in tool",
+  "generation_calls": 1,
+  "reference_images": [
+    "/Users/unalaptop/Work/abraza-tu-paz/abraza-tu-paz-jardin/research/generated-assets-v2/refuge-objects-v2.png"
+  ],
+  "original_generated_file": "/Users/unalaptop/.codex/generated_images/01a1151c-92e6-7f70-9cb9-483a40309182/exec-b5baaf93-7cbe-4067-8756-987f82176e0b.png",
+  "native_output_dimensions": {
+    "width": 863,
+    "height": 1823
+  },
+  "aspect_ratio": "approximately 9:19",
+  "alpha": false,
+  "exact_prompt": "Use case: photorealistic-natural\nAsset type: native portrait mobile refuge photograph for the Abraza tu Paz website.\nInput image: refuge-objects-v2.png is the visual reference for the exact refuge, architecture, materials, wicker chairs, furniture, garden, lighting and small functional objects. Reframe this same believable room for portrait; do not crop the horizontal photograph or stretch it.\nPrimary request: A tall portrait editorial photograph of the SAME intimate refuge, in a 9:19 aspect ratio (9:16 only if that is the available native portrait ratio). Back the camera modestly away and use a naturally wider room view so all the required objects fit comfortably in the portrait frame with real perspective. Keep the existing large simple rectangular garden opening centrally visible in the upper-middle, both wicker chairs fully recognizable in the lower half, and the small central wooden coffee table with its cup of green matcha visible in front of them.\nComposition and visible object positions in the full native portrait image:\n- Garden passage and path: centered approximately x=50%, y=35%, opening onto the same lush green garden, irregular stone path and restrained pink flowers.\n- Left wicker chair with the source's light cushion and beige throw: approximately x=28%, y=64%, recognizable seat and back, naturally placed.\n- Right wicker chair with the source's muted terracotta cushion: approximately x=74%, y=64%, recognizable seat and back.\n- Bookshelf/library: visibly inside the left side of the frame, approximately x=13%, y=45%, with enough shelves and plain book spines to read clearly as a small library.\n- Small photo stack: on the small left-front wooden side table, approximately x=21%, y=83%, clearly visible flat pale-bordered Polaroid prints, interiors blank or indistinct.\n- One upright blank portrait photo frame: on the right-hand desk, approximately x=84%, y=48%, clearly visible complete modest worn wooden frame with a pale blank interior.\n- Matcha cup: on the central coffee table approximately x=50%, y=74%, with its naturally muted green tea surface clearly visible.\nArrange these objects around the usable center of the image, with comfortable margins; do not put the library, photo stack or desk frame on cropped outer edges. Keep the room's open center legible and preserve natural depth between the chairs, coffee table, side table and desk. Some rug and brick floor can fill the lower portion; use restrained ceiling/wall space above, not large empty stretches.\nPhysical continuity: Same weathered cream stone/plaster walls, worn timber, two wicker armchairs, aged wooden shelves and desk, simple rectangular garden opening, brick floor, woven rug, plants and warm modest lamps as the reference. Same warm late-afternoon sun and natural interior shadow. Photograph as a real human-scale room with a modestly backed-away camera, straight verticals and believable furniture proportions.\nConstraints: Photorealistic natural editorial photograph, no illustrated or rendered look. No people, faces, human likenesses, detailed portraits, readable writing, letters, text, logos, UI, borders or watermark. Photo interiors remain blank for actual photographs to be overlaid later. No extra chairs, extra frames or new decorative objects. No luxury/spa styling, fantasy glow, fisheye distortion, stretching, flattened perspective or oversized furniture.\nOutput: One high-resolution native portrait photograph, preferably 9:19, never a stretched landscape image.",
+  "composition_coordinates": {
+    "garden_passage": {
+      "center_pixels": [
+        449,
+        638
+      ],
+      "center_percent": {
+        "x": 52.03,
+        "y": 35
+      },
+      "bounds_pixels": {
+        "left": 258,
+        "top": 243,
+        "right": 644,
+        "bottom": 1035
+      }
+    },
+    "left_chair": {
+      "center_pixels": [
+        255,
+        980
+      ],
+      "center_percent": {
+        "x": 29.55,
+        "y": 53.76
+      },
+      "bounds_pixels": {
+        "left": 123,
+        "top": 810,
+        "right": 384,
+        "bottom": 1135
+      }
+    },
+    "right_chair": {
+      "center_pixels": [
+        636,
+        973
+      ],
+      "center_percent": {
+        "x": 73.7,
+        "y": 53.37
+      },
+      "bounds_pixels": {
+        "left": 515,
+        "top": 810,
+        "right": 758,
+        "bottom": 1136
+      }
+    },
+    "library": {
+      "center_pixels": [
+        65,
+        711
+      ],
+      "center_percent": {
+        "x": 7.53,
+        "y": 39
+      },
+      "bounds_pixels": {
+        "left": 0,
+        "top": 249,
+        "right": 122,
+        "bottom": 1106
+      }
+    },
+    "polaroid_stack": {
+      "center_pixels": [
+        259,
+        1379
+      ],
+      "center_percent": {
+        "x": 30.01,
+        "y": 75.64
+      },
+      "bounds_pixels": {
+        "left": 200,
+        "top": 1352,
+        "right": 308,
+        "bottom": 1410
+      },
+      "front_blank_interior_quad_pixels": [
+        [
+          213,
+          1376
+        ],
+        [
+          260,
+          1360
+        ],
+        [
+          291,
+          1389
+        ],
+        [
+          243,
+          1400
+        ]
+      ]
+    },
+    "blank_desk_frame": {
+      "center_pixels": [
+        756,
+        767
+      ],
+      "center_percent": {
+        "x": 87.6,
+        "y": 42.07
+      },
+      "bounds_pixels": {
+        "left": 723,
+        "top": 722,
+        "right": 787,
+        "bottom": 809
+      },
+      "blank_interior_quad_pixels": [
+        [
+          745,
+          730
+        ],
+        [
+          778,
+          729
+        ],
+        [
+          768,
+          797
+        ],
+        [
+          733,
+          793
+        ]
+      ]
+    },
+    "matcha_cup": {
+      "center_pixels": [
+        409,
+        1055
+      ],
+      "center_percent": {
+        "x": 47.39,
+        "y": 57.87
+      },
+      "bounds_pixels": {
+        "left": 386,
+        "top": 1024,
+        "right": 438,
+        "bottom": 1090
+      }
+    }
+  },
+  "coordinate_note": "Measured visually from native output; pixel bounds and overlay quadrilaterals are estimates within several pixels. Percentage coordinates apply to full uncropped image space. Final positions differ from approximate prompt targets.",
+  "foreground_asset": "refuge-mobile-foreground-v1.png",
+  "validation": "Portrait is a new coherent room framing, not stretched from the landscape. Both chairs, library, photo stack, blank desk frame and matcha remain visible."
+}

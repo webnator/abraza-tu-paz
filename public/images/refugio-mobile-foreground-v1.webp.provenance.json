@@ -1,0 +1,61 @@
+{
+  "asset": "refuge-mobile-foreground-v1.png",
+  "method": "built-in image_gen",
+  "tool": "image_gen.imagegen",
+  "model": "not exposed by the built-in tool",
+  "generation_calls": 1,
+  "reference_images": [
+    "/Users/unalaptop/.codex/generated_images/01a1151c-92e6-7f70-9cb9-483a40309182/exec-b5baaf93-7cbe-4067-8756-987f82176e0b.png",
+    "/Users/unalaptop/Work/abraza-tu-paz/abraza-tu-paz-jardin/site/public/images/refugio-primer-plano.png"
+  ],
+  "original_generated_file": "/Users/unalaptop/.codex/generated_images/01a1151c-92e6-7f70-9cb9-483a40309182/exec-8486b3ab-8ec1-4fbb-83e9-45e49a1a7035.png",
+  "native_output_dimensions": {
+    "width": 863,
+    "height": 1823
+  },
+  "aspect_ratio": "approximately 9:19",
+  "alpha": true,
+  "exact_prompt": "Use case: photorealistic-natural\nAsset type: transparent portrait foreground leaves overlay for the Abraza tu Paz mobile refuge photograph.\nInput images: Image 1 is the exact portrait refuge background and supplies the canvas ratio, plant color and warm late-afternoon lighting. Image 2 is a horizontal foreground leaf reference only, for natural leaf appearance and shallow foreground depth; do not include its table, pot or horizontal layout.\nPrimary request: Create only a restrained photographic peripheral foreground layer of leaves on a genuinely transparent background, matching Image 1's native 9:19 portrait canvas. Show a modest softly focused warm-green leaf cluster entering from the lower-left edge, and just a few small vine leaves entering from the upper-right corner. It is an overlay layer, not a room photograph or a background.\nExact composition: Lower-left leaves stay within x=0% to x=16%, mostly y=70% to y=100%, with a few natural tips but never beyond x=20%. Upper-right leaves stay within x=90% to x=100%, y=0% to y=15%. Keep the entire center, both chairs, coffee table and matcha cup, central garden doorway, left-front Polaroid stack around x=29%,y=75%, and right desk frame around x=87%,y=42% completely unobstructed. At least 85% of the canvas is completely transparent. Do not place leaves along the central bottom edge.\nStyle/materials: Photorealistic real green leaves, matching the reference room's warm late-afternoon sunlight and intimate natural atmosphere, believable veins and edges, subtle shallow foreground focus. Match the source's plant scale; no oversized leaf shapes that dominate the scene.\nTransparency: Actual alpha channel; fully transparent empty area, including the large center. Natural clean leaf edges without an opaque backdrop or opaque shadow rectangle. Preserve genuine transparency.\nConstraints: Leaves only, with minimal natural connecting petioles if needed. No room, garden background, furniture, tables, pots, people, faces, text, writing, logos, UI, borders or watermark. No checkerboard, solid-color background, white background, fantasy, illustration or plastic texture.\nOutput: One native portrait transparent PNG layer in the same 9:19 aspect as Image 1; preferably exactly 863 by 1823 pixels if available.",
+  "alpha_validation": {
+    "range": [
+      0,
+      255
+    ],
+    "fully_transparent_pixels": 1451775,
+    "total_pixels": 1573249,
+    "fully_transparent_percent": 92.279,
+    "alpha_at_all_functional_hotspots": 0,
+    "tested_hotspots": {
+      "garden_passage": [
+        449,
+        638
+      ],
+      "left_chair": [
+        255,
+        980
+      ],
+      "right_chair": [
+        636,
+        973
+      ],
+      "library": [
+        65,
+        711
+      ],
+      "polaroid_stack": [
+        259,
+        1379
+      ],
+      "blank_desk_frame": [
+        756,
+        767
+      ],
+      "matcha_cup": [
+        409,
+        1055
+      ]
+    }
+  },
+  "composition_notes": "Warm green leaves enter lower-left and upper-right only. Lower-left tips extend beyond requested 20% width near y84–100%, but remain clear of the photo stack at y75.65%. Center and all functional hotspots are transparent.",
+  "reason_for_new_layer": "The existing horizontal foreground contains a foreground tabletop and crop-dependent leaf placement; the native portrait layer preserves depth without hiding mobile objects."
+}

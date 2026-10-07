@@ -1,0 +1,2 @@
+# Preserve supplied workbook bytes, including PDF stream line endings.
+*.pdf binary

@@ -1,0 +1,60 @@
+{
+  "asset": "cartel-madera-v1.png",
+  "method": "built-in image_gen",
+  "tool": "image_gen.imagegen",
+  "model": "not exposed by the built-in tool",
+  "generation_calls": 1,
+  "original_generated_file": "/Users/unalaptop/.codex/generated_images/01a1151c-92e6-7f70-9cb9-483a40309182/exec-7727d7e8-c4af-4381-a507-0c7674edd38d.png",
+  "native_output_dimensions": {
+    "width": 1448,
+    "height": 1086
+  },
+  "aspect_ratio": "4:3",
+  "alpha": true,
+  "alpha_validation": {
+    "range": [
+      0,
+      255
+    ],
+    "transparent_pixels": 646790,
+    "total_pixels": 1572528,
+    "central_wood_rgba": [
+      171,
+      130,
+      96,
+      253
+    ],
+    "top_margin_rgba": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "bottom_margin_rgba": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "exact_prompt": "Use case: photorealistic-natural\nAsset type: standalone blank wooden entrance sign cutout for overlay on a warm photographic garden gate.\nPrimary request: One small humble weathered wooden entrance sign, centered, viewed almost straight on, with subtle realistic wood grain, naturally slightly irregular worn edges and a thin physical wooden thickness.\nComposition/framing: 4:3 landscape canvas. The sign is a single landscape wooden plaque, approximately 85% of the canvas width and 72% of its height, with generous transparent margin on every side. Keep the front surface flat and clearly usable for real text to be laid over it later. Do not angle or distort the readable surface substantially.\nMaterials/textures: Warm muted medium-brown old wood, soft patina, very restrained fine grain, slightly faded natural surface, small real imperfections. Modest garden scale; handmade rather than pristine. Simple natural edge silhouette, not ornamental.\nLighting/mood: Warm soft late-afternoon light from upper left, gently shaded lower-right edge, natural photographic detail.\nTransparency: Genuine transparent background with actual alpha, including fully transparent margins and clean natural wood edges. The only visible object is the wooden sign; no environmental background and no opaque shadow rectangle.\nConstraints: The entire front face is blank, with absolutely no words, letters, numbers, symbols, logos, carvings, painted marks or writing. No attached posts, ropes, chains, nails, leaves, flowers or extra objects. No frame, border, UI or watermark. No illustration, plastic texture, glossy varnish, luxury finish or fantasy styling.",
+  "composition": {
+    "visible_wood_bounds_percent_estimate": {
+      "left": 3.5,
+      "top": 16.5,
+      "right": 96.5,
+      "bottom": 84
+    },
+    "safe_text_area_percent_estimate": {
+      "left": 20,
+      "top": 30,
+      "right": 80,
+      "bottom": 70
+    },
+    "text_center_percent": {
+      "x": 50,
+      "y": 50
+    }
+  },
+  "notes": "Blank front surface. Actual transparent margins verified; no words, letters, posts, ropes or environmental background."
+}

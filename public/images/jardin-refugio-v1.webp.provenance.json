@@ -1,0 +1,49 @@
+{
+  "asset": "jardin-refugio-v1.png",
+  "generated_at_utc": "2026-10-07 06:48:36 UTC",
+  "method": "built-in image_gen",
+  "tool": "image_gen.imagegen",
+  "model": "not exposed by the built-in tool",
+  "generation_calls": 2,
+  "requested_size": "16:9, at least 2048 pixels wide, corrective prompt ideally 2560x1440",
+  "native_output_dimensions": {
+    "width": 1672,
+    "height": 941
+  },
+  "alpha": false,
+  "original_generated_file": "/Users/unalaptop/.codex/generated_images/01a1151c-92e6-7f70-9cb9-483a40309182/exec-27bad0e4-0190-404c-8730-aec63cfb5e64.png",
+  "discarded_first_generation": "/Users/unalaptop/.codex/generated_images/01a1151c-92e6-7f70-9cb9-483a40309182/exec-da91fd22-a4d8-4e69-bdf6-6ced38d94c77.png",
+  "iteration_reason": "First refuge was too large and too close; one corrective edit reduced apparent size and extended path depth.",
+  "reference_images": [
+    "/Users/unalaptop/Work/abraza-tu-paz/abraza-tu-paz-jardin/site/public/images/jardin-base.jpg",
+    "/Users/unalaptop/Work/abraza-tu-paz/abraza-tu-paz-jardin/site/public/images/refugio-base.jpg"
+  ],
+  "initial_prompt": "Use case: photorealistic-natural\nAsset type: wide photographic garden background for the Abraza tu Paz website, 16:9 landscape, preferably at least 2048 pixels wide.\nPrimary request: Create one new natural editorial photograph of an intimate planted garden with a clearly recognizable, modest refuge at the end of its path.\nInput images: Image 1 (jardin-base.jpg) is the garden composition, vegetation, pond and warm-light reference. Image 2 (refugio-base.jpg) is the refuge architecture, scale, materials and interior atmosphere reference. Use these as visual references for the same believable place, not as a collage.\nScene/backdrop: A lush but small domestic garden, with layered green foliage, moss, ferns, restrained pale-pink flowers, subtle canopy shadow and real uneven growth. An imperfect narrow dirt-and-stone path starts at the lower-middle/left foreground and recedes naturally toward the refuge doorway. A modest shallow irregular stone-edged pond lies in the lower-right, with believable dark reflections, small mossy rocks and a quiet visible water surface. Keep the pond close enough to the center that its left and middle water area remains visible in a portrait center crop.\nRefuge: Near the background center, centered approximately at x=58% and y=35% of the complete frame, a small low weathered-stone garden refuge with a simple wooden roof and a covered terrace. Its full exterior should occupy only approximately 18–24% of the frame width and be distant, perspectively small, behind the garden. The open doorway is the obvious destination of the path. Warm amber light glows gently from inside. Through the opening, suggest the same humble cream-plastered room with worn wood and wicker seating as Image 2, without exaggerating visible interior detail at this distance. Vines partially hide the side walls but do not hide the roof, terrace or open doorway. Place the doorway near x=57%, y=39%, with the path visibly reaching its threshold.\nComposition/framing: Human eye-level wide establishing photograph, physically coherent depth and perspective, foreground plants large, distant refuge distinctly smaller. The refuge remains recognizable as a small real building. The central portrait crop must retain the doorway, roof, path and some pond. Use natural edge foliage framing; keep center and doorway unobstructed. No additional buildings.\nLighting/mood: Late-afternoon warm dappled sun, matching both references; intimate, still, grounded and welcoming. Detailed natural shadows and moss-green shade, with warm highlights. Natural photographic color balance and real photographic texture.\nMaterials/textures: Irregular old stone, lightly worn wooden roof beams, warm aged plaster, damp soil, moss and imperfect flagstones. No pristine landscaping or polished surfaces.\nConstraints: One photorealistic photograph; no people, writing, text, logos, UI, frames or watermark. No luxury resort, spa, oversized pavilion, monumental architecture, fantasy cottage, illustrated aesthetic, surreal glow, overdone bokeh or plastic-looking leaves.",
+  "corrective_prompt": "Use case: precise-object-edit\nAsset type: photorealistic-natural wide 16:9 garden photograph for a website.\nInput images: Image 1 is the garden image to correct; Image 2 is the architecture and warm interior reference for the refuge.\nPrimary request: Correct only the scale and distance of the refuge in Image 1. It is currently too large and too close. Make the whole refuge much more distant and smaller, at about two-thirds of its current apparent width, by physically extending the garden and path into the background before its doorway.\nPrecise composition: The whole small building including its wooden roof should fit within x=47% to x=69% of the image, and y=23% to y=46% of the image, centered at x=58%, y=35%. The roof must no longer reach the top edge; above it show real sunlit background foliage and canopy. The warm open doorway should occupy approximately x=56% to x=62%, y=31% to y=43%. The narrow winding stone-and-dirt path must naturally recede into depth and reach the threshold near x=59%, y=44%. Garden plants may partially overlap the side walls without hiding the doorway or roof. The building is a humble garden room with old stone, aged cream plaster and a modest weathered wooden roof, a covered terrace, and subtle warm light inside, physically consistent with Image 2. Interior wicker seating may only be hinted at in miniature at this farther distance.\nInvariants: Preserve the full garden composition, foreground scale, stone path in the lower half, pond in the lower-right, green ferns, moss, old stool, terracotta pot, foliage, restrained pink flowers, camera position, aspect ratio and warm late-afternoon light. Keep the central crop usable with doorway and part of the pond visible. Photographic realism with coherent depth and perspective, not pasted or composited-looking.\nOutput: One high-resolution wide 16:9 photograph, ideally 2560 by 1440 pixels or at least 2048 pixels wide.\nAvoid: People, text, logos, UI, watermarks, extra buildings, luxury resort, spa, fantasy, monumental architecture, harsh glow, illustration or plastic textures.",
+  "measured_composition_estimates": {
+    "refuge_visible_bounds_percent": {
+      "left": 52,
+      "top": 20,
+      "right": 71,
+      "bottom": 40
+    },
+    "doorway_bounds_percent": {
+      "left": 58,
+      "top": 27,
+      "right": 62.5,
+      "bottom": 38
+    },
+    "doorway_hotspot_percent": {
+      "x": 60.3,
+      "y": 32.5
+    },
+    "pond_visible_area_percent": {
+      "left": 53,
+      "top": 52,
+      "right": 89,
+      "bottom": 91
+    }
+  },
+  "foreground_recommendation": "Reuse site/public/images/jardin-primer-plano.png (1672x941, alpha verified); warm green edge foliage matches. Keep full-image registration and monitor the lower edge so it does not cover too much visible pond.",
+  "limitation": "Built-in tool returned native 1672x941 despite larger resolution requested. No enlargement applied."
+}

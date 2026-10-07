@@ -1,0 +1,50 @@
+# Abraza tu Paz
+
+Una experiencia inmersiva de tres espacios —entrada, jardín y refugio— con acceso directo al contenido mediante un menú editorial.
+
+## Desarrollo local
+
+```sh
+npm run dev -- --port 3000
+```
+
+Se utiliza el proyecto React/Vinext existente y su configuración de Sites. Esta iteración no se ha desplegado.
+
+## Contenido y rutas
+
+`/terapia`, `/gabriela`, `/biblioteca`, `/reflexiones`, `/proyectos`, `/contacto`.
+
+Cada recurso tiene una ruta bajo `/biblioteca/`. Las reflexiones tienen sus propias rutas bajo `/reflexiones/`. Los objetos del refugio y el menú abren los mismos destinos. El contenido está renderizado en servidor; cerrar la lectura regresa al paisaje conservando la escena.
+
+Los textos se definen en `lib/content.ts` y `components/editorial-content.tsx`. Las interacciones editoriales están en `components/editorial-interactions.tsx`; las escenas y el menú, en `components/experience.tsx`.
+
+## Verificación
+
+```sh
+npx tsc --noEmit
+npm run build
+node scripts/verify-site.mjs
+```
+
+El verificador necesita el servidor local. Comprueba todas las rutas, títulos, descripciones, contenido renderizado, imágenes, los cuatro PDFs originales y una ruta inexistente. El resultado se guarda en `docs/review/http-verification.json`.
+
+`scripts/capture-review.mjs` captura el conjunto de escenas y páginas de referencia en escritorio y móvil mediante agent-browser. Los resultados están en `.impeccable/review/`, fuera de Git.
+
+## Activos y fuentes
+
+Las fuentes se conservan en `../research/sources/`; las nuevas imágenes originales y prompts, en `../research/generated-assets-v2/`. Las fotografías optimizadas, portadas y recursos se sirven desde `public/`. Los cuatro PDFs mantienen exactamente los bytes originales.
+
+Para reproducir la preparación de activos se necesita `sips`, Poppler y Sharp. El script acepta la carpeta Node que contiene Sharp como primer argumento; por defecto busca las dependencias del proyecto:
+
+```sh
+node scripts/prepare-assets.mjs /ruta/a/runtime/node
+node scripts/record-assets.mjs
+```
+
+No son pasos necesarios para ejecutar o compilar la web; los activos optimizados están incluidos.
+
+## Revisión antes de publicar
+
+Ver `docs/review/contenido-y-publicacion.md` para las condiciones de sesiones, reserva, revisión clínica y editorial, fotografías, vídeo y workbooks. El contacto actual utiliza el perfil público `@abrazatupaz`. No hay precios, enlaces de reserva ni credenciales inventadas.
+
+La rama de implementación es `atp-web-completa`. `immersive-transition-v2` conserva la oclusión vegetal original y `camera-turn-v3` la variante de giro de cámara.

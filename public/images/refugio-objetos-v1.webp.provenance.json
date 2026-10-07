@@ -1,0 +1,88 @@
+{
+  "asset": "refuge-objects-v2.png",
+  "method": "built-in image_gen",
+  "tool": "image_gen.imagegen",
+  "model": "not exposed by the built-in tool",
+  "generation_calls": 2,
+  "original_generated_file": "/Users/unalaptop/.codex/generated_images/01a1151c-92e6-7f70-9cb9-483a40309182/exec-2bb1a35a-174d-4309-8827-a0cf66c6ce37.png",
+  "intermediate_generated_file": "/Users/unalaptop/.codex/generated_images/01a1151c-92e6-7f70-9cb9-483a40309182/exec-e7dbda6a-676e-4323-b1cc-09c31865b2d2.png",
+  "reference_images": [
+    "/Users/unalaptop/Work/abraza-tu-paz/abraza-tu-paz-jardin/research/generated-assets-v2/refuge-objects-v1.png"
+  ],
+  "native_output_dimensions": {
+    "width": 1672,
+    "height": 941
+  },
+  "alpha": false,
+  "initial_exact_prompt": "Use case: precise-object-edit\nAsset type: photorealistic 16:9 refuge interior photograph for the Abraza tu Paz website.\nInput image: refuge-objects-v1.png is the exact edit target.\nPrimary request: Move only the existing single upright blank wooden photograph frame from the extreme-right desk edge to the clearly visible leftward area of that same right-hand desk, centered at approximately x=85% of the entire image width and y=43% of its height. It must sit naturally on the existing desktop with coherent perspective and matching warm light. Target the frame's outer bounding box around x=82% to x=88% and y=35.5% to y=50.5%, approximately 6% frame width by 15% frame height. Keep it a single small modest worn wooden tabletop frame, upright and gently tilted, with a pale blank interior that will receive an actual photograph later. The full frame must remain inside this clearly visible desk region. Remove the old frame from the extreme right, leaving the underlying tabletop, wall and nearby existing objects naturally restored. There must be exactly one photo frame on the right desk.\nInvariants: Preserve all architecture, shelves, plants, the two wicker chairs and cushions, matcha cup and its visible green contents, center wooden coffee table and book, blank Polaroid photograph stack on the left-front table, other furniture and objects, rug, brick floor, open garden doorway, garden beyond, natural shadows, warm late-afternoon light, exact camera position, original 16:9 crop and complete composition. Do not move the chair or desk to make room; simply reposition the one frame on its existing tabletop. Do not change the frame into a wall hanging.\nConstraints: Natural photographic perspective, materials, scale and shadows. Blank photo interior only: no people, faces, likenesses, picture details, text, letters, numbers, logos, UI or watermark. No extra props, no extra photographs or frames, no redesigned furniture or architecture.\nOutput: One photograph, same native wide composition as the source.",
+  "corrective_size_prompt": "Use case: precise-object-edit\nInput image: the refuge photograph with its blank upright tabletop photo frame already moved to the visible right-hand desk.\nPrimary request: One targeted size correction to that same single blank wooden photo frame. Increase its width and height by approximately 45–50% so its outer dimensions become about 6% of the full image width and 14–15% of the full image height. Keep its horizontal center near x=85–86%, inside the visible right desk. Anchor the frame's bottom naturally to its current desktop surface and let the additional height extend upward, so it remains physically standing on the desk. Preserve its wooden construction, upright lightly tilted perspective, simple pale blank interior, warm light and natural contact shadow. Keep exactly one frame in this position and keep the extreme-right desktop free of the removed original.\nInvariants: Change only this frame's size and its immediate physically necessary shadow. Preserve all matcha cup details, the two wicker chairs and cushions, center coffee table and book, left-front Polaroid stack, desk, lamp, other plants and objects, architecture, floor and rug, open garden view, camera position, 16:9 composition, light and color. Do not move any furniture or other props.\nConstraints: Blank frame interior; no people, faces, portrait details, letters, writing, logos, UI or watermark. Photographic realism and desk-scale physical perspective.",
+  "requested_change": "Move the one blank upright right-desk frame from extreme x97% to visible desk around x85%,y43%, approximately 6% width by 15% height. A corrective edit increased the undersized first result.",
+  "final_frame_coordinates": {
+    "note": "Measured visually in native source image space; corners are estimates within several pixels.",
+    "bounds_pixels": {
+      "left": 1397,
+      "top": 330,
+      "right": 1484,
+      "bottom": 432
+    },
+    "center_pixels": {
+      "x": 1440,
+      "y": 381
+    },
+    "center_percent": {
+      "x": 86.12,
+      "y": 40.49
+    },
+    "outer_quad_pixels": [
+      [
+        1415,
+        330
+      ],
+      [
+        1484,
+        331
+      ],
+      [
+        1469,
+        431
+      ],
+      [
+        1397,
+        428
+      ]
+    ],
+    "blank_interior_quad_pixels": [
+      [
+        1421,
+        339
+      ],
+      [
+        1474,
+        340
+      ],
+      [
+        1462,
+        420
+      ],
+      [
+        1409,
+        417
+      ]
+    ],
+    "apparent_size_percent": {
+      "width": 5.2,
+      "height": 10.84
+    }
+  },
+  "unchanged_object_hotspots_percent": {
+    "matcha_cup": {
+      "x": 49.64,
+      "y": 68.76
+    },
+    "polaroid_stack": {
+      "x": 24.82,
+      "y": 88.63
+    }
+  },
+  "notes": "Single blank wooden frame now visibly stands on the right desk inside desktop crop. Actual final frame is somewhat smaller than requested height; current scale fits naturally on the existing desktop and is more prominent than the first correction. Matcha, chairs, garden, furniture and photo stack remain present in the original composition."
+}

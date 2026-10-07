@@ -1,0 +1,180 @@
+{
+  "origin": "http://localhost:3000",
+  "checkedAt": "2026-10-07T07:40:40.793Z",
+  "checks": [
+    {
+      "path": "/",
+      "status": 200,
+      "title": "Abraza tu Paz — un lugar para atravesarlo",
+      "description": true,
+      "heading": true,
+      "serverRenderedContent": true,
+      "imageErrors": 0,
+      "pass": true
+    },
+    {
+      "path": "/terapia",
+      "status": 200,
+      "title": "Terapia · Abraza tu Paz",
+      "description": true,
+      "heading": true,
+      "serverRenderedContent": true,
+      "imageErrors": 0,
+      "pass": true
+    },
+    {
+      "path": "/gabriela",
+      "status": 200,
+      "title": "Quién te acompaña · Abraza tu Paz",
+      "description": true,
+      "heading": true,
+      "serverRenderedContent": true,
+      "imageErrors": 0,
+      "pass": true
+    },
+    {
+      "path": "/biblioteca",
+      "status": 200,
+      "title": "Biblioteca · Abraza tu Paz",
+      "description": true,
+      "heading": true,
+      "serverRenderedContent": true,
+      "imageErrors": 0,
+      "pass": true
+    },
+    {
+      "path": "/reflexiones",
+      "status": 200,
+      "title": "Reflexiones · Abraza tu Paz",
+      "description": true,
+      "heading": true,
+      "serverRenderedContent": true,
+      "imageErrors": 0,
+      "pass": true
+    },
+    {
+      "path": "/proyectos",
+      "status": 200,
+      "title": "Proyectos · Abraza tu Paz",
+      "description": true,
+      "heading": true,
+      "serverRenderedContent": true,
+      "imageErrors": 0,
+      "pass": true
+    },
+    {
+      "path": "/contacto",
+      "status": 200,
+      "title": "¿Hablamos? · Abraza tu Paz",
+      "description": true,
+      "heading": true,
+      "serverRenderedContent": true,
+      "imageErrors": 0,
+      "pass": true
+    },
+    {
+      "path": "/biblioteca/adulto-responsable",
+      "status": 200,
+      "title": "Ser mi propio adulto responsable · Abraza tu Paz",
+      "description": true,
+      "heading": true,
+      "serverRenderedContent": true,
+      "imageErrors": 0,
+      "pass": true
+    },
+    {
+      "path": "/biblioteca/vinculos-que-se-transforman",
+      "status": 200,
+      "title": "Vínculos que se transforman · Abraza tu Paz",
+      "description": true,
+      "heading": true,
+      "serverRenderedContent": true,
+      "imageErrors": 0,
+      "pass": true
+    },
+    {
+      "path": "/biblioteca/descifrando-la-frustracion",
+      "status": 200,
+      "title": "Descifrando la frustración · Abraza tu Paz",
+      "description": true,
+      "heading": true,
+      "serverRenderedContent": true,
+      "imageErrors": 0,
+      "pass": true
+    },
+    {
+      "path": "/biblioteca/transitar-las-fiestas",
+      "status": 200,
+      "title": "Transitar las fiestas fiel a ti · Abraza tu Paz",
+      "description": true,
+      "heading": true,
+      "serverRenderedContent": true,
+      "imageErrors": 0,
+      "pass": true
+    },
+    {
+      "path": "/reflexiones/cambiar-tambien-es-perder",
+      "status": 200,
+      "title": "Cambiar también puede sentirse como perder · Abraza tu Paz",
+      "description": true,
+      "heading": true,
+      "serverRenderedContent": true,
+      "imageErrors": 0,
+      "pass": true
+    },
+    {
+      "path": "/reflexiones/poner-un-limite-y-sentir-culpa",
+      "status": 200,
+      "title": "Poner un límite y sentir culpa · Abraza tu Paz",
+      "description": true,
+      "heading": true,
+      "serverRenderedContent": true,
+      "imageErrors": 0,
+      "pass": true
+    },
+    {
+      "path": "/reflexiones/cuando-tu-cabeza-no-para",
+      "status": 200,
+      "title": "Cuando tu cabeza no para · Abraza tu Paz",
+      "description": true,
+      "heading": true,
+      "serverRenderedContent": true,
+      "imageErrors": 0,
+      "pass": true
+    },
+    {
+      "resource": "adulto-responsable.pdf",
+      "status": 200,
+      "unchanged": true,
+      "bytes": 2484024,
+      "pass": true
+    },
+    {
+      "resource": "vinculos-que-se-transforman.pdf",
+      "status": 200,
+      "unchanged": true,
+      "bytes": 2226944,
+      "pass": true
+    },
+    {
+      "resource": "descifrando-la-frustracion.pdf",
+      "status": 200,
+      "unchanged": true,
+      "bytes": 754667,
+      "pass": true
+    },
+    {
+      "resource": "transitar-las-fiestas.pdf",
+      "status": 200,
+      "unchanged": true,
+      "bytes": 3399424,
+      "pass": true
+    },
+    {
+      "path": "/no-existe-este-camino",
+      "status": 404,
+      "pass": true
+    }
+  ],
+  "failed": 0
+}

@@ -1,0 +1,142 @@
+[
+  {
+    "asset": "public/og.png",
+    "kind": "existing project asset",
+    "source": "immersive-transition-v2"
+  },
+  {
+    "asset": "public/images/cartel-madera-v1.webp",
+    "kind": "built-in image_gen",
+    "source": "cartel-madera-v1.png"
+  },
+  {
+    "asset": "public/images/entrada-base.jpg",
+    "kind": "existing project asset",
+    "source": "immersive-transition-v2"
+  },
+  {
+    "asset": "public/images/entrada-primer-plano-v2.png",
+    "kind": "existing project asset",
+    "source": "immersive-transition-v2"
+  },
+  {
+    "asset": "public/images/entrada-primer-plano-v2.webp",
+    "kind": "existing project asset",
+    "source": "immersive-transition-v2"
+  },
+  {
+    "asset": "public/images/entrada-umbral-v2.png",
+    "kind": "existing project asset",
+    "source": "immersive-transition-v2"
+  },
+  {
+    "asset": "public/images/entrada-umbral-v2.webp",
+    "kind": "existing project asset",
+    "source": "immersive-transition-v2"
+  },
+  {
+    "asset": "public/images/jardin-base.jpg",
+    "kind": "existing project asset",
+    "source": "immersive-transition-v2"
+  },
+  {
+    "asset": "public/images/jardin-primer-plano.png",
+    "kind": "existing project asset",
+    "source": "immersive-transition-v2"
+  },
+  {
+    "asset": "public/images/jardin-primer-plano.webp",
+    "kind": "existing project asset",
+    "source": "immersive-transition-v2"
+  },
+  {
+    "asset": "public/images/jardin-refugio-v1.webp",
+    "kind": "built-in image_gen",
+    "source": "jardin-refugio-v1.png"
+  },
+  {
+    "asset": "public/images/refugio-base.jpg",
+    "kind": "existing project asset",
+    "source": "immersive-transition-v2"
+  },
+  {
+    "asset": "public/images/refugio-mobile-foreground-v1.webp",
+    "kind": "built-in image_gen",
+    "source": "refuge-mobile-foreground-v1.png"
+  },
+  {
+    "asset": "public/images/refugio-mobile-v1.webp",
+    "kind": "built-in image_gen",
+    "source": "refuge-mobile-v1.png"
+  },
+  {
+    "asset": "public/images/refugio-objetos-v1.webp",
+    "kind": "built-in image_gen",
+    "source": "refuge-objects-v2.png"
+  },
+  {
+    "asset": "public/images/refugio-primer-plano.png",
+    "kind": "existing project asset",
+    "source": "immersive-transition-v2"
+  },
+  {
+    "asset": "public/images/refugio-primer-plano.webp",
+    "kind": "existing project asset",
+    "source": "immersive-transition-v2"
+  },
+  {
+    "asset": "public/images/transicion-hojas-v4.png",
+    "kind": "existing project asset",
+    "source": "immersive-transition-v2"
+  },
+  {
+    "asset": "public/images/transicion-hojas-v4.webp",
+    "kind": "existing project asset",
+    "source": "immersive-transition-v2"
+  },
+  {
+    "asset": "public/photographs/familia.webp",
+    "kind": "supplied photograph",
+    "source": "immersive-transition-v2"
+  },
+  {
+    "asset": "public/photographs/gabriela-cotidiana.webp",
+    "kind": "supplied photograph",
+    "source": "immersive-transition-v2"
+  },
+  {
+    "asset": "public/photographs/gabriela-viaje.webp",
+    "kind": "supplied photograph",
+    "source": "immersive-transition-v2"
+  },
+  {
+    "asset": "public/photographs/maternidad.webp",
+    "kind": "supplied photograph",
+    "source": "immersive-transition-v2"
+  },
+  {
+    "asset": "public/photographs/pareja-paris.webp",
+    "kind": "supplied photograph",
+    "source": "immersive-transition-v2"
+  },
+  {
+    "asset": "public/resources/adulto-responsable.webp",
+    "kind": "supplied PDF cover",
+    "source": "immersive-transition-v2"
+  },
+  {
+    "asset": "public/resources/descifrando-la-frustracion.webp",
+    "kind": "supplied PDF cover",
+    "source": "immersive-transition-v2"
+  },
+  {
+    "asset": "public/resources/transitar-las-fiestas.webp",
+    "kind": "supplied PDF cover",
+    "source": "immersive-transition-v2"
+  },
+  {
+    "asset": "public/resources/vinculos-que-se-transforman.webp",
+    "kind": "supplied PDF cover",
+    "source": "immersive-transition-v2"
+  }
+]
