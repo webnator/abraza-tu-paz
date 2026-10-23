@@ -19,6 +19,7 @@ import {
   DialogClose,
 } from '@/components/ui/dialog';
 import { destinations, titleForPath, destinationForPath } from '@/lib/content';
+import { Polaroids } from '@/components/editorial-interactions';
 
 type SceneId = 'entrada' | 'jardin' | 'refugio';
 type Scene = {
@@ -78,7 +79,7 @@ const locations = [
   {
     id: 'gabriela',
     label: 'Mi historia',
-    href: '/gabriela#polaroids',
+    href: '/#polaroids',
     x: 24.8,
     y: 87,
     mx: 30.01,
@@ -151,12 +152,12 @@ function SceneLayers({ scene, reload }: { scene: Scene; reload: number }) {
               />
               <img
                 className="table-photo table-photo--one"
-                src="/photographs/pareja-paris.webp"
+                src="/photographs/polaroid-paris.webp"
                 alt=""
               />
               <img
                 className="table-photo table-photo--two"
-                src="/photographs/familia.webp"
+                src="/photographs/polaroid-septiembre-2026.webp"
                 alt=""
               />
             </>
@@ -188,6 +189,7 @@ export function Experience({ children }: { children: ReactNode }) {
   const reading = path !== '/';
   const [sceneIndex, setSceneIndex] = useState(reading ? 2 : 0);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [albumOpen, setAlbumOpen] = useState(false);
   const [transition, setTransition] = useState<Passage | null>(null);
   const [inspected, setInspected] = useState<{ x: number; y: number } | null>(
     null,
@@ -239,6 +241,23 @@ export function Experience({ children }: { children: ReactNode }) {
     }, 180);
     return () => window.clearTimeout(timer);
   }, [path, reading]);
+  useEffect(() => {
+    // Old album links also enter the existing refuge, never a second photo page.
+    if (window.location.hash !== '#polaroids') {
+      setAlbumOpen(false);
+      return;
+    }
+    if (path !== '/') {
+      router.replace('/#polaroids', { scroll: false });
+      return;
+    }
+    setSceneIndex(2);
+    setMenuOpen(false);
+    setAlbumOpen(true);
+    setInspected(
+      window.innerWidth <= 720 ? { x: 30.01, y: 75.64 } : { x: 24.8, y: 87 },
+    );
+  }, [path, router]);
   useEffect(() => {
     const assets = [
       window.innerWidth <= 720 && scene.mobileImage
@@ -366,11 +385,27 @@ export function Experience({ children }: { children: ReactNode }) {
     lastFocus.current = document.activeElement as HTMLElement;
     setInspected({ x, y });
     resetParallax();
+    if (href === '/#polaroids') {
+      setAlbumOpen(true);
+      return;
+    }
     if (inspectTimer.current) clearTimeout(inspectTimer.current);
     inspectTimer.current = setTimeout(
       () => router.push(href),
       reducedMotion ? 0 : 350,
     );
+  };
+  const closeAlbum = () => {
+    setAlbumOpen(false);
+    setInspected(null);
+    if (window.location.hash === '#polaroids')
+      window.history.replaceState(window.history.state, '', '/');
+    window.setTimeout(() => {
+      const target = lastFocus.current?.isConnected
+        ? lastFocus.current
+        : document.querySelector<HTMLElement>('.hotspot--gabriela');
+      target?.focus({ preventScroll: true });
+    }, 150);
   };
   const closeReading = () => {
     cameFromLandscape.current = false;
@@ -400,13 +435,13 @@ export function Experience({ children }: { children: ReactNode }) {
         closeReading();
         return;
       }
-      if (reading || menuOpen || transition) return;
+      if (reading || menuOpen || albumOpen || transition) return;
       if (event.key === 'ArrowRight') void goTo(Math.min(sceneIndex + 1, 2));
       if (event.key === 'ArrowLeft') void goTo(Math.max(sceneIndex - 1, 0));
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [reading, menuOpen, transition, sceneIndex, goTo]);
+  }, [reading, menuOpen, albumOpen, transition, sceneIndex, goTo]);
   const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
     if (
       !stageRef.current ||
@@ -459,9 +494,9 @@ export function Experience({ children }: { children: ReactNode }) {
     <>
       <div
         ref={stageRef}
-        role={reading || menuOpen ? undefined : 'main'}
+        role={reading || menuOpen || albumOpen ? undefined : 'main'}
         aria-label="La experiencia de Abraza tu Paz"
-        className={`experience${transition ? ' is-transitioning' : ''}${inspected ? ' is-inspecting' : ''}${reading || menuOpen ? ' is-reading' : ''}`}
+        className={`experience${transition ? ' is-transitioning' : ''}${inspected ? ' is-inspecting' : ''}${albumOpen ? ' is-viewing-album' : ''}${reading || menuOpen ? ' is-reading' : ''}`}
         style={
           inspected
             ? ({
@@ -520,8 +555,10 @@ export function Experience({ children }: { children: ReactNode }) {
               : undefined
           }
           aria-label={`El ${scene.name.toLowerCase()}`}
-          aria-hidden={reading || menuOpen ? true : undefined}
-          inert={reading || menuOpen || !!transition ? true : undefined}
+          aria-hidden={reading || menuOpen || albumOpen ? true : undefined}
+          inert={
+            reading || menuOpen || albumOpen || !!transition ? true : undefined
+          }
         >
           <div ref={worldRef} className="scene-world">
             <SceneLayers scene={scene} reload={reload} />
@@ -654,8 +691,8 @@ export function Experience({ children }: { children: ReactNode }) {
         </section>
         <header
           className="masthead"
-          inert={reading || menuOpen ? true : undefined}
-          aria-hidden={reading || menuOpen ? true : undefined}
+          inert={reading || menuOpen || albumOpen ? true : undefined}
+          aria-hidden={reading || menuOpen || albumOpen ? true : undefined}
         >
           <button
             className="wordmark"
@@ -703,6 +740,35 @@ export function Experience({ children }: { children: ReactNode }) {
           </div>
         ) : null}
       </div>
+      <Dialog
+        open={albumOpen}
+        onOpenChange={(open) => {
+          if (!open) closeAlbum();
+        }}
+      >
+        <DialogContent
+          className="refuge-album"
+          backdropClassName="refuge-album-backdrop"
+          showCloseButton={false}
+        >
+          <DialogTitle className="sr-only">
+            Las fotografías del refugio
+          </DialogTitle>
+          <DialogDescription className="sr-only">
+            Siete polaroids de Gabriela. Puedes recorrerlas con las flechas y
+            dejarlas sobre la mesa para seguir explorando el refugio.
+          </DialogDescription>
+          <DialogClose className="refuge-album__close">
+            Dejar las fotos <X size={19} aria-hidden="true" />
+          </DialogClose>
+          <Polaroids
+            onNavigate={() => {
+              setAlbumOpen(false);
+              setInspected(null);
+            }}
+          />
+        </DialogContent>
+      </Dialog>
       <Dialog open={menuOpen} onOpenChange={setMenuOpen}>
         <DialogContent className="global-menu" showCloseButton={false}>
           <div className="overlay-bar">

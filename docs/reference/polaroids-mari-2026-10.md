@@ -1,5 +1,19 @@
 # Polaroids de Gabriela — material recibido e integración
 
+## Corrección de integración: el contenido vive en el refugio
+
+La primera presentación del álbum dentro de la página biográfica no respetaba la continuidad inmersiva que esperaba el usuario. Se corrige el 23 de octubre de 2026:
+
+- Las siete polaroids se recogen desde la mesa del refugio en la experiencia existente, sin cambiar de página. El refugio permanece visible detrás, con aproximación al objeto.
+- La visualización contiene las fotografías, sus textos breves y controles de álbum; no tiene cabecera de página, menú editorial ni un fondo de papel que sustituya al mundo.
+- «Dejar las fotos» y Escape devuelven a la misma mesa, restauran el foco sobre el objeto y reactivan el parallax. Se mantienen los pasos verja → jardín → refugio y el regreso al jardín.
+- Dos de las polaroids reales recibidas están colocadas sobre la mesa como parte del escenario.
+- `/#polaroids` abre el objeto dentro del refugio. El enlace antiguo `/gabriela#polaroids` se convierte a ese acceso, en lugar de mostrar una página de fotos. La biografía conserva solo un enlace al objeto, no un segundo álbum estático.
+- La prueba actual en `docs/review/polaroids-verification.json` exige que no exista `.editorial-overlay` al recoger las fotos, que la URL siga en `/`, que el paisaje sea el refugio y que el visor sea transparente.
+- Verificación real en escritorio y móvil: ambas transiciones animadas, las siete imágenes, anterior/siguiente, Escape, recuperación del parallax, regreso al jardín y acceso antiguo correctos. Capturas actuales en `.impeccable/review/polaroids-immersive/`.
+
+Los apartados siguientes conservan el análisis de la fuente y el registro de la primera incorporación; para el comportamiento de navegación y presentación, prevalece esta corrección.
+
 Revisado e integrado el 23 de octubre de 2026. Fuente: correo «Polaroids página web», de Maria Gabriela Laurentin, enviado el 9 de octubre de 2026 a las 12:17 (Europe/Madrid). Gmail message ID: `1a1202b9282e2a7b`.
 
 ## Fuente y alcance

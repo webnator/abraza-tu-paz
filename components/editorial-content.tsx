@@ -9,7 +9,6 @@ import {
 import {
   ResourceCatalog,
   VideoPlayer,
-  Polaroids,
   DownloadResource,
 } from '@/components/editorial-interactions';
 import {
@@ -211,7 +210,9 @@ function Gabriela() {
           Hay una vida alrededor de lo que hago: vínculos, lugares, proyectos y
           momentos cotidianos. Estas son algunas imágenes de esa historia.
         </p>
-        <Polaroids />
+        <Link href="/#polaroids" className="editorial-link">
+          Mirar las fotografías del refugio
+        </Link>
       </section>
       <section className="editorial-section two-column">
         <h2>Sentarnos a mirar, sin una respuesta de antemano.</h2>

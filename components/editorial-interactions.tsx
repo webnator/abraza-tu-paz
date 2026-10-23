@@ -62,22 +62,54 @@ export function VideoPlayer() {
   );
 }
 
-export function Polaroids() {
+export function Polaroids({ onNavigate }: { onNavigate?: () => void }) {
   const [index, setIndex] = useState(0);
   const story = stories[index];
   return (
-    <section className="photo-stories" aria-label="Álbum de Gabriela">
-      <div className="photo-stories__photograph">
+    <section
+      className="refuge-photos"
+      aria-label="Álbum de Gabriela"
+      onKeyDown={(event) => {
+        if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+        event.preventDefault();
+        event.stopPropagation();
+        setIndex(
+          (current) =>
+            (current + (event.key === 'ArrowRight' ? 1 : stories.length - 1)) %
+            stories.length,
+        );
+      }}
+    >
+      <div className="refuge-photos__scene">
         <figure className="polaroid polaroid--authored" key={story.id}>
           <img
             src={story.image}
             alt={story.alt}
             width={story.width}
             height={story.height}
-            loading="lazy"
+            loading="eager"
           />
           <figcaption className="sr-only">{story.caption}</figcaption>
         </figure>
+      </div>
+      <div
+        className="refuge-photos__caption"
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        <h3>{story.caption}</h3>
+        <p>{story.text}</p>
+        {story.related ? (
+          <Link
+            className="editorial-link"
+            href={story.related.href}
+            onClick={onNavigate}
+          >
+            {story.related.label}
+          </Link>
+        ) : null}
+      </div>
+      <div className="refuge-photos__navigation">
         <div className="photo-controls">
           <button
             aria-label="Fotografía anterior"
@@ -98,17 +130,8 @@ export function Polaroids() {
             <ChevronRight aria-hidden="true" />
           </button>
         </div>
-      </div>
-      <div className="photo-stories__text" aria-live="polite">
-        <h3>{story.caption}</h3>
-        <p>{story.text}</p>
-        {story.related ? (
-          <Link className="editorial-link" href={story.related.href}>
-            {story.related.label}
-          </Link>
-        ) : null}
         <div
-          className="photo-stories__choices"
+          className="refuge-photos__choices"
           role="group"
           aria-label="Elegir una fotografía"
         >
@@ -117,8 +140,9 @@ export function Polaroids() {
               key={item.id}
               aria-pressed={index === i}
               onClick={() => setIndex(i)}
+              aria-label={item.caption}
             >
-              {item.caption}
+              <img src={item.image} alt="" loading="lazy" />
             </button>
           ))}
         </div>

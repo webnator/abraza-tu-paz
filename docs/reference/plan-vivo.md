@@ -127,7 +127,7 @@
 
 1. Selección, orden y composición editorial de siete fotografías, con marcos y rótulos propios. No hay relatos biográficos adicionales en el email ni en el PDF.
 2. Vida personal: «Loreto - 2026», «Noviembre 2025», «Tailandia», «Septiembre 2026», «Paris» y «Disney». Proyectos: «Cuaderno Solidario».
-3. El álbum provisional de cinco fotos se sustituye por estas siete polaroids completas, sin inventar anécdotas ni recortar las fotografías. La ruta es `/gabriela#polaroids`; las fotos del refugio llevan al álbum.
+3. El álbum provisional de cinco fotos se sustituye por estas siete polaroids completas, sin inventar anécdotas ni recortar las fotografías. Tras revisión explícita del usuario, se integran como objeto de la mesa del refugio, con el paisaje visible: no se abre una página biográfica. El acceso directo es `/#polaroids`; el antiguo `/gabriela#polaroids` conduce a ese mismo objeto. Al cerrarlo se permanece en el refugio con el parallax activo.
 4. La identificación de la foto de Gabriela con la tableta como Cuaderno Solidario permite usar una imagen real en Proyectos en vez del jardín conceptual.
 5. No cambia el posicionamiento clínico. Maternidad, viajes y vida familiar siguen siendo textura personal, no nuevas especializaciones.
 

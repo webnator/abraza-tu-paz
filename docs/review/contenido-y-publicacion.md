@@ -37,6 +37,8 @@ La pieza 04 se conserva en `../research/sources/04-polaroids-mari/`. Su análisi
 
 ## Decisiones de implementación
 
+- Corrección tras revisión del usuario: las polaroids viven como objeto de la mesa del refugio en `/`, sobre el paisaje y sin panel biográfico. Al cerrarlas se permanece en la misma escena, con parallax activo. El acceso antiguo `/gabriela#polaroids` conduce al objeto inmersivo `/#polaroids`; se retira la duplicación del álbum en la biografía. Verificación completa en `polaroids-verification.json`.
+
 - El refugio se reconoce a distancia desde el jardín. El área interactiva cubre su puerta y fachada.
 - Se conserva la oclusión vegetal, con cierre completo antes del cambio.
 - En móvil el refugio tiene una composición vertical propia y primer plano transparente, con todos sus objetos dentro del encuadre. El jardín/entrada permiten desplazamiento horizontal; el foco centra objetos cuando resulta necesario.

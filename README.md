@@ -41,7 +41,7 @@ node scripts/prepare-assets.mjs /ruta/a/runtime/node
 node scripts/record-assets.mjs
 ```
 
-El álbum de siete polaroids recibido de Gabriela se documenta en `docs/reference/polaroids-mari-2026-10.md`. Se puede reproducir su preparación con `node scripts/prepare-polaroids.mjs /ruta/a/runtime/node`. El original permanece fuera de `public/`; las composiciones WebP conservan las fotografías, marcos y rótulos originales. La sección se abre en `/gabriela#polaroids`.
+El álbum de siete polaroids recibido de Gabriela se documenta en `docs/reference/polaroids-mari-2026-10.md`. Se puede reproducir su preparación con `node scripts/prepare-polaroids.mjs /ruta/a/runtime/node`. El original permanece fuera de `public/`; las composiciones WebP conservan las fotografías, marcos y rótulos originales. Las fotos son un objeto interactivo de la mesa del refugio, dentro de `/`, con el paisaje visible y sin abrir una página biográfica. `/#polaroids` permite el acceso directo a ese objeto; el antiguo enlace `/gabriela#polaroids` conduce ahora al mismo refugio. `node scripts/verify-polaroids.mjs` comprueba el recorrido y la integración.
 
 No son pasos necesarios para ejecutar o compilar la web; los activos optimizados están incluidos.
 
