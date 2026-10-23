@@ -5,11 +5,11 @@ Implementación local en `atp-web-completa`, basada en `immersive-transition-v2`
 ## Contenido integrado
 
 - Terapia: reconocimiento, mirada profesional, enfoque transpersonal, acompañamiento online y FAQs. No se ha inventado precio, duración o frecuencia.
-- Gabriela: relato basado en el briefing, investigación y vídeo de 2023; cinco fotografías reales y fragmentos de historia.
+- Gabriela: relato basado en el briefing, investigación y vídeo de 2023; álbum de siete polaroids seleccionadas y compuestas por Gabriela, recibido por email el 9 de octubre e integrado el 23 de octubre de 2026. Los rótulos, marcos y orden originales se conservan; los textos de apoyo son descripciones editoriales, no anécdotas atribuidas.
 - Biblioteca: cuatro fichas, portadas y PDFs originales sin modificaciones; categorías Hacer, Leer y Escuchar.
 - Escuchar: vídeo real aportado. No hay audios de Gabriela generados o simulados.
 - Reflexiones: tres propuestas editoriales nuevas derivadas de temas de marca. Necesitan revisión de Gabriela antes de publicar: «Cambiar también puede sentirse como perder», «Poner un límite y sentir culpa», «Cuando tu cabeza no para».
-- Proyectos: Cuaderno Solidario y Respira Venezuela, descritos como iniciativas documentadas. No se promete inscripción ni vigencia actual.
+- Proyectos: Cuaderno Solidario y Respira Venezuela, descritos como iniciativas documentadas. La fotografía de Cuaderno Solidario está identificada por Gabriela en el nuevo material. No se promete inscripción ni vigencia actual.
 - Contacto: acceso real al perfil público @abrazatupaz. El teléfono de los workbooks y Calendly no se han incorporado como canales activos sin confirmación.
 
 ## Datos solicitados
@@ -20,8 +20,8 @@ Se ha pedido de forma agrupada confirmar: canal de contacto/enlace de reserva, t
 
 1. Confirmar los datos prácticos y el canal de reserva; incorporarlos al contenido central cuando se reciban.
 2. Validar el texto de Terapia y la explicación transpersonal con Gabriela.
-3. Aprobar las tres reflexiones y los cinco fragmentos asociados a las fotografías. No se han añadido anécdotas específicas sin fuente.
-4. Confirmar el uso público de fotos de pareja y maternidad, especialmente las que incluyen a la bebé. La fotografía de otros cuatro menores se conserva en fuentes y no se usa.
+3. Aprobar las tres reflexiones y las descripciones editoriales del álbum. Los antiguos cinco fragmentos genéricos en primera persona se han sustituido por las siete polaroids aportadas y textos breves sin anécdotas inventadas.
+4. Confirmar el uso público de las fotos de pareja, maternidad y menores. La selección nueva de Gabriela incluye «Loreto - 2026», con cuatro menores: se incorpora a la revisión local junto al resto del álbum, sin afirmar permisos públicos ni identidades no facilitadas.
 5. Decidir si el vídeo de 2023 se conserva o se sustituye. No se pudo descargar para inspección audiovisual; se revisó la transcripción automática y los metadatos. La integración ofrece reproducción bajo demanda y enlace alternativo.
 6. Revisar los workbooks: erratas, `@`, formulaciones clínicas, teléfono personal y cita atribuida a Brené Brown. Los originales se mantienen íntegros; la descarga local muestra los documentos aportados.
 7. Confirmar estado, destinatarios y forma de participación de cada proyecto solidario.
@@ -32,6 +32,8 @@ Se ha pedido de forma agrupada confirmar: canal de contacto/enlace de reserva, t
 Las fuentes originales se conservan en `../research/sources/`: briefing inicial recuperado de otra exportación idéntica y paquete completo de contenido. El ZIP original de Diseño ya no está en la ruta recibida; su paleta, jerarquía y reglas están conservadas en `docs/reference` y en la investigación original. No se ha recreado una exportación como si fuese el original.
 
 Las imágenes nuevas y prompts exactos están en `../research/generated-assets-v2/`. Versiones web, fotografías y PDFs se sirven desde `public/`. Los rasters previos y originales permanecen disponibles; las procedencias se registran en `media-manifest.json` y sidecars.
+
+La pieza 04 se conserva en `../research/sources/04-polaroids-mari/`. Su análisis y clasificación están en `docs/reference/polaroids-mari-2026-10.md`. El PDF biográfico no se sirve públicamente. La firma del email no se interpreta como confirmación de un canal de reserva y sus datos no se publican.
 
 ## Decisiones de implementación
 

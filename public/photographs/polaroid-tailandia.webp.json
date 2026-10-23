@@ -1,0 +1,5 @@
+{
+  "prompt": "User-supplied source: ../research/sources/04-polaroids-mari/Web - Polaroids.pdf. PDF rasterization, removal of outer blank page and WebP compression only. Original photograph, paper frame and handwritten caption preserved. No semantic edits.",
+  "source": "Web - Polaroids.pdf, page 4",
+  "method": "supplied PDF polaroid artwork"
+}

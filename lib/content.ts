@@ -191,43 +191,88 @@ export const reflections = [
   },
 ] as const;
 
-export const stories = [
+type PhotoStory = {
+  id: string;
+  image: string;
+  width: number;
+  height: number;
+  caption: string;
+  text: string;
+  alt: string;
+  related?: { href: string; label: string };
+};
+
+// Gabriela's selection and order, from the seven-page "Web - Polaroids" PDF.
+// Captions are sourced; the short supporting descriptions do not invent anecdotes.
+export const stories: readonly PhotoStory[] = [
   {
-    id: 'proyecto',
-    image: '/photographs/gabriela-cotidiana.webp',
-    title: 'Lo que hago, lo que vivo',
-    caption: 'La persona detrás del proyecto',
-    text: 'Mi manera de acompañar también tiene una vida alrededor: curiosidad, aprendizajes, vínculos y decisiones. Abraza tu Paz nace de ese encuentro entre lo que sé como psicóloga y lo que sigo descubriendo como persona.',
+    id: 'loreto-2026',
+    image: '/photographs/polaroid-loreto-2026.webp',
+    width: 1548,
+    height: 1800,
+    caption: 'Loreto · 2026',
+    text: 'Un momento compartido junto al agua. Los vínculos y los encuentros también forman parte de esta historia.',
+    alt: 'Cuatro niños junto a una baranda de madera, frente a un lago. Rótulo original: Loreto - 2026.',
   },
   {
-    id: 'maternidad',
-    image: '/photographs/maternidad.webp',
-    title: 'Una nueva manera de estar',
-    caption: 'Maternidad',
-    text: 'La maternidad forma parte de quien soy hoy. Una experiencia personal que da textura a mi mirada y convive con otras partes de mi vida. Mi historia abre preguntas; no presupone que sea igual a la tuya.',
+    id: 'cuaderno-solidario',
+    image: '/photographs/polaroid-cuaderno-solidario.webp',
+    width: 1283,
+    height: 1800,
+    caption: 'Proyecto Cuaderno Solidario',
+    text: 'Una de las iniciativas de Abraza tu Paz. Una forma de llevar el acompañamiento más allá de la consulta.',
+    alt: 'Gabriela con una tableta, junto a su perro y rodeada de plantas. Polaroid del proyecto Cuaderno Solidario.',
+    related: {
+      href: '/proyectos#cuaderno-solidario',
+      label: 'Conocer Cuaderno Solidario',
+    },
   },
   {
-    id: 'pareja',
-    image: '/photographs/pareja-paris.webp',
-    title: 'La vida compartida',
-    caption: 'Vínculos',
-    text: 'Los vínculos también forman parte de mi historia. Son lugares donde nos conocemos, cambiamos y aprendemos a conversar sobre lo que queremos y necesitamos. No siempre desde la certeza; muchas veces, desde el encuentro.',
+    id: 'noviembre-2025',
+    image: '/photographs/polaroid-noviembre-2025.webp',
+    width: 1434,
+    height: 1621,
+    caption: 'Noviembre 2025',
+    text: 'La maternidad como parte de la vida personal de Gabriela: cercanía, cuidado y una nueva etapa.',
+    alt: 'Gabriela sostiene a su bebé dormida en sus brazos. Rótulo original: Noviembre 2025.',
   },
   {
-    id: 'viajes',
-    image: '/photographs/gabriela-viaje.webp',
-    title: 'Hacer espacio al disfrute',
-    caption: 'Viajes y momentos propios',
-    text: 'También hay espacio para el disfrute, el viaje y los momentos que no necesitan convertirse en una enseñanza. La vida que acompaño incluye lo cotidiano, lo difícil y aquello que simplemente nos hace bien.',
+    id: 'tailandia',
+    image: '/photographs/polaroid-tailandia.webp',
+    width: 1212,
+    height: 1800,
+    caption: 'Tailandia',
+    text: 'Un viaje compartido, frente al mar y entre montañas. Lugares y recuerdos que también tienen su sitio.',
+    alt: 'Gabriela y su pareja abrazados en una playa, con acantilados al fondo. Rótulo original: Tailandia.',
   },
   {
-    id: 'familia',
-    image: '/photographs/familia.webp',
-    title: 'Lo que me acompaña',
-    caption: 'Mi vida fuera de la consulta',
-    text: 'Tengo vínculos, lugares y personas que me acompañan. No miro la vida desde fuera. La vivo, y sigo aprendiendo a habitar sus cambios mientras acompaño a otras personas a atravesar los suyos.',
+    id: 'septiembre-2026',
+    image: '/photographs/polaroid-septiembre-2026.webp',
+    width: 1494,
+    height: 1187,
+    caption: 'Septiembre 2026',
+    text: 'Un recuerdo en familia, al aire libre. La vida cotidiana, fuera de la consulta.',
+    alt: 'Gabriela, su pareja y su bebé en un paseo al aire libre. Rótulo original: Septiembre 2026.',
   },
-] as const;
+  {
+    id: 'paris',
+    image: '/photographs/polaroid-paris.webp',
+    width: 1194,
+    height: 1800,
+    caption: 'París',
+    text: 'Una pausa compartida frente a la Torre Eiffel. Otra imagen de los vínculos y los viajes que acompañan esta vida.',
+    alt: 'Gabriela y su pareja frente a la Torre Eiffel. Rótulo original: Paris.',
+  },
+  {
+    id: 'disney',
+    image: '/photographs/polaroid-disney.webp',
+    width: 1220,
+    height: 1800,
+    caption: 'Disney',
+    text: 'Un día de viaje y disfrute. También hay lugar para lo que nos hace bien, sin tener que convertirlo todo en una enseñanza.',
+    alt: 'Gabriela junto a una baranda, con el castillo de Disney al fondo. Rótulo original: Disney.',
+  },
+];
 
 export function destinationForPath(path: string): Destination | null {
   const first = path.split('/').filter(Boolean)[0];

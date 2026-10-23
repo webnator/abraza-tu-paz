@@ -78,7 +78,7 @@ const locations = [
   {
     id: 'gabriela',
     label: 'Mi historia',
-    href: '/gabriela',
+    href: '/gabriela#polaroids',
     x: 24.8,
     y: 87,
     mx: 30.01,

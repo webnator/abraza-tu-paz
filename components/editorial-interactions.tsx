@@ -66,11 +66,17 @@ export function Polaroids() {
   const [index, setIndex] = useState(0);
   const story = stories[index];
   return (
-    <section className="photo-stories" aria-label="Fragmentos de mi historia">
+    <section className="photo-stories" aria-label="Álbum de Gabriela">
       <div className="photo-stories__photograph">
-        <figure className="polaroid" key={story.id}>
-          <img src={story.image} alt={story.caption} loading="lazy" />
-          <figcaption>{story.caption}</figcaption>
+        <figure className="polaroid polaroid--authored" key={story.id}>
+          <img
+            src={story.image}
+            alt={story.alt}
+            width={story.width}
+            height={story.height}
+            loading="lazy"
+          />
+          <figcaption className="sr-only">{story.caption}</figcaption>
         </figure>
         <div className="photo-controls">
           <button
@@ -81,7 +87,8 @@ export function Polaroids() {
           >
             <ChevronLeft aria-hidden="true" />
           </button>
-          <span>
+          <span aria-live="polite" aria-atomic="true">
+            <span className="sr-only">Fotografía </span>
             {index + 1} / {stories.length}
           </span>
           <button
@@ -93,9 +100,18 @@ export function Polaroids() {
         </div>
       </div>
       <div className="photo-stories__text" aria-live="polite">
-        <h3>{story.title}</h3>
+        <h3>{story.caption}</h3>
         <p>{story.text}</p>
-        <div className="photo-stories__choices">
+        {story.related ? (
+          <Link className="editorial-link" href={story.related.href}>
+            {story.related.label}
+          </Link>
+        ) : null}
+        <div
+          className="photo-stories__choices"
+          role="group"
+          aria-label="Elegir una fotografía"
+        >
           {stories.map((item, i) => (
             <button
               key={item.id}

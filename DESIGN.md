@@ -233,7 +233,7 @@ Cada recurso mantiene su portada original dentro de un soporte tonal rectangular
 
 Los bloques de conversación son superficies musgo con texto hueso y una acción inversa. Las listas de reconocimiento, las filas de reflexión y las preguntas frecuentes se organizan con divisores finos. Las preguntas frecuentes usan controles rectos, peso 500 y tamaño `1.1rem`; al abrir muestran el texto en el mismo flujo y cambian la dirección del chevron.
 
-Las fotografías personales conservan un tratamiento editorial natural. La polaroid tiene papel claro, sombra y giro `-3deg`, con pie serif centrado; sus elecciones usan texto y subrayado, y sus flechas se presentan como controles circulares. El vídeo empieza con una fotografía oscurecida, un círculo de reproducción y un título serif. Al activar se convierte en un reproductor `16 / 9`; su pie conserva la explicación de conexión y la vía directa al vídeo.
+Las fotografías personales conservan un tratamiento editorial natural. El álbum utiliza las siete polaroids compuestas por Gabriela: cada imagen mantiene su marco de papel y su rótulo manuscrito original, con sombra y giro `-3deg`, sin añadir un segundo marco CSS. El soporte tiene altura estable de `33rem` en escritorio y `26rem` en móvil; la imagen se contiene sin recortar y conserva su proporción, también cuando es horizontal. Las elecciones usan texto y subrayado, con altura mínima de `44px`; anterior y siguiente son controles circulares. El contador y los textos tienen equivalentes accesibles. El vídeo empieza con una fotografía oscurecida, un círculo de reproducción y un título serif. Al activar se convierte en un reproductor `16 / 9`; su pie conserva la explicación de conexión y la vía directa al vídeo.
 
 ### Signature Component: the Landscape
 

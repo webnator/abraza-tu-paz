@@ -1,0 +1,182 @@
+{
+  "checkedAt": "2026-10-23T06:45:18.603Z",
+  "results": [
+    {
+      "device": "desktop",
+      "states": [
+        {
+          "caption": "Loreto · 2026",
+          "selected": "Loreto · 2026",
+          "loaded": true,
+          "naturalRatio": 0.86,
+          "renderedRatio": 0.8598484848484849,
+          "withinViewport": true,
+          "overflow": false,
+          "count": "Fotografía 1 / 7",
+          "pass": true
+        },
+        {
+          "caption": "Proyecto Cuaderno Solidario",
+          "selected": "Proyecto Cuaderno Solidario",
+          "loaded": true,
+          "naturalRatio": 0.7127777777777777,
+          "renderedRatio": 0.7121212121212122,
+          "withinViewport": true,
+          "overflow": false,
+          "count": "Fotografía 2 / 7",
+          "pass": true
+        },
+        {
+          "caption": "Noviembre 2025",
+          "selected": "Noviembre 2025",
+          "loaded": true,
+          "naturalRatio": 0.8846391116594695,
+          "renderedRatio": 0.884469696969697,
+          "withinViewport": true,
+          "overflow": false,
+          "count": "Fotografía 3 / 7",
+          "pass": true
+        },
+        {
+          "caption": "Tailandia",
+          "selected": "Tailandia",
+          "loaded": true,
+          "naturalRatio": 0.6733333333333333,
+          "renderedRatio": 0.6742424242424242,
+          "withinViewport": true,
+          "overflow": false,
+          "count": "Fotografía 4 / 7",
+          "pass": true
+        },
+        {
+          "caption": "Septiembre 2026",
+          "selected": "Septiembre 2026",
+          "loaded": true,
+          "naturalRatio": 1.2586352148272957,
+          "renderedRatio": 1.2586666666666666,
+          "withinViewport": true,
+          "overflow": false,
+          "count": "Fotografía 5 / 7",
+          "pass": true
+        },
+        {
+          "caption": "París",
+          "selected": "París",
+          "loaded": true,
+          "naturalRatio": 0.6633333333333333,
+          "renderedRatio": 0.6628787878787878,
+          "withinViewport": true,
+          "overflow": false,
+          "count": "Fotografía 6 / 7",
+          "pass": true
+        },
+        {
+          "caption": "Disney",
+          "selected": "Disney",
+          "loaded": true,
+          "naturalRatio": 0.6777777777777778,
+          "renderedRatio": 0.678030303030303,
+          "withinViewport": true,
+          "overflow": false,
+          "count": "Fotografía 7 / 7",
+          "pass": true
+        }
+      ],
+      "nextWrap": true,
+      "previousWrap": true,
+      "projectUrl": "http://localhost:3000/proyectos#cuaderno-solidario",
+      "textZoomOverflow": false,
+      "errors": "",
+      "pass": true
+    },
+    {
+      "device": "mobile",
+      "states": [
+        {
+          "caption": "Loreto · 2026",
+          "selected": "Loreto · 2026",
+          "loaded": true,
+          "naturalRatio": 0.86,
+          "renderedRatio": 0.8601398601398601,
+          "withinViewport": true,
+          "overflow": false,
+          "count": "Fotografía 1 / 7",
+          "pass": true
+        },
+        {
+          "caption": "Proyecto Cuaderno Solidario",
+          "selected": "Proyecto Cuaderno Solidario",
+          "loaded": true,
+          "naturalRatio": 0.7127777777777777,
+          "renderedRatio": 0.7130434782608696,
+          "withinViewport": true,
+          "overflow": false,
+          "count": "Fotografía 2 / 7",
+          "pass": true
+        },
+        {
+          "caption": "Noviembre 2025",
+          "selected": "Noviembre 2025",
+          "loaded": true,
+          "naturalRatio": 0.8846391116594695,
+          "renderedRatio": 0.8848920863309353,
+          "withinViewport": true,
+          "overflow": false,
+          "count": "Fotografía 3 / 7",
+          "pass": true
+        },
+        {
+          "caption": "Tailandia",
+          "selected": "Tailandia",
+          "loaded": true,
+          "naturalRatio": 0.6733333333333333,
+          "renderedRatio": 0.673972602739726,
+          "withinViewport": true,
+          "overflow": false,
+          "count": "Fotografía 4 / 7",
+          "pass": true
+        },
+        {
+          "caption": "Septiembre 2026",
+          "selected": "Septiembre 2026",
+          "loaded": true,
+          "naturalRatio": 1.2586352148272957,
+          "renderedRatio": 1.2615384615384615,
+          "withinViewport": true,
+          "overflow": false,
+          "count": "Fotografía 5 / 7",
+          "pass": true
+        },
+        {
+          "caption": "París",
+          "selected": "París",
+          "loaded": true,
+          "naturalRatio": 0.6633333333333333,
+          "renderedRatio": 0.6630727762803235,
+          "withinViewport": true,
+          "overflow": false,
+          "count": "Fotografía 6 / 7",
+          "pass": true
+        },
+        {
+          "caption": "Disney",
+          "selected": "Disney",
+          "loaded": true,
+          "naturalRatio": 0.6777777777777778,
+          "renderedRatio": 0.6776859504132231,
+          "withinViewport": true,
+          "overflow": false,
+          "count": "Fotografía 7 / 7",
+          "pass": true
+        }
+      ],
+      "nextWrap": true,
+      "previousWrap": true,
+      "projectUrl": "http://localhost:3000/proyectos#cuaderno-solidario",
+      "textZoomOverflow": false,
+      "errors": "",
+      "pass": true
+    }
+  ],
+  "pass": true
+}

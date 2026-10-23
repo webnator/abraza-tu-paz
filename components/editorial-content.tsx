@@ -205,11 +205,11 @@ function Gabriela() {
         </p>
         <VideoPlayer />
       </section>
-      <section className="editorial-section">
+      <section className="editorial-section" id="polaroids">
         <h2>Fragmentos de una vida</h2>
         <p className="section-intro">
-          Lo personal da textura a mi mirada. Estos son algunos de los lugares
-          desde los que también acompaño.
+          Hay una vida alrededor de lo que hago: vínculos, lugares, proyectos y
+          momentos cotidianos. Estas son algunas imágenes de esa historia.
         </p>
         <Polaroids />
       </section>
@@ -296,11 +296,11 @@ function Projects() {
         <h1>Lo que también cultivamos.</h1>
         <p>El acompañamiento también puede tomar una forma compartida.</p>
       </header>
-      <section className="project-story">
+      <section className="project-story" id="cuaderno-solidario">
         <div className="project-image">
           <img
-            src="/images/jardin-refugio-v1.webp"
-            alt="Un jardín vivo y cuidado que conduce al refugio"
+            src="/photographs/gabriela-cotidiana.webp"
+            alt="Gabriela trabajando con su tableta, junto a su perro y entre plantas; fotografía seleccionada para Cuaderno Solidario"
             loading="lazy"
           />
         </div>

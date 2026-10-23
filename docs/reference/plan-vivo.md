@@ -115,6 +115,30 @@
 - Los workbooks necesitan revisión editorial, clínica, visual, legal y de privacidad.
 - El canal de reserva y los datos operativos continúan sin confirmarse.
 
+### Pieza 04 — polaroids seleccionadas por Gabriela
+
+- **Incorporación:** 23 de octubre de 2026, por petición explícita de analizar e integrar el nuevo material en la web local.
+- **Fuente:** email «Polaroids página web», de Maria Gabriela Laurentin, 9 de octubre de 2026. Message ID `1a1202b9282e2a7b`.
+- **Adjunto:** `Web - Polaroids.pdf`, siete páginas. SHA-256 `ba4939ae7a08268398f96797b610d587d57e27c5361ece7dfb56162ae27f133a`.
+- **Conservación:** `research/sources/04-polaroids-mari/`, original íntegro, metadatos y renders de todas las páginas.
+- **Análisis completo:** `polaroids-mari-2026-10.md`, con copia en `site/docs/reference/`.
+
+#### Qué aporta y qué cambia
+
+1. Selección, orden y composición editorial de siete fotografías, con marcos y rótulos propios. No hay relatos biográficos adicionales en el email ni en el PDF.
+2. Vida personal: «Loreto - 2026», «Noviembre 2025», «Tailandia», «Septiembre 2026», «Paris» y «Disney». Proyectos: «Cuaderno Solidario».
+3. El álbum provisional de cinco fotos se sustituye por estas siete polaroids completas, sin inventar anécdotas ni recortar las fotografías. La ruta es `/gabriela#polaroids`; las fotos del refugio llevan al álbum.
+4. La identificación de la foto de Gabriela con la tableta como Cuaderno Solidario permite usar una imagen real en Proyectos en vez del jardín conceptual.
+5. No cambia el posicionamiento clínico. Maternidad, viajes y vida familiar siguen siendo textura personal, no nuevas especializaciones.
+
+#### Estado y siguiente validación
+
+- Integración local autorizada y realizada, conservando paleta, escenas y transiciones. Sin despliegue.
+- Revisar permiso público de personas reconocibles, especialmente los menores de las páginas 1, 3 y 5. «Loreto» no se interpreta ni se asigna a una persona o lugar sin contexto adicional.
+- Pedir relatos a Gabriela si se desea profundizar. Las descripciones breves que acompañan las imágenes son editoriales, no citas ni memorias de la autora.
+- Cuaderno Solidario sigue pendiente de confirmación de vigencia/participación. La imagen no acredita una campaña activa.
+- Los datos de la firma del correo no se convierten en contacto o reserva de la web sin confirmación. Persisten los vacíos operativos anteriores.
+
 ## Decisiones confirmadas acumuladas
 
 ### Marca y posicionamiento

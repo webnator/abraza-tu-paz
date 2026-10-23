@@ -2014,6 +2014,7 @@ a {
   margin-top: 2.5rem;
 }
 .photo-stories__photograph {
+  min-width: 0;
   padding: 0 1rem;
 }
 .polaroid {
@@ -2027,12 +2028,29 @@ a {
   height: 27rem;
   object-fit: cover;
 }
-.polaroid figcaption {
+.polaroid figcaption:not(.sr-only) {
   text-align: center;
   padding: 1rem 0.5rem 0.55rem;
   font-family: var(--font-serif), serif;
   font-size: 1.35rem;
   color: var(--atp-moss);
+}
+.polaroid--authored {
+  height: 33rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  box-shadow: none;
+}
+.polaroid--authored img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  box-shadow: 0 10px 25px rgb(52 72 58 / 12%);
 }
 .photo-controls {
   display: flex;
@@ -2069,6 +2087,7 @@ a {
   margin-top: 2rem;
 }
 .photo-stories__choices button {
+  min-height: 44px;
   padding: 0.35rem 0;
   background: none;
   border: 0;
@@ -2607,6 +2626,12 @@ a {
   }
   .polaroid img {
     height: 23rem;
+  }
+  .polaroid--authored {
+    height: 26rem;
+  }
+  .polaroid--authored img {
+    height: auto;
   }
   .photo-stories__text h3 {
     font-size: 2.2rem;

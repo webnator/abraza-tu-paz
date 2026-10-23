@@ -120,6 +120,41 @@
     "source": "immersive-transition-v2"
   },
   {
+    "asset": "public/photographs/polaroid-cuaderno-solidario.webp",
+    "kind": "supplied PDF polaroid artwork",
+    "source": "Web - Polaroids.pdf, page 2"
+  },
+  {
+    "asset": "public/photographs/polaroid-disney.webp",
+    "kind": "supplied PDF polaroid artwork",
+    "source": "Web - Polaroids.pdf, page 7"
+  },
+  {
+    "asset": "public/photographs/polaroid-loreto-2026.webp",
+    "kind": "supplied PDF polaroid artwork",
+    "source": "Web - Polaroids.pdf, page 1"
+  },
+  {
+    "asset": "public/photographs/polaroid-noviembre-2025.webp",
+    "kind": "supplied PDF polaroid artwork",
+    "source": "Web - Polaroids.pdf, page 3"
+  },
+  {
+    "asset": "public/photographs/polaroid-paris.webp",
+    "kind": "supplied PDF polaroid artwork",
+    "source": "Web - Polaroids.pdf, page 6"
+  },
+  {
+    "asset": "public/photographs/polaroid-septiembre-2026.webp",
+    "kind": "supplied PDF polaroid artwork",
+    "source": "Web - Polaroids.pdf, page 5"
+  },
+  {
+    "asset": "public/photographs/polaroid-tailandia.webp",
+    "kind": "supplied PDF polaroid artwork",
+    "source": "Web - Polaroids.pdf, page 4"
+  },
+  {
     "asset": "public/resources/adulto-responsable.webp",
     "kind": "supplied PDF cover",
     "source": "immersive-transition-v2"
