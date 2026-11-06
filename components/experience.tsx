@@ -951,7 +951,6 @@ export function Experience({ children }: { children: ReactNode }) {
                 ))}
             </nav>
           </div>
-          <DialogClose className="drawer-return">Seguir explorando</DialogClose>
         </DialogContent>
       </Dialog>
       {reading ? (

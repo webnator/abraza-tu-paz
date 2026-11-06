@@ -223,7 +223,7 @@ El foco visible de botones y enlaces usa una línea de `2px` separada `5px`. En 
 
 El identificador provisional es serif: `1.8rem` sobre el paisaje y `1.7rem` en los paneles, con tracking `-0.025em`; en móvil pasa a `1.5rem` y `1.4rem`. La cabecera tiene dos extremos: nombre a la izquierda y menú a la derecha, sin etiqueta de escena. El logo definitivo queda pendiente de material y confirmación del cliente, incluida su coherencia con redes.
 
-El drawer muestra cuatro nombres serif de `2rem`: Terapia, Quién te acompaña, Biblioteca y ¿Hablamos? Sin subtítulos, mapa, números o imagen adicional. El contacto conserva el acento bugambilia tinta. Las acciones llevan a los objetos del refugio y dejan visible su etiqueta, sin abrir una superficie editorial. El pie solo ofrece «Seguir explorando». Apertura lateral de `320ms`, sin zoom y sin blur sobre el jardín; Escape y el exterior cierran con foco protegido. La navegación lectora anterior permanece hasta su revisión de contenido.
+El drawer muestra cuatro nombres serif de `2rem`: Terapia, Quién te acompaña, Biblioteca y ¿Hablamos? Sin subtítulos, mapa, números o imagen adicional. El contacto conserva el acento bugambilia tinta. Las acciones llevan a los objetos del refugio y dejan visible su etiqueta, sin abrir una superficie editorial. Solo hay un cierre, en la esquina superior; se elimina «Seguir explorando» del pie. Apertura lateral de `320ms`, sin zoom y sin blur sobre el jardín; Escape y el exterior cierran con foco protegido. La navegación lectora anterior permanece hasta su revisión de contenido.
 
 ### Library Tabs and Resource Covers
 

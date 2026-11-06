@@ -1900,20 +1900,10 @@ a {
   min-height: 5.25rem;
   padding: 1rem 1.5rem;
 }
-.global-menu .close-control,
-.global-menu .drawer-return {
+.global-menu .close-control {
   font-family: var(--font-menu);
   font-size: var(--menu-label-size);
   font-weight: 400;
-}
-.drawer-return {
-  min-height: 44px;
-  align-self: flex-start;
-  margin: 1.5rem 2.5rem 2.5rem;
-  color: var(--atp-earth);
-  font-size: 0.8125rem;
-  text-decoration: underline;
-  text-underline-offset: 0.4em;
 }
 .editorial-overlay {
   display: flex;
