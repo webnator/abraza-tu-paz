@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { Code2, X } from 'lucide-react';
 
 export type EntranceSignMaterial = 'paper' | 'wood';
@@ -22,6 +22,9 @@ export function DevelopmentControls({
   onMenuTypefaceChange,
   woodStars,
   onWoodStarsChange,
+  open,
+  onOpenChange,
+  onReplayFirstVisit,
   blocked,
 }: {
   material: EntranceSignMaterial;
@@ -30,24 +33,26 @@ export function DevelopmentControls({
   onMenuTypefaceChange: (typeface: MenuTypeface) => void;
   woodStars: boolean;
   onWoodStarsChange: (visible: boolean) => void;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  onReplayFirstVisit: () => void;
   blocked: boolean;
 }) {
-  const [open, setOpen] = useState(false);
   const root = useRef<HTMLDivElement>(null);
   const trigger = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    if (blocked) setOpen(false);
-  }, [blocked]);
+    if (blocked) onOpenChange(false);
+  }, [blocked, onOpenChange]);
 
   useEffect(() => {
     if (!open) return;
     const closeOutside = (event: PointerEvent) => {
-      if (!root.current?.contains(event.target as Node)) setOpen(false);
+      if (!root.current?.contains(event.target as Node)) onOpenChange(false);
     };
     document.addEventListener('pointerdown', closeOutside);
     return () => document.removeEventListener('pointerdown', closeOutside);
-  }, [open]);
+  }, [open, onOpenChange]);
 
   if (!developmentEnabled) return null;
   return (
@@ -58,7 +63,7 @@ export function DevelopmentControls({
         event.stopPropagation();
         if (event.key === 'Escape' && open) {
           event.preventDefault();
-          setOpen(false);
+          onOpenChange(false);
           trigger.current?.focus();
         }
       }}
@@ -75,7 +80,7 @@ export function DevelopmentControls({
               type="button"
               aria-label="Cerrar controles de desarrollo"
               onClick={() => {
-                setOpen(false);
+                onOpenChange(false);
                 trigger.current?.focus();
               }}
             >
@@ -131,8 +136,15 @@ export function DevelopmentControls({
               </label>
             ))}
           </fieldset>
+          <button
+            type="button"
+            className="development-tools__replay"
+            onClick={onReplayFirstVisit}
+          >
+            Probar primera visita
+          </button>
           <p>
-            Bienvenida: adaptación del briefing pendiente de aprobación de
+            Bienvenidas: propuestas de texto pendientes de aprobación de
             Gabriela.
           </p>
           <p>Solo desarrollo · Se recuerda en este navegador.</p>
@@ -147,7 +159,7 @@ export function DevelopmentControls({
         aria-expanded={open}
         aria-controls="development-variants"
         title="Variantes de desarrollo"
-        onClick={() => setOpen((value) => !value)}
+        onClick={() => onOpenChange(!open)}
       >
         <Code2 size={17} aria-hidden="true" />
       </button>

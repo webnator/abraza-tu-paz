@@ -12,6 +12,8 @@ Se utiliza el proyecto React/Vinext existente y su configuración de Sites. Esta
 
 El botón `</>` de la esquina inferior izquierda abre las variantes de desarrollo: cartel de papel o madera clavada, estrellas talladas y tipografía del menú. Las elecciones se recuerdan en este navegador. El panel y sus preferencias locales no se aplican al build de producción; allí se conserva el papel y se utiliza Cormorant para el menú.
 
+La primera visita muestra una bienvenida de Gabriela tras 2,2 segundos y recuerda que fue vista mediante `localStorage`. «Probar primera visita» en el panel de desarrollo permite repetirla. Las respuestas no se guardan. Texto y comportamiento se documentan en `docs/reference/bienvenida-jardin.md`; `node scripts/verify-first-visit.mjs` verifica la espera, persistencia y caminos dentro del jardín.
+
 ## Contenido y rutas
 
 `/terapia`, `/gabriela`, `/biblioteca`, `/reflexiones`, `/proyectos`, `/contacto`.

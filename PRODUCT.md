@@ -41,7 +41,7 @@ Documentos de research reproducidos en docs/reference. Fuentes originales en ../
 
 ## Pending Client Decisions
 
-- Bienvenida de la tablilla: validar o aportar el texto breve que explica el jardín y la exploración a tu ritmo. La implementación local es una adaptación provisional del material entregado, documentada en `docs/reference/bienvenida-jardin.md`.
+- Bienvenidas: validar o aportar el texto de la tablilla y la conversación de primera visita con Gabriela. Son propuestas provisionales basadas en el material y la voz documentados, descritas en `docs/reference/bienvenida-jardin.md`.
 - Logo e identidad vigentes: pedir originales y revisar coherencia con las redes antes de reemplazar el identificador provisional de cabecera. Pendiente explícito del 6 de noviembre de 2026.
 
 ## Accessibility & Inclusion

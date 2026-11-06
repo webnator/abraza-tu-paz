@@ -23,6 +23,10 @@ import { destinations, titleForPath, destinationForPath } from '@/lib/content';
 import { Polaroids } from '@/components/editorial-interactions';
 import { CarvedStars, EntranceWelcome } from '@/components/entrance-welcome';
 import {
+  FirstVisitWelcome,
+  useFirstVisitWelcome,
+} from '@/components/first-visit-welcome';
+import {
   DevelopmentControls,
   developmentEnabled,
   entranceSignStorageKey,
@@ -245,6 +249,7 @@ export function Experience({ children }: { children: ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [albumOpen, setAlbumOpen] = useState(false);
   const [welcomeOpen, setWelcomeOpen] = useState(false);
+  const [developmentOpen, setDevelopmentOpen] = useState(false);
   const [pointedObject, setPointedObject] = useState<string | null>(null);
   const [signMaterial, setSignMaterial] =
     useState<EntranceSignMaterial>('paper');
@@ -271,6 +276,17 @@ export function Experience({ children }: { children: ReactNode }) {
   const inspectTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const lastFocus = useRef<HTMLElement | null>(null);
   const signRef = useRef<HTMLButtonElement>(null);
+  const firstVisit = useFirstVisitWelcome(
+    reading ||
+      menuOpen ||
+      albumOpen ||
+      welcomeOpen ||
+      developmentOpen ||
+      !!transition ||
+      busy ||
+      loadError,
+  );
+  const modalOpen = menuOpen || albumOpen || welcomeOpen || firstVisit.open;
   const scene = scenes[sceneIndex];
   const isGardenPassage =
     transition &&
@@ -551,10 +567,10 @@ export function Experience({ children }: { children: ReactNode }) {
     [],
   );
   useEffect(() => {
-    if (sceneIndex !== 1 || reading || menuOpen || transition) return;
+    if (sceneIndex !== 1 || reading || modalOpen || transition) return;
     const timer = setTimeout(() => setPauseRevealed(true), 6000);
     return () => clearTimeout(timer);
-  }, [sceneIndex, reading, menuOpen, transition]);
+  }, [sceneIndex, reading, modalOpen, transition]);
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
       if (reading && event.key === 'Escape') {
@@ -562,19 +578,18 @@ export function Experience({ children }: { children: ReactNode }) {
         closeReading();
         return;
       }
-      if (reading || menuOpen || albumOpen || welcomeOpen || transition) return;
+      if (reading || modalOpen || transition) return;
       if (event.key === 'ArrowRight') void goTo(Math.min(sceneIndex + 1, 2));
       if (event.key === 'ArrowLeft') void goTo(Math.max(sceneIndex - 1, 0));
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [reading, menuOpen, albumOpen, welcomeOpen, transition, sceneIndex, goTo]);
+  }, [reading, modalOpen, transition, sceneIndex, goTo]);
   const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
     if (
       !stageRef.current ||
       reading ||
-      menuOpen ||
-      welcomeOpen ||
+      modalOpen ||
       transition ||
       inspected ||
       reducedMotion
@@ -622,11 +637,9 @@ export function Experience({ children }: { children: ReactNode }) {
     <>
       <div
         ref={stageRef}
-        role={
-          reading || menuOpen || albumOpen || welcomeOpen ? undefined : 'main'
-        }
+        role={reading || modalOpen ? undefined : 'main'}
         aria-label="La experiencia de Abraza tu Paz"
-        className={`experience${transition ? ' is-transitioning' : ''}${inspected ? ' is-inspecting' : ''}${albumOpen ? ' is-viewing-album' : ''}${reading || menuOpen || welcomeOpen ? ' is-reading' : ''}`}
+        className={`experience${transition ? ' is-transitioning' : ''}${inspected ? ' is-inspecting' : ''}${albumOpen ? ' is-viewing-album' : ''}${reading || menuOpen || welcomeOpen || firstVisit.open ? ' is-reading' : ''}`}
         style={
           inspected
             ? ({
@@ -690,14 +703,8 @@ export function Experience({ children }: { children: ReactNode }) {
               : undefined
           }
           aria-label={`El ${scene.name.toLowerCase()}`}
-          aria-hidden={
-            reading || menuOpen || albumOpen || welcomeOpen ? true : undefined
-          }
-          inert={
-            reading || menuOpen || albumOpen || welcomeOpen || !!transition
-              ? true
-              : undefined
-          }
+          aria-hidden={reading || modalOpen ? true : undefined}
+          inert={reading || modalOpen || !!transition ? true : undefined}
         >
           <div ref={worldRef} className="scene-world">
             <SceneLayers
@@ -827,12 +834,8 @@ export function Experience({ children }: { children: ReactNode }) {
         <header
           className="masthead menu-typeface"
           data-menu-typeface={menuTypeface}
-          inert={
-            reading || menuOpen || albumOpen || welcomeOpen ? true : undefined
-          }
-          aria-hidden={
-            reading || menuOpen || albumOpen || welcomeOpen ? true : undefined
-          }
+          inert={reading || modalOpen ? true : undefined}
+          aria-hidden={reading || modalOpen ? true : undefined}
         >
           <button
             className="wordmark"
@@ -883,6 +886,16 @@ export function Experience({ children }: { children: ReactNode }) {
         material={signMaterial}
         woodStars={woodStars}
         returnFocus={signRef}
+      />
+      <FirstVisitWelcome
+        open={firstVisit.open}
+        onOpenChange={firstVisit.onOpenChange}
+        returnFocus={firstVisit.returnFocus}
+        onChoose={(choice) => {
+          firstVisit.onOpenChange(false);
+          if (choice === 'therapy') visitRefugeObject('terapia');
+          if (choice === 'resources') visitRefugeObject('biblioteca');
+        }}
       />
       <Dialog
         open={albumOpen}
@@ -1000,7 +1013,13 @@ export function Experience({ children }: { children: ReactNode }) {
         onMenuTypefaceChange={changeMenuTypeface}
         woodStars={woodStars}
         onWoodStarsChange={changeWoodStars}
-        blocked={menuOpen || albumOpen || welcomeOpen}
+        open={developmentOpen}
+        onOpenChange={setDevelopmentOpen}
+        onReplayFirstVisit={() => {
+          setDevelopmentOpen(false);
+          firstVisit.replay();
+        }}
+        blocked={modalOpen}
       />
     </>
   );

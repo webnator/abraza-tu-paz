@@ -1,0 +1,133 @@
+{
+  "checkedAt": "2026-11-06T07:30:15.136Z",
+  "results": [
+    {
+      "device": "desktop",
+      "early": {
+        "open": false,
+        "seen": null,
+        "scene": "entrada",
+        "path": "/",
+        "reader": false,
+        "focus": null,
+        "focusInside": false,
+        "fits": true,
+        "photoLoaded": false
+      },
+      "initial": {
+        "open": true,
+        "seen": "1",
+        "scene": "entrada",
+        "path": "/",
+        "reader": false,
+        "focus": null,
+        "focusInside": true,
+        "fits": true,
+        "photoLoaded": true,
+        "response": "¿Qué te trae por aquí hoy?"
+      },
+      "explored": {
+        "open": false,
+        "seen": "1",
+        "scene": "entrada",
+        "path": "/",
+        "reader": false,
+        "focus": "Abrir menú",
+        "focusInside": false,
+        "fits": true,
+        "photoLoaded": false
+      },
+      "returned": {
+        "open": false,
+        "seen": "1",
+        "scene": "entrada",
+        "path": "/",
+        "reader": false,
+        "focus": null,
+        "focusInside": false,
+        "fits": true,
+        "photoLoaded": false
+      },
+      "replay": true,
+      "destination": {
+        "open": false,
+        "seen": "1",
+        "scene": "refugio",
+        "path": "/",
+        "reader": false,
+        "focus": "Terapia",
+        "focusInside": false,
+        "fits": true,
+        "photoLoaded": false
+      },
+      "errors": "",
+      "pass": true
+    },
+    {
+      "device": "mobile",
+      "early": {
+        "open": false,
+        "seen": null,
+        "scene": "entrada",
+        "path": "/",
+        "reader": false,
+        "focus": null,
+        "focusInside": false,
+        "fits": true,
+        "photoLoaded": false
+      },
+      "initial": {
+        "open": true,
+        "seen": "1",
+        "scene": "entrada",
+        "path": "/",
+        "reader": false,
+        "focus": null,
+        "focusInside": true,
+        "fits": true,
+        "photoLoaded": true,
+        "response": "¿Qué te trae por aquí hoy?"
+      },
+      "destination": {
+        "open": false,
+        "seen": "1",
+        "scene": "refugio",
+        "path": "/",
+        "reader": false,
+        "focus": "Biblioteca",
+        "focusInside": false,
+        "fits": true,
+        "photoLoaded": false
+      },
+      "errors": "",
+      "pass": true
+    },
+    {
+      "deferred": {
+        "open": false,
+        "seen": null,
+        "scene": "entrada",
+        "path": "/",
+        "reader": false,
+        "focus": null,
+        "focusInside": false,
+        "fits": true,
+        "photoLoaded": false
+      },
+      "dismissed": {
+        "open": false,
+        "seen": "1",
+        "scene": "entrada",
+        "path": "/",
+        "reader": false,
+        "focus": "Abrir menú",
+        "focusInside": false,
+        "fits": true,
+        "photoLoaded": false
+      },
+      "errors": "",
+      "pass": true
+    }
+  ],
+  "pass": true
+}

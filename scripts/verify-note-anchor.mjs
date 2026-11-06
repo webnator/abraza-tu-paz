@@ -31,6 +31,12 @@ async function check(device, width, height, material) {
   const session = `atp-note-anchor-${device}-${material}`;
   await run(session, 'set', 'viewport', String(width), String(height));
   await run(session, 'open', 'http://localhost:3000/');
+  // Returning-visitor fixture; the automatic first visit has its own verifier.
+  await run(
+    session,
+    'eval',
+    "localStorage.setItem('abraza-tu-paz:welcome-seen:v1', '1')",
+  );
   await run(session, 'wait', '500');
   await run(session, 'snapshot', '-i');
   await run(
