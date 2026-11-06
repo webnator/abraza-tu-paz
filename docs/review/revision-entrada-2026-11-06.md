@@ -8,6 +8,7 @@ La web es el jardín: el parallax no es una portada que conduce a una «web verd
 
 - Nota vertical junto a la verja, dentro del mismo contenedor que la imagen de puerta y piedra (`.depth-layer--threshold`). La primera incorporación al plano intermedio aún producía deslizamiento relativo; se corrige uniéndola al plano exacto de la puerta, con idéntica transformación y transición heredadas.
 - Papel colgado con cordel y contorno alfa real. Letra manuscrita `Nothing You Could Do`, no una serif ni una fuente de sistema. El texto sigue siendo HTML accesible.
+- Ajuste final solicitado: nota un poco más cerca de la verja (ancla horizontal 63.1%) y sombra de contacto suave, `drop-shadow(2px 3px 3px rgb(12 19 12 / 34%))`, aplicada al contorno del papel, no a una caja rectangular. La puerta y la nota siguen compartiendo su transformación.
 - Tras la corrección del cliente durante la revisión: tamaño aproximado de un tercio del área del primer papel propuesto; ancho local 4.83% que compensa la escala base de la puerta, tipografía proporcionada, exposición al 76% y saturación al 72% para integrarlo en los tonos apagados de la entrada. Se mantiene la tinta musgo oscura.
 - Eliminado el nombre de escena de la cabecera. La orientación accesible permanece en los nombres de escenas y controles.
 - Drawer derecho de 370px como máximo en escritorio, sin imagen, subtítulos, números ni mapa adicional; cuatro opciones: Terapia, Quién te acompaña, Biblioteca y ¿Hablamos? Fondo hueso, veladura mínima, cierre con Escape y retorno al recorrido.

@@ -1,11 +1,11 @@
 {
-  "checkedAt": "2026-11-06T06:35:48.381Z",
+  "checkedAt": "2026-11-06T06:39:36.222Z",
   "results": [
     {
       "device": "desktop",
       "initial": {
         "sameParent": true,
-        "x": 0.6400966014338857,
+        "x": 0.6309922074400824,
         "y": 0.46139516779559714,
         "widthRatio": 0.05322847555574269,
         "textFits": true,
@@ -15,7 +15,7 @@
       "samples": [
         {
           "sameParent": true,
-          "x": 0.6400966014338857,
+          "x": 0.6309922074400824,
           "y": 0.46139516779559714,
           "widthRatio": 0.05322847555574269,
           "textFits": true,
@@ -24,16 +24,16 @@
         },
         {
           "sameParent": true,
-          "x": 0.6400966611118543,
+          "x": 0.6309922665076321,
           "y": 0.46139516779559714,
           "widthRatio": 0.05322851264784199,
           "textFits": true,
-          "transform": "matrix(1.035, 0, 0, 1.035, 7.78952, 4.0895)",
+          "transform": "matrix(1.035, 0, 0, 1.035, 7.79135, 4.09046)",
           "noteVisible": true
         },
         {
           "sameParent": true,
-          "x": 0.6400966014338857,
+          "x": 0.6309922074400824,
           "y": 0.46139516779559714,
           "widthRatio": 0.05322847555574269,
           "textFits": true,
@@ -42,16 +42,16 @@
         },
         {
           "sameParent": true,
-          "x": 0.6400966014338857,
+          "x": 0.6309922665076321,
           "y": 0.46139516779559714,
-          "widthRatio": 0.05322847555574269,
+          "widthRatio": 0.05322851264784199,
           "textFits": true,
-          "transform": "matrix(1.035, 0, 0, 1.035, -7.58203, -3.98056)",
+          "transform": "matrix(1.035, 0, 0, 1.035, -7.58199, -3.98055)",
           "noteVisible": true
         },
         {
           "sameParent": true,
-          "x": 0.6400966014338857,
+          "x": 0.6309922074400824,
           "y": 0.46139516779559714,
           "widthRatio": 0.05322847555574269,
           "textFits": true,
@@ -60,15 +60,15 @@
         },
         {
           "sameParent": true,
-          "x": 0.6400966654298581,
-          "y": 0.46139517322317025,
-          "widthRatio": 0.05322851244020949,
+          "x": 0.6309922462177581,
+          "y": 0.46139519377888294,
+          "widthRatio": 0.05322850979595874,
           "textFits": true,
-          "transform": "matrix(1.34955, 0, 0, 1.34955, 0, 0)",
+          "transform": "matrix(1.32189, 0, 0, 1.32189, 0, 0)",
           "noteVisible": true
         }
       ],
-      "maxNormalizedDrift": 6.399597241024679e-8,
+      "maxNormalizedDrift": 5.9067549629254756e-8,
       "scene": "\"jardin\"",
       "errors": "",
       "pass": true
@@ -77,9 +77,9 @@
       "device": "mobile",
       "initial": {
         "sameParent": true,
-        "x": 0.6400989618723075,
+        "x": 0.6309967381382164,
         "y": 0.4613908244395683,
-        "widthRatio": 0.05323099763896801,
+        "widthRatio": 0.053231033386182014,
         "textFits": true,
         "transform": "matrix(1.035, 0, 0, 1.035, 0, 0)",
         "noteVisible": true
@@ -87,25 +87,25 @@
       "samples": [
         {
           "sameParent": true,
-          "x": 0.6400989618723075,
+          "x": 0.6309967381382164,
           "y": 0.4613908244395683,
-          "widthRatio": 0.05323099763896801,
+          "widthRatio": 0.053231033386182014,
           "textFits": true,
           "transform": "matrix(1.035, 0, 0, 1.035, 0, 0)",
           "noteVisible": true
         },
         {
           "sameParent": true,
-          "x": 0.6400989339824074,
+          "x": 0.6309966930254688,
           "y": 0.4613908537475045,
           "widthRatio": 0.053231029580460006,
           "textFits": true,
-          "transform": "matrix(1.035, 0, 0, 1.035, 7.7913, 4.0872)",
+          "transform": "matrix(1.035, 0, 0, 1.035, 7.79219, 4.08767)",
           "noteVisible": true
         },
         {
           "sameParent": true,
-          "x": 0.6400989618723075,
+          "x": 0.6309967202646095,
           "y": 0.4613908537475045,
           "widthRatio": 0.05323099763896801,
           "textFits": true,
@@ -114,33 +114,33 @@
         },
         {
           "sameParent": true,
-          "x": 0.6400989618723075,
-          "y": 0.4613908537475045,
-          "widthRatio": 0.05323099763896801,
+          "x": 0.6309966479127276,
+          "y": 0.46139088305544446,
+          "widthRatio": 0.05323102577473853,
           "textFits": true,
-          "transform": "matrix(1.035, 0, 0, 1.035, -7.58474, -3.97885)",
+          "transform": "matrix(1.035, 0, 0, 1.035, -7.58263, -3.97773)",
           "noteVisible": true
         },
         {
           "sameParent": true,
-          "x": 0.6400989618723075,
+          "x": 0.6309967381382164,
           "y": 0.4613908537475045,
-          "widthRatio": 0.05323099763896801,
+          "widthRatio": 0.053231033386182014,
           "textFits": true,
           "transform": "matrix(1.035, 0, 0, 1.035, -8, -4.19668)",
           "noteVisible": true
         },
         {
           "sameParent": true,
-          "x": 0.6400988725761669,
-          "y": 0.4613908909789896,
-          "widthRatio": 0.053230993898928526,
+          "x": 0.6309967049554428,
+          "y": 0.4613908955582572,
+          "widthRatio": 0.05323102015320043,
           "textFits": true,
-          "transform": "matrix(1.35058, 0, 0, 1.35058, 0, 0)",
+          "transform": "matrix(1.41488, 0, 0, 1.41488, 0, 0)",
           "noteVisible": false
         }
       ],
-      "maxNormalizedDrift": 8.929614059294266e-8,
+      "maxNormalizedDrift": 9.022548885795345e-8,
       "scene": "\"jardin\"",
       "errors": "",
       "pass": true
