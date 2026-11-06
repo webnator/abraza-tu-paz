@@ -1447,12 +1447,14 @@
 }
 .threshold-invitation__carving {
   position: absolute;
-  top: 74%;
-  left: 35%;
-  width: 30%;
+  top: 70%;
+  left: 30%;
+  width: 40%;
   height: auto;
-  fill: rgb(24 20 12 / 78%);
-  filter: drop-shadow(0.6px 0.9px 0.35px rgb(220 202 166 / 57%));
+  fill: rgb(201 165 111 / 90%);
+  stroke: rgb(96 68 39 / 60%);
+  stroke-width: 0.6px;
+  filter: drop-shadow(0.5px 0.8px 0.4px rgb(28 19 10 / 65%));
   pointer-events: none;
 }
 .threshold-invitation[data-material='wood']:hover {
