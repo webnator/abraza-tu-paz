@@ -11,6 +11,17 @@ const run = async (session, ...args) =>
   (await exec('agent-browser', ['--session', session, ...args])).stdout.trim();
 const click = (session, name) =>
   run(session, 'find', 'role', 'button', 'click', '--name', name, '--exact');
+const waitForReply = (session) =>
+  run(
+    session,
+    'wait',
+    '--fn',
+    "!document.querySelector('.conversation__typing')",
+  );
+const reply = async (session, name) => {
+  await click(session, name);
+  await waitForReply(session);
+};
 const check = (condition, message) => {
   if (!condition) throw new Error(message);
 };
@@ -35,6 +46,7 @@ const read = async (session) =>
     photoLoaded: !!photo?.complete && photo.naturalWidth > 0,
     seen: localStorage.getItem('abraza-tu-paz:welcome-seen:v1'),
     chat: !!chat,
+    typing: !!chat?.querySelector('.conversation__typing'),
     chatFits: !chat || (cb.top >= -1 && cb.bottom <= innerHeight + 1 && cb.left >= -1 && cb.right <= innerWidth + 1 && chat.scrollWidth <= chat.clientWidth),
     chatAppearance: !chat || (getComputedStyle(chat).backgroundColor === 'rgb(233, 223, 204)' && parseFloat(getComputedStyle(chat.querySelector('h2')).fontSize) <= 28 && getComputedStyle(chat.querySelector('[data-speaker="gabriela"]')).color === 'rgb(52, 72, 58)'),
     focusInsideChat: !!chat?.contains(document.activeElement),
@@ -93,7 +105,23 @@ async function visit(device, width, height) {
     );
     await run(session, 'snapshot', '-i');
     await click(session, 'Busco acompañamiento');
-    await click(session, 'Cómo es tu manera de acompañar');
+    const pending = await read(session);
+    check(
+      pending.typing &&
+        pending.messages.length === 3 &&
+        pending.messages.at(-1).speaker === 'visitor',
+      `${device}: reply was not delayed`,
+    );
+    await run(session, 'screenshot', resolve(review, `${device}-typing.png`));
+    await click(session, 'Minimizar conversación');
+    await run(session, 'wait', '1800');
+    await click(session, 'Retomar conversación con Gabriela');
+    await waitForReply(session);
+    check(
+      (await read(session)).messages.length === 5,
+      `${device}: pending reply did not survive minimizing`,
+    );
+    await reply(session, 'Cómo es tu manera de acompañar');
     const conversation = await read(session);
     check(
       conversation.messages.length === 8 &&
@@ -119,7 +147,7 @@ async function visit(device, width, height) {
       (await read(session)).messages.length === conversation.messages.length,
       `${device}: conversation lost on reopen`,
     );
-    await click(session, 'Me gustaría consultar una cita');
+    await reply(session, 'Me gustaría consultar una cita');
     const contact = await read(session);
     const url = new URL(contact.whatsapp);
     check(
@@ -132,8 +160,8 @@ async function visit(device, width, height) {
     );
     await run(session, 'screenshot', resolve(review, `${device}-contact.png`));
     // Inspect WhatsApp href only. Never open it or send a message during QA.
-    await click(session, 'Quiero mirar otra cosa');
-    await click(session, 'Me vendría bien un recurso');
+    await reply(session, 'Quiero mirar otra cosa');
+    await reply(session, 'Me vendría bien un recurso');
     await click(session, 'Acercarme a la biblioteca');
     await run(session, 'wait', '600');
     const destination = await read(session);

@@ -23,6 +23,7 @@ import { destinations, titleForPath, destinationForPath } from '@/lib/content';
 import { Polaroids } from '@/components/editorial-interactions';
 import { CarvedStars, EntranceWelcome } from '@/components/entrance-welcome';
 import { GuidedConversation } from '@/components/guided-conversation';
+import { useEntranceCamera } from '@/components/use-entrance-camera';
 import {
   FirstVisitWelcome,
   useFirstVisitWelcome,
@@ -33,6 +34,7 @@ import {
   entranceSignStorageKey,
   menuTypefaceStorageKey,
   woodStarsStorageKey,
+  entranceCameraStorageKey,
   type EntranceSignMaterial,
   type MenuTypeface,
 } from '@/components/development-controls';
@@ -258,6 +260,7 @@ export function Experience({ children }: { children: ReactNode }) {
     useState<EntranceSignMaterial>('paper');
   const [menuTypeface, setMenuTypeface] = useState<MenuTypeface>('serif');
   const [woodStars, setWoodStars] = useState(true);
+  const [entranceCameraEnabled, setEntranceCameraEnabled] = useState(true);
   const [transition, setTransition] = useState<Passage | null>(null);
   const [inspected, setInspected] = useState<{ x: number; y: number } | null>(
     null,
@@ -291,6 +294,12 @@ export function Experience({ children }: { children: ReactNode }) {
       loadError,
   );
   const modalOpen = menuOpen || albumOpen || welcomeOpen || firstVisit.open;
+  const entranceCamera = useEntranceCamera({
+    stage: stageRef,
+    enabled: sceneIndex === 0 && entranceCameraEnabled,
+    paused: reading || modalOpen || !!transition || busy || developmentOpen,
+    reducedMotion,
+  });
   useEffect(() => {
     if (modalOpen) setConversationOpen(false);
   }, [modalOpen]);
@@ -314,6 +323,8 @@ export function Experience({ children }: { children: ReactNode }) {
         setMenuTypeface(savedTypeface);
       if (window.localStorage.getItem(woodStarsStorageKey) === 'false')
         setWoodStars(false);
+      if (window.localStorage.getItem(entranceCameraStorageKey) === 'false')
+        setEntranceCameraEnabled(false);
     } catch {
       /* Storage can be unavailable; switching still works in memory. */
     }
@@ -338,6 +349,14 @@ export function Experience({ children }: { children: ReactNode }) {
     setWoodStars(visible);
     try {
       window.localStorage.setItem(woodStarsStorageKey, String(visible));
+    } catch {
+      /* Keep the choice in memory. */
+    }
+  };
+  const changeEntranceCamera = (enabled: boolean) => {
+    setEntranceCameraEnabled(enabled);
+    try {
+      window.localStorage.setItem(entranceCameraStorageKey, String(enabled));
     } catch {
       /* Keep the choice in memory. */
     }
@@ -614,6 +633,7 @@ export function Experience({ children }: { children: ReactNode }) {
     }
     const x = event.clientX / window.innerWidth - 0.5,
       y = event.clientY / window.innerHeight - 0.5;
+    if (sceneIndex === 0) entranceCamera.move(x, y);
     [
       ['back', 20, 14],
       ['mid', 32, 22],
@@ -644,6 +664,7 @@ export function Experience({ children }: { children: ReactNode }) {
     <>
       <div
         ref={stageRef}
+        data-entrance-camera={entranceCameraEnabled ? 'true' : 'false'}
         role={reading || modalOpen ? undefined : 'main'}
         aria-label="La experiencia de Abraza tu Paz"
         className={`experience${transition ? ' is-transitioning' : ''}${inspected ? ' is-inspecting' : ''}${albumOpen ? ' is-viewing-album' : ''}${reading || menuOpen || welcomeOpen || firstVisit.open ? ' is-reading' : ''}`}
@@ -656,7 +677,10 @@ export function Experience({ children }: { children: ReactNode }) {
             : undefined
         }
         onPointerMove={handlePointerMove}
-        onPointerLeave={resetParallax}
+        onPointerLeave={() => {
+          entranceCamera.reset();
+          resetParallax();
+        }}
         onPointerDown={(event) => {
           if (event.pointerType === 'touch')
             touch.current = {
@@ -1033,6 +1057,8 @@ export function Experience({ children }: { children: ReactNode }) {
         onMenuTypefaceChange={changeMenuTypeface}
         woodStars={woodStars}
         onWoodStarsChange={changeWoodStars}
+        entranceCamera={entranceCameraEnabled}
+        onEntranceCameraChange={changeEntranceCamera}
         open={developmentOpen}
         onOpenChange={setDevelopmentOpen}
         onReplayFirstVisit={() => {

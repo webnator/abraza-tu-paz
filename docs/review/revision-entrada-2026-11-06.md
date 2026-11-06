@@ -49,3 +49,18 @@ Pedir el logo/identidad vigente y sus archivos originales. Revisar la coherencia
 La petición más reciente sustituye la navegación desde el cartel por una bienvenida centrada sobre el paisaje oscurecido. La verja sigue siendo el acceso al jardín. El detalle conserva la madera y las estrellas; el título tiene más aire sobre él y un relieve hundido. El cierre «Cerrar» queda más arriba que el clavo inferior; se elimina la X y también se puede cerrar fuera o con Escape. El texto se basa en el briefing, pero su adaptación sigue pendiente de Gabriela: ver `docs/reference/bienvenida-jardin.md` y `lib/entrance-welcome.ts`.
 
 El verificador comprueba la lectura en papel y madera, escritorio y móvil: cabe en pantalla, mantiene escena/URL, recibe el foco, bloquea las flechas y devuelve el foco al cartel al cerrar. La prueba del zoom y parallax continúa desde la verja.
+
+## Ajustes solicitados durante la prueba
+
+- Chat: elección inmediata y respuesta tras una pausa breve, con puntos y entrada suave de cada mensaje. Se elimina el subtítulo visible «Conversación guiada». El hilo sigue siendo local y de opciones redactadas.
+- Bienvenida: «Conversar conmigo» o «Explorar el jardín»; la segunda opción cierra la bienvenida y deja el recorrido disponible.
+- Cámara: experimentar **solo en la entrada** con un encuadre que permita mirar arriba/abajo y perspectiva 3D al mover el ratón, además de movimiento leve en reposo. Jardín y refugio conservan su cámara hasta validar este ensayo.
+- Audio: preparar primero muestras independientes para entrada amortiguada, jardín con agua/aves/insectos y refugio de interior con campana suave. Entregar para escuchar **antes de integrar audio en el sitio**.
+
+### Resultado de este pase
+
+- Chat y texto de bienvenida actualizados. Las respuestas se incorporan secuencialmente y continúan si se minimiza el chat.
+- Ensayo de cámara **implementado solo en la entrada**, con desplazamiento de encuadre, perspectiva de 1400px y giro dependiente del puntero. La ligera deriva de reposo comparte la cámara del mundo y conserva el cartel unido al umbral. El movimiento se congela durante lecturas/diálogos, se pausa al ocultar la pestaña y se elimina con reducción de movimiento.
+- Las transiciones de la verja nivelan la cámara durante el cruce; el jardín y el refugio mantienen sus cámaras anteriores. `</>` ofrece «Movimiento y cámara 3D · entrada» para comparar.
+- Verificación en escritorio, móvil y reducción de movimiento: `entrance-camera-verification.json`. El anclaje de la nota ahora se mide en coordenadas locales del plano compartido, porque la proyección 3D cambia las proporciones aparentes en pantalla; `note-anchor-verification.json` sigue cubriendo papel y madera.
+- Tres muestras de audio y un recorrido de 86s preparados fuera de `public/`. Estado y créditos en `docs/reference/audio-atmosfera-v1.md`. **Pendientes de escucha y de integración posterior.**

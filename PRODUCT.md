@@ -44,6 +44,7 @@ Documentos de research reproducidos en docs/reference. Fuentes originales en ../
 
 - Bienvenidas: validar o aportar el texto de la tablilla y la conversación de primera visita con Gabriela. Son propuestas provisionales basadas en el material y la voz documentados, descritas en `docs/reference/bienvenida-jardin.md`.
 - Sustituir el WhatsApp provisional de Williams por el número confirmado de Gabriela antes de publicar. La consulta de cita por WhatsApp no equivale a una reserva confirmada.
+- Valorar las muestras de audio antes de integrarlas y afinar la cámara nueva en la entrada antes de extenderla al jardín o al refugio.
 - Logo e identidad vigentes: pedir originales y revisar coherencia con las redes antes de reemplazar el identificador provisional de cabecera. Pendiente explícito del 6 de noviembre de 2026.
 
 ## Accessibility & Inclusion

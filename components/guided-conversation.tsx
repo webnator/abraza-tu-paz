@@ -7,6 +7,8 @@ import {
   conversationFlow,
   initialConversation,
   type ConversationOption,
+  type ConversationMessage,
+  type ConversationNodeId,
 } from '@/lib/guided-conversation';
 import { whatsappUrl } from '@/lib/contact';
 
@@ -24,6 +26,17 @@ export function GuidedConversation({
   onNavigate: (destination: 'therapy' | 'resources') => void;
 }) {
   const [conversation, setConversation] = useState(initialConversation);
+  const [pending, setPending] = useState<{
+    id: number;
+    node: ConversationNodeId;
+    messages: ConversationMessage[];
+    index: number;
+    startIndex: number;
+  } | null>(null);
+  const [animatedIndex, setAnimatedIndex] = useState<number | null>(null);
+  const replying = useRef(false);
+  const replySequence = useRef(0);
+  const visible = useRef(false);
   const panelId = useId();
   const title = useRef<HTMLHeadingElement>(null);
   const history = useRef<HTMLDivElement>(null);
@@ -31,8 +44,38 @@ export function GuidedConversation({
   const previouslyOpen = useRef(false);
 
   useEffect(() => {
+    replySequence.current += 1;
+    replying.current = false;
+    setPending(null);
+    setAnimatedIndex(null);
     setConversation(initialConversation());
   }, [resetKey]);
+  useEffect(() => {
+    visible.current = open && !blocked;
+    if (!visible.current) setAnimatedIndex(null);
+  }, [open, blocked]);
+  useEffect(() => {
+    if (!pending) return;
+    const timer = setTimeout(
+      () => {
+        if (pending.id !== replySequence.current) return;
+        const last = pending.index === pending.messages.length - 1;
+        setAnimatedIndex(
+          visible.current ? pending.startIndex + pending.index : null,
+        );
+        setConversation((current) => ({
+          node: last ? pending.node : current.node,
+          messages: [...current.messages, pending.messages[pending.index]],
+        }));
+        if (last) {
+          replying.current = false;
+          setPending(null);
+        } else setPending({ ...pending, index: pending.index + 1 });
+      },
+      pending.index === 0 ? 850 : 550,
+    );
+    return () => clearTimeout(timer);
+  }, [pending]);
   useEffect(() => {
     if (blocked) {
       previouslyOpen.current = false;
@@ -54,7 +97,24 @@ export function GuidedConversation({
   }, [conversation.messages.length, open, blocked]);
 
   const choose = (option: ConversationOption) => {
-    setConversation((current) => advanceConversation(current, option.id));
+    if (replying.current) return;
+    const next = advanceConversation(conversation, option.id);
+    if (next === conversation) return;
+    const visitorIndex = conversation.messages.length;
+    replying.current = true;
+    setAnimatedIndex(visitorIndex);
+    setConversation({
+      node: conversation.node,
+      messages: next.messages.slice(0, visitorIndex + 1),
+    });
+    setPending({
+      id: ++replySequence.current,
+      node: next.node,
+      messages: next.messages.slice(visitorIndex + 1),
+      index: 0,
+      startIndex: visitorIndex + 1,
+    });
+    title.current?.focus({ preventScroll: true });
     if (option.action === 'close') onOpenChange(false);
     if (option.action === 'therapy' || option.action === 'resources') {
       onOpenChange(false);
@@ -87,7 +147,6 @@ export function GuidedConversation({
       role="dialog"
       aria-modal="false"
       aria-labelledby={`${panelId}-title`}
-      aria-describedby={`${panelId}-description`}
       onKeyDown={(event) => {
         event.stopPropagation();
         if (event.key === 'Escape') {
@@ -107,7 +166,6 @@ export function GuidedConversation({
           <h2 id={`${panelId}-title`} ref={title} tabIndex={-1}>
             Gabriela
           </h2>
-          <p id={`${panelId}-description`}>Conversación guiada</p>
         </div>
         <button
           type="button"
@@ -127,7 +185,7 @@ export function GuidedConversation({
       >
         {conversation.messages.map((message, index) => (
           <p
-            className={`conversation__message conversation__message--${message.speaker}`}
+            className={`conversation__message conversation__message--${message.speaker}${index === animatedIndex ? ' conversation__message--arriving' : ''}`}
             data-speaker={message.speaker}
             key={index}
           >
@@ -137,8 +195,20 @@ export function GuidedConversation({
             {message.text}
           </p>
         ))}
+        {pending ? (
+          <div className="conversation__typing" role="status">
+            <span className="sr-only">Preparando respuesta…</span>
+            <i aria-hidden="true" />
+            <i aria-hidden="true" />
+            <i aria-hidden="true" />
+          </div>
+        ) : null}
       </div>
-      <div className="conversation__options" aria-label="Elige cómo seguir">
+      <div
+        className="conversation__options"
+        aria-label="Elige cómo seguir"
+        aria-busy={!!pending}
+      >
         {conversationFlow[conversation.node].options.map((option) =>
           option.action === 'whatsapp' ? (
             <a
@@ -146,7 +216,15 @@ export function GuidedConversation({
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => choose(option)}
+              aria-disabled={pending ? true : undefined}
+              tabIndex={pending ? -1 : undefined}
+              onClick={(event) => {
+                if (replying.current) {
+                  event.preventDefault();
+                  return;
+                }
+                choose(option);
+              }}
             >
               <span>{option.label}</span>
               <ArrowUpRight size={15} aria-hidden="true" />
@@ -155,6 +233,7 @@ export function GuidedConversation({
             <button
               type="button"
               key={option.id}
+              disabled={!!pending}
               onClick={() => choose(option)}
             >
               {option.label}

@@ -14,6 +14,8 @@ El botón `</>` de la esquina inferior izquierda abre las variantes de desarroll
 
 La primera visita muestra una bienvenida centrada de Gabriela tras 2,2 segundos y recuerda que fue vista mediante `localStorage`. «Conversar conmigo» abre un chat guiado que acumula las respuestas; al minimizar queda una bolita para retomarlo durante la visita. El hilo no se guarda en almacenamiento persistente. «Probar primera visita» en el panel de desarrollo permite repetir la bienvenida y reiniciar el hilo. Texto y comportamiento se documentan en `docs/reference/bienvenida-jardin.md`; `node scripts/verify-first-visit.mjs` comprueba el flujo y el enlace provisional de WhatsApp.
 
+La entrada prueba cámara con encuadre móvil, perspectiva 3D y movimiento leve de reposo, comparables desde `</>`. `node scripts/verify-entrance-camera.mjs` comprueba alcance, pausa y reducción de movimiento. Las muestras de sonido están fuera del sitio, pendientes de escucha: ver `docs/reference/audio-atmosfera-v1.md`. Se preparan con `node scripts/prepare-ambient-previews.mjs`; todavía no hay audio integrado en la web.
+
 ## Contenido y rutas
 
 `/terapia`, `/gabriela`, `/biblioteca`, `/reflexiones`, `/proyectos`, `/contacto`.

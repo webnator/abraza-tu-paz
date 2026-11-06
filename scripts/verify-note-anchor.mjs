@@ -9,6 +9,27 @@ const review = resolve(root, '.impeccable/review/note-anchor');
 mkdirSync(review, { recursive: true });
 const run = async (session, ...args) =>
   (await exec('agent-browser', ['--session', session, ...args])).stdout.trim();
+// The camera is intentionally always moving. Use a real pointer click instead
+// of Playwright's requirement for two identical bounding boxes.
+async function clickPhysical(session, selector) {
+  const point = JSON.parse(
+    JSON.parse(
+      await run(
+        session,
+        'eval',
+        `JSON.stringify((() => { const r = document.querySelector(${JSON.stringify(selector)}).getBoundingClientRect(); return [r.x+r.width/2,r.y+r.height/2]; })())`,
+      ),
+    ),
+  );
+  await run(
+    session,
+    'mouse',
+    'move',
+    ...point.map((x) => String(Math.round(x))),
+  );
+  await run(session, 'mouse', 'down');
+  await run(session, 'mouse', 'up');
+}
 const measurement = `JSON.stringify((() => {
   const gate = document.querySelector('.depth-layer--threshold > img');
   const note = document.querySelector('.threshold-invitation');
@@ -20,6 +41,9 @@ const measurement = `JSON.stringify((() => {
     x: (n.left + n.width / 2 - g.left) / g.width,
     y: (n.top + n.height / 2 - g.top) / g.height,
     widthRatio: n.width / g.width,
+    localX: note.offsetLeft / gate.offsetWidth,
+    localY: note.offsetTop / gate.offsetHeight,
+    localWidthRatio: note.offsetWidth / gate.offsetWidth,
     textFits: text.scrollWidth <= text.clientWidth,
     transform: getComputedStyle(gate.parentElement).transform,
     noteVisible: n.left >= 0 && n.right <= innerWidth,
@@ -99,16 +123,7 @@ async function check(device, width, height, material) {
     resolve(review, `${device}-${material}.png`),
   );
   await run(session, 'snapshot', '-i');
-  await run(
-    session,
-    'find',
-    'role',
-    'button',
-    'click',
-    '--name',
-    'Leer la bienvenida de Abraza tu Paz',
-    '--exact',
-  );
+  await clickPhysical(session, '.threshold-invitation');
   await run(session, 'wait', '500');
   const welcome = JSON.parse(
     JSON.parse(
@@ -150,16 +165,7 @@ async function check(device, width, height, material) {
     "document.activeElement === document.querySelector('.threshold-invitation')",
   );
   await run(session, 'snapshot', '-i');
-  await run(
-    session,
-    'find',
-    'role',
-    'button',
-    'click',
-    '--name',
-    'Entrar al jardín por la verja',
-    '--exact',
-  );
+  await clickPhysical(session, '.passage-zone--entrada');
   await run(session, 'wait', '250');
   samples.push(await measure(session));
   await run(session, 'wait', '1350');
@@ -172,9 +178,9 @@ async function check(device, width, height, material) {
   const drift = Math.max(
     ...samples.map((s) =>
       Math.max(
-        Math.abs(s.x - initial.x),
-        Math.abs(s.y - initial.y),
-        Math.abs(s.widthRatio - initial.widthRatio),
+        Math.abs(s.localX - initial.localX),
+        Math.abs(s.localY - initial.localY),
+        Math.abs(s.localWidthRatio - initial.localWidthRatio),
       ),
     ),
   );

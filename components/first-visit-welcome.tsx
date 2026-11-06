@@ -176,7 +176,9 @@ export function FirstVisitWelcome({
             {firstVisitWelcome.action}
             <ArrowRight size={18} strokeWidth={1.4} aria-hidden="true" />
           </button>
-          <DialogClose className="first-visit__close">Cerrar</DialogClose>
+          <DialogClose className="first-visit__close">
+            Explorar el jardín
+          </DialogClose>
         </div>
       </DialogContent>
     </Dialog>
