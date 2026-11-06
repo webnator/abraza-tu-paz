@@ -4,14 +4,14 @@ Implementación local en `atp-web-completa`, basada en `immersive-transition-v2`
 
 ## Contenido integrado
 
-- Bienvenidas: lectura opcional de la tablilla y conversación automática de primera visita con fotografía real de Gabriela. La tablilla adapta el concepto de jardín aportado; la conversación propone tres respuestas breves basadas en la voz y los contenidos disponibles. Textos centralizados en `lib/entrance-welcome.ts` y `lib/first-visit.ts`, con procedencia en `docs/reference/bienvenida-jardin.md`. Pedir aprobación o versiones definitivas a Gabriela.
+- Bienvenidas: lectura opcional de la tablilla y bienvenida centrada de primera visita con fotografía real de Gabriela, que abre un chat guiado con varias rondas e historial. Textos centralizados en `lib/entrance-welcome.ts`, `lib/first-visit.ts` y `lib/guided-conversation.ts`, con procedencia en `docs/reference/bienvenida-jardin.md`. Pedir aprobación o versiones definitivas a Gabriela.
 - Terapia: reconocimiento, mirada profesional, enfoque transpersonal, acompañamiento online y FAQs. No se ha inventado precio, duración o frecuencia.
 - Gabriela: relato basado en el briefing, investigación y vídeo de 2023; álbum de siete polaroids seleccionadas y compuestas por Gabriela, recibido por email el 9 de octubre e integrado el 23 de octubre de 2026. Los rótulos, marcos y orden originales se conservan; los textos de apoyo son descripciones editoriales, no anécdotas atribuidas.
 - Biblioteca: cuatro fichas, portadas y PDFs originales sin modificaciones; categorías Hacer, Leer y Escuchar.
 - Escuchar: vídeo real aportado. No hay audios de Gabriela generados o simulados.
 - Reflexiones: tres propuestas editoriales nuevas derivadas de temas de marca. Necesitan revisión de Gabriela antes de publicar: «Cambiar también puede sentirse como perder», «Poner un límite y sentir culpa», «Cuando tu cabeza no para».
 - Proyectos: Cuaderno Solidario y Respira Venezuela, descritos como iniciativas documentadas. La fotografía de Cuaderno Solidario está identificada por Gabriela en el nuevo material. No se promete inscripción ni vigencia actual.
-- Contacto: acceso real al perfil público @abrazatupaz. El teléfono de los workbooks y Calendly no se han incorporado como canales activos sin confirmación.
+- Contacto: acceso al perfil público @abrazatupaz y WhatsApp desde el chat, con el número provisional de Williams expresamente autorizado para revisión el 6 de noviembre de 2026. Está identificado como temporal en `lib/contact.ts`; no se presenta como número validado de Gabriela en la documentación. Los teléfonos antiguos y Calendly siguen sin convertirse en canales activos.
 
 ## Datos solicitados
 
@@ -21,7 +21,7 @@ Se ha pedido de forma agrupada confirmar: canal de contacto/enlace de reserva, t
 
 Validar también la bienvenida de la tablilla y la conversación de primera visita con Gabriela o pedirle sus textos definitivos antes de publicarlas. Las propuestas locales se identifican como pendientes en el panel de desarrollo y en su referencia de contenido.
 
-1. Confirmar los datos prácticos y el canal de reserva; incorporarlos al contenido central cuando se reciban.
+1. Confirmar los datos prácticos y el canal de reserva; sustituir el WhatsApp provisional de Williams por el número definitivo de Gabriela antes de publicar. El CTA consulta una cita, no confirma una reserva.
 2. Validar el texto de Terapia y la explicación transpersonal con Gabriela.
 3. Aprobar las tres reflexiones y las descripciones editoriales del álbum. Los antiguos cinco fragmentos genéricos en primera persona se han sustituido por las siete polaroids aportadas y textos breves sin anécdotas inventadas.
 4. Confirmar el uso público de las fotos de pareja, maternidad y menores. La selección nueva de Gabriela incluye «Loreto - 2026», con cuatro menores: se incorpora a la revisión local junto al resto del álbum, sin afirmar permisos públicos ni identidades no facilitadas.

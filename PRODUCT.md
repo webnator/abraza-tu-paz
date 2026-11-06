@@ -20,7 +20,7 @@ Conocimiento clínico atravesado por experiencia humana. Acompañar transformaci
 
 ## Capabilities and Constraints
 
-Recorrido umbral/jardín/refugio; contenido accesible por objetos y menú; biblioteca con cuatro workbooks originales; vídeo real y fotografías personales. React/Vinext existente, preview local y sin despliegue. Precio, duración, frecuencia y enlace de reserva pendientes de confirmación. Instagram @abrazatupaz es un canal público confirmado.
+Recorrido umbral/jardín/refugio; contenido accesible por objetos y menú; biblioteca con cuatro workbooks originales; vídeo real y fotografías personales. Bienvenida de primera visita y chat guiado que conserva el hilo mientras se recorre el jardín. React/Vinext existente, preview local y sin despliegue. Precio, duración, frecuencia y canal definitivo de reserva pendientes de confirmación. Instagram @abrazatupaz es un canal público confirmado; WhatsApp utiliza provisionalmente el número de Williams, autorizado para esta revisión.
 
 ## Brand Commitments
 
@@ -42,6 +42,7 @@ Documentos de research reproducidos en docs/reference. Fuentes originales en ../
 ## Pending Client Decisions
 
 - Bienvenidas: validar o aportar el texto de la tablilla y la conversación de primera visita con Gabriela. Son propuestas provisionales basadas en el material y la voz documentados, descritas en `docs/reference/bienvenida-jardin.md`.
+- Sustituir el WhatsApp provisional de Williams por el número confirmado de Gabriela antes de publicar. La consulta de cita por WhatsApp no equivale a una reserva confirmada.
 - Logo e identidad vigentes: pedir originales y revisar coherencia con las redes antes de reemplazar el identificador provisional de cabecera. Pendiente explícito del 6 de noviembre de 2026.
 
 ## Accessibility & Inclusion

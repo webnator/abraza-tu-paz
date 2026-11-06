@@ -12,7 +12,7 @@ Se utiliza el proyecto React/Vinext existente y su configuración de Sites. Esta
 
 El botón `</>` de la esquina inferior izquierda abre las variantes de desarrollo: cartel de papel o madera clavada, estrellas talladas y tipografía del menú. Las elecciones se recuerdan en este navegador. El panel y sus preferencias locales no se aplican al build de producción; allí se conserva el papel y se utiliza Cormorant para el menú.
 
-La primera visita muestra una bienvenida de Gabriela tras 2,2 segundos y recuerda que fue vista mediante `localStorage`. «Probar primera visita» en el panel de desarrollo permite repetirla. Las respuestas no se guardan. Texto y comportamiento se documentan en `docs/reference/bienvenida-jardin.md`; `node scripts/verify-first-visit.mjs` verifica la espera, persistencia y caminos dentro del jardín.
+La primera visita muestra una bienvenida centrada de Gabriela tras 2,2 segundos y recuerda que fue vista mediante `localStorage`. «Conversar conmigo» abre un chat guiado que acumula las respuestas; al minimizar queda una bolita para retomarlo durante la visita. El hilo no se guarda en almacenamiento persistente. «Probar primera visita» en el panel de desarrollo permite repetir la bienvenida y reiniciar el hilo. Texto y comportamiento se documentan en `docs/reference/bienvenida-jardin.md`; `node scripts/verify-first-visit.mjs` comprueba el flujo y el enlace provisional de WhatsApp.
 
 ## Contenido y rutas
 
@@ -51,6 +51,6 @@ No son pasos necesarios para ejecutar o compilar la web; los activos optimizados
 
 ## Revisión antes de publicar
 
-Ver `docs/review/contenido-y-publicacion.md` para las condiciones de sesiones, reserva, revisión clínica y editorial, fotografías, vídeo y workbooks. El contacto actual utiliza el perfil público `@abrazatupaz`. No hay precios, enlaces de reserva ni credenciales inventadas.
+Ver `docs/review/contenido-y-publicacion.md` para las condiciones de sesiones, reserva, revisión clínica y editorial, fotografías, vídeo y workbooks. El perfil público `@abrazatupaz` continúa disponible. El chat añade WhatsApp con el número provisional de Williams, autorizado para revisión y centralizado en `lib/contact.ts`; sustituir por el de Gabriela antes de publicar. No hay precios, calendario de reserva ni credenciales inventadas.
 
 La rama de implementación es `atp-web-completa`. `immersive-transition-v2` conserva la oclusión vegetal original y `camera-turn-v3` la variante de giro de cámara.

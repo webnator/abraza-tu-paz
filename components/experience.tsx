@@ -22,6 +22,7 @@ import {
 import { destinations, titleForPath, destinationForPath } from '@/lib/content';
 import { Polaroids } from '@/components/editorial-interactions';
 import { CarvedStars, EntranceWelcome } from '@/components/entrance-welcome';
+import { GuidedConversation } from '@/components/guided-conversation';
 import {
   FirstVisitWelcome,
   useFirstVisitWelcome,
@@ -250,6 +251,8 @@ export function Experience({ children }: { children: ReactNode }) {
   const [albumOpen, setAlbumOpen] = useState(false);
   const [welcomeOpen, setWelcomeOpen] = useState(false);
   const [developmentOpen, setDevelopmentOpen] = useState(false);
+  const [conversationOpen, setConversationOpen] = useState(false);
+  const [conversationReset, setConversationReset] = useState(0);
   const [pointedObject, setPointedObject] = useState<string | null>(null);
   const [signMaterial, setSignMaterial] =
     useState<EntranceSignMaterial>('paper');
@@ -282,11 +285,15 @@ export function Experience({ children }: { children: ReactNode }) {
       albumOpen ||
       welcomeOpen ||
       developmentOpen ||
+      conversationOpen ||
       !!transition ||
       busy ||
       loadError,
   );
   const modalOpen = menuOpen || albumOpen || welcomeOpen || firstVisit.open;
+  useEffect(() => {
+    if (modalOpen) setConversationOpen(false);
+  }, [modalOpen]);
   const scene = scenes[sceneIndex];
   const isGardenPassage =
     transition &&
@@ -891,11 +898,24 @@ export function Experience({ children }: { children: ReactNode }) {
         open={firstVisit.open}
         onOpenChange={firstVisit.onOpenChange}
         returnFocus={firstVisit.returnFocus}
-        onChoose={(choice) => {
-          firstVisit.onOpenChange(false);
-          if (choice === 'therapy') visitRefugeObject('terapia');
-          if (choice === 'resources') visitRefugeObject('biblioteca');
+        onStartConversation={() => {
+          firstVisit.acknowledge();
+          setConversationOpen(true);
         }}
+      />
+      <GuidedConversation
+        open={conversationOpen}
+        blocked={modalOpen || developmentOpen}
+        resetKey={conversationReset}
+        onOpenChange={(open) => {
+          if (open) firstVisit.acknowledge();
+          setConversationOpen(open);
+        }}
+        onNavigate={(destination) =>
+          visitRefugeObject(
+            destination === 'therapy' ? 'terapia' : 'biblioteca',
+          )
+        }
       />
       <Dialog
         open={albumOpen}
@@ -1017,9 +1037,11 @@ export function Experience({ children }: { children: ReactNode }) {
         onOpenChange={setDevelopmentOpen}
         onReplayFirstVisit={() => {
           setDevelopmentOpen(false);
+          setConversationOpen(false);
+          setConversationReset((value) => value + 1);
           firstVisit.replay();
         }}
-        blocked={modalOpen}
+        blocked={modalOpen || conversationOpen}
       />
     </>
   );

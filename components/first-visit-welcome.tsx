@@ -7,7 +7,7 @@ import {
   useState,
   type RefObject,
 } from 'react';
-import { ArrowRight, ArrowLeft } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -19,7 +19,6 @@ import {
   firstVisitDelay,
   firstVisitStorageKey,
   firstVisitWelcome,
-  type FirstVisitChoice,
 } from '@/lib/first-visit';
 
 export function useFirstVisitWelcome(blocked: boolean) {
@@ -91,30 +90,35 @@ export function useFirstVisitWelcome(blocked: boolean) {
     setAttempt((value) => value + 1);
   }, []);
 
-  return { open, onOpenChange: setOpen, replay, returnFocus };
+  const acknowledge = useCallback(() => {
+    seenThisVisit.current = true;
+    try {
+      window.localStorage.setItem(firstVisitStorageKey, '1');
+    } catch {
+      /* In-memory recall remains active. */
+    }
+    setOpen(false);
+  }, []);
+
+  return { open, onOpenChange: setOpen, replay, returnFocus, acknowledge };
 }
 
 export function FirstVisitWelcome({
   open,
   onOpenChange,
-  onChoose,
+  onStartConversation,
   returnFocus,
 }: {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  onChoose: (choice: FirstVisitChoice) => void;
+  onStartConversation: () => void;
   returnFocus: RefObject<HTMLElement | null>;
 }) {
-  const [choice, setChoice] = useState<FirstVisitChoice | null>(null);
   const title = useRef<HTMLHeadingElement>(null);
-  const question = useRef<HTMLHeadingElement>(null);
-  const selected = firstVisitWelcome.choices.find((item) => item.id === choice);
+  const startingConversation = useRef(false);
   useEffect(() => {
-    if (open) setChoice(null);
+    if (open) startingConversation.current = false;
   }, [open]);
-  useEffect(() => {
-    if (choice) question.current?.focus();
-  }, [choice]);
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -124,6 +128,7 @@ export function FirstVisitWelcome({
         showCloseButton={false}
         initialFocus={title}
         finalFocus={() => {
+          if (startingConversation.current) return false;
           const target = returnFocus.current;
           return target?.isConnected &&
             target !== document.body &&
@@ -136,8 +141,8 @@ export function FirstVisitWelcome({
         <header className="first-visit__greeting">
           <img
             src="/photographs/gabriela-cotidiana.webp"
-            width={98}
-            height={124}
+            width={128}
+            height={160}
             alt="Gabriela, rodeada de plantas"
           />
           <div>
@@ -151,59 +156,28 @@ export function FirstVisitWelcome({
             <p>{firstVisitWelcome.greeting}</p>
           </div>
         </header>
-        {!selected ? (
-          <div className="first-visit__conversation">
-            <DialogDescription className="first-visit__message">
-              {firstVisitWelcome.introduction}
-            </DialogDescription>
-            <h3 className="first-visit__question" ref={question} tabIndex={-1}>
-              {firstVisitWelcome.question}
-            </h3>
-            <div className="first-visit__choices">
-              {firstVisitWelcome.choices.map((item) => (
-                <button
-                  type="button"
-                  key={item.id}
-                  onClick={() => setChoice(item.id)}
-                >
-                  <span>{item.label}</span>
-                  <ArrowRight size={16} strokeWidth={1.4} aria-hidden="true" />
-                </button>
-              ))}
-            </div>
-          </div>
-        ) : (
-          <div className="first-visit__conversation">
-            <h3 className="first-visit__question" ref={question} tabIndex={-1}>
-              {selected.title}
-            </h3>
-            <DialogDescription className="first-visit__message">
-              {selected.reply}
-            </DialogDescription>
-            <button
-              type="button"
-              className="first-visit__action"
-              onClick={() => onChoose(selected.id)}
-            >
-              {selected.action}
-              <ArrowRight size={17} strokeWidth={1.4} aria-hidden="true" />
-            </button>
-            <button
-              type="button"
-              className="first-visit__back"
-              onClick={() => {
-                setChoice(null);
-                requestAnimationFrame(() => question.current?.focus());
-              }}
-            >
-              <ArrowLeft size={14} aria-hidden="true" />
-              Volver a la pregunta
-            </button>
-          </div>
-        )}
-        {selected?.id !== 'explore' ? (
+        <div className="first-visit__copy">
+          <DialogDescription className="first-visit__message">
+            {firstVisitWelcome.paragraphs[0]}
+          </DialogDescription>
+          <p className="first-visit__message">
+            {firstVisitWelcome.paragraphs[1]}
+          </p>
+        </div>
+        <div className="first-visit__actions">
+          <button
+            type="button"
+            className="first-visit__action"
+            onClick={() => {
+              startingConversation.current = true;
+              onStartConversation();
+            }}
+          >
+            {firstVisitWelcome.action}
+            <ArrowRight size={18} strokeWidth={1.4} aria-hidden="true" />
+          </button>
           <DialogClose className="first-visit__close">Cerrar</DialogClose>
-        ) : null}
+        </div>
       </DialogContent>
     </Dialog>
   );

@@ -11,6 +11,9 @@ const run = async (session, ...args) =>
   (await exec('agent-browser', ['--session', session, ...args])).stdout.trim();
 const click = (session, name) =>
   run(session, 'find', 'role', 'button', 'click', '--name', name, '--exact');
+const check = (condition, message) => {
+  if (!condition) throw new Error(message);
+};
 const read = async (session) =>
   JSON.parse(
     JSON.parse(
@@ -18,136 +21,153 @@ const read = async (session) =>
         session,
         'eval',
         `JSON.stringify((() => {
-  const dialog = document.querySelector('.first-visit');
-  const box = dialog?.getBoundingClientRect();
-  const photo = dialog?.querySelector('img');
+  const intro = document.querySelector('.first-visit');
+  const chat = document.querySelector('.conversation-widget');
+  const box = intro?.getBoundingClientRect();
+  const cb = chat?.getBoundingClientRect();
+  const photo = intro?.querySelector('img');
+  const link = chat?.querySelector('a[href^="https://wa.me/"]');
   return {
-    open: !!dialog,
+    intro: !!intro,
+    centered: !intro || (Math.abs(box.left + box.width / 2 - innerWidth / 2) < 2 && Math.abs(box.top + box.height / 2 - innerHeight / 2) < 2),
+    blurred: !!intro && getComputedStyle(document.querySelector('.first-visit-backdrop')).backdropFilter.includes('blur(6px)'),
+    introFits: !intro || (box.top >= -1 && box.bottom <= innerHeight + 1 && box.left >= -1 && box.right <= innerWidth + 1 && intro.scrollWidth <= intro.clientWidth),
+    photoLoaded: !!photo?.complete && photo.naturalWidth > 0,
     seen: localStorage.getItem('abraza-tu-paz:welcome-seen:v1'),
+    chat: !!chat,
+    chatFits: !chat || (cb.top >= -1 && cb.bottom <= innerHeight + 1 && cb.left >= -1 && cb.right <= innerWidth + 1 && chat.scrollWidth <= chat.clientWidth),
+    chatAppearance: !chat || (getComputedStyle(chat).backgroundColor === 'rgb(243, 239, 229)' && parseFloat(getComputedStyle(chat.querySelector('h2')).fontSize) <= 28 && getComputedStyle(chat.querySelector('[data-speaker="gabriela"]')).color === 'rgb(52, 72, 58)'),
+    focusInsideChat: !!chat?.contains(document.activeElement),
+    messages: [...document.querySelectorAll('.conversation__message')].map(x => ({speaker:x.dataset.speaker,text:x.textContent.trim()})),
+    launcher: !!document.querySelector('.conversation-launcher'),
+    whatsapp: link?.href,
+    whatsappTarget: link?.target,
     scene: document.querySelector('.scene:not(.scene--arriving)')?.dataset.scene,
     path: location.pathname,
     reader: !!document.querySelector('.editorial-overlay'),
     focus: document.activeElement?.getAttribute('aria-label'),
-    focusInside: dialog?.contains(document.activeElement) ?? false,
-    fits: !dialog || (box.left >= -1 && box.right <= innerWidth + 1 && box.top >= -1 && box.bottom <= innerHeight + 1 && dialog.scrollWidth <= dialog.clientWidth),
-    photoLoaded: !!photo?.complete && photo.naturalWidth > 0,
-    response: dialog?.querySelector('.first-visit__question')?.textContent,
   };
 })())`,
       ),
     ),
   );
-const check = (condition, message) => {
-  if (!condition) throw new Error(message);
-};
 
 async function visit(device, width, height) {
   const session = `atp-first-visit-${device}`;
   try {
     await run(session, 'set', 'viewport', String(width), String(height));
     await run(session, 'open', 'http://localhost:3000/');
-    const early = await read(session);
-    check(!early.open, `${device}: welcome appeared before the delay`);
+    check(
+      !(await read(session)).intro,
+      `${device}: intro appeared without waiting`,
+    );
     await run(session, 'wait', '2800');
     const initial = await read(session);
     check(
-      initial.open &&
-        initial.seen === '1' &&
-        initial.fits &&
+      initial.intro &&
+        initial.centered &&
+        initial.blurred &&
+        initial.introFits &&
         initial.photoLoaded &&
-        initial.focusInside,
-      `${device}: initial welcome failed`,
+        initial.seen === '1',
+      `${device}: centered introduction failed`,
     );
     await run(session, 'screenshot', resolve(review, `${device}-welcome.png`));
+    await run(session, 'snapshot', '-i');
+    await click(session, 'Conversar conmigo');
+    await run(session, 'wait', '400');
+    const started = await read(session);
+    check(
+      !started.intro &&
+        started.chat &&
+        started.chatFits &&
+        started.chatAppearance &&
+        started.focusInsideChat &&
+        started.messages.length === 2,
+      `${device}: intro did not hand focus to chat`,
+    );
     await run(session, 'press', 'ArrowRight');
     check(
       (await read(session)).scene === 'entrada',
-      `${device}: arrow navigated behind welcome`,
+      `${device}: arrow navigated behind the focused chat`,
     );
     await run(session, 'snapshot', '-i');
-    await click(session, 'Quiero explorar con calma');
+    await click(session, 'Busco acompañamiento');
+    await click(session, 'Cómo es tu manera de acompañar');
+    const conversation = await read(session);
     check(
-      (await read(session)).response === 'Pues vamos a tu ritmo.',
-      `${device}: explore reply missing`,
+      conversation.messages.length === 8 &&
+        conversation.messages.filter((m) => m.speaker === 'visitor').length ===
+          2 &&
+        conversation.messages[0].text.includes('primer lugar'),
+      `${device}: messages were replaced instead of appended`,
     );
-    await click(session, 'Volver a la pregunta');
+    await run(
+      session,
+      'screenshot',
+      resolve(review, `${device}-conversation.png`),
+    );
+    await click(session, 'Minimizar conversación');
+    const minimized = await read(session);
+    check(
+      !minimized.chat && minimized.launcher,
+      `${device}: launcher missing after minimize`,
+    );
+    await click(session, 'Retomar conversación con Gabriela');
+    await run(session, 'wait', '300');
+    check(
+      (await read(session)).messages.length === conversation.messages.length,
+      `${device}: conversation lost on reopen`,
+    );
+    await click(session, 'Me gustaría consultar una cita');
+    const contact = await read(session);
+    const url = new URL(contact.whatsapp);
+    check(
+      url.hostname === 'wa.me' &&
+        url.pathname === '/34654325653' &&
+        url.searchParams.get('text') ===
+          'Hola, me gustaría recibir información sobre las sesiones de Abraza tu Paz.' &&
+        contact.whatsappTarget === '_blank',
+      `${device}: wrong WhatsApp destination or message`,
+    );
+    await run(session, 'screenshot', resolve(review, `${device}-contact.png`));
+    // Inspect WhatsApp href only. Never open it or send a message during QA.
+    await click(session, 'Quiero mirar otra cosa');
     await click(session, 'Me vendría bien un recurso');
+    await click(session, 'Acercarme a la biblioteca');
+    await run(session, 'wait', '600');
+    const destination = await read(session);
     check(
-      (await read(session)).response === 'Quizás encuentres algo para hoy.',
-      `${device}: resource reply missing`,
+      !destination.chat &&
+        destination.launcher &&
+        destination.scene === 'refugio' &&
+        destination.path === '/' &&
+        !destination.reader &&
+        destination.focus === 'Biblioteca',
+      `${device}: library left the existing garden`,
     );
-    await run(session, 'screenshot', resolve(review, `${device}-reply.png`));
-
-    if (device === 'mobile') {
-      await click(session, 'Acercarme a la biblioteca');
-      await run(session, 'wait', '600');
-      const destination = await read(session);
-      check(
-        !destination.open &&
-          destination.scene === 'refugio' &&
-          destination.path === '/' &&
-          !destination.reader &&
-          destination.focus === 'Biblioteca',
-        'mobile: resource did not lead to the existing refuge object',
-      );
-      return {
-        device,
-        early,
-        initial,
-        destination,
-        errors: await run(session, 'errors'),
-        pass: true,
-      };
-    }
-
-    await click(session, 'Volver a la pregunta');
-    await click(session, 'Quiero explorar con calma');
-    await click(session, 'Seguir mirando');
-    await run(session, 'wait', '250');
-    const explored = await read(session);
+    await click(session, 'Retomar conversación con Gabriela');
     check(
-      !explored.open && explored.scene === 'entrada',
-      'desktop: explore changed the scene',
+      (await read(session)).messages.length > contact.messages.length,
+      `${device}: history was lost during scene change`,
     );
+    await run(session, 'press', 'Escape');
     await run(session, 'reload');
     await run(session, 'wait', '2800');
     const returned = await read(session);
     check(
-      !returned.open && returned.seen === '1',
-      'desktop: welcome repeated on return',
-    );
-    await run(session, 'snapshot', '-i');
-    await click(session, 'Controles de desarrollo');
-    await click(session, 'Probar primera visita');
-    await run(session, 'wait', '700');
-    check(!(await read(session)).open, 'desktop: replay skipped the delay');
-    await run(session, 'wait', '1800');
-    check((await read(session)).open, 'desktop: replay did not reopen');
-    await run(session, 'snapshot', '-i');
-    await click(session, 'Busco acompañamiento');
-    check(
-      (await read(session)).response === 'Podemos empezar por ahí.',
-      'desktop: therapy reply missing',
-    );
-    await click(session, 'Conocer cómo acompaño');
-    await run(session, 'wait', '600');
-    const destination = await read(session);
-    check(
-      !destination.open &&
-        destination.scene === 'refugio' &&
-        destination.path === '/' &&
-        !destination.reader &&
-        destination.focus === 'Terapia',
-      'desktop: therapy did not lead to the existing refuge object',
+      !returned.intro && returned.launcher && returned.seen === '1',
+      `${device}: welcome repeated or launcher missing on return`,
     );
     return {
       device,
-      early,
       initial,
-      explored,
-      returned,
-      replay: true,
+      started,
+      messageCountBeforeMinimize: conversation.messages.length,
+      historyResumed: true,
+      contactUrl: contact.whatsapp,
       destination,
+      returned,
       errors: await run(session, 'errors'),
       pass: true,
     };
@@ -156,24 +176,34 @@ async function visit(device, width, height) {
   }
 }
 
-async function defer() {
+async function deferred() {
   const session = 'atp-first-visit-deferred';
   try {
     await run(session, 'set', 'viewport', '1440', '900');
     await run(session, 'open', 'http://localhost:3000/');
     await run(session, 'snapshot', '-i');
+    await click(session, 'Retomar conversación con Gabriela');
+    await run(session, 'wait', '2700');
+    const manual = await read(session);
+    check(
+      !manual.intro && manual.chat && manual.seen === '1',
+      'manual chat did not suppress automatic intro',
+    );
+    await click(session, 'Minimizar conversación');
+    await click(session, 'Controles de desarrollo');
+    await click(session, 'Probar primera visita');
     await click(session, 'Abrir menú');
     await run(session, 'wait', '2800');
-    const deferred = await read(session);
+    const waiting = await read(session);
     check(
-      !deferred.open && deferred.seen === null,
-      'welcome overlapped menu or was marked seen without showing',
+      !waiting.intro && waiting.seen === null && !waiting.chat,
+      'intro overlapped the menu',
     );
     await run(session, 'press', 'Escape');
     await run(session, 'wait', '2600');
     check(
-      (await read(session)).open,
-      'welcome did not resume after menu closed',
+      (await read(session)).intro,
+      'intro did not resume after menu closed',
     );
     await run(session, 'mouse', 'move', '5', '5');
     await run(session, 'mouse', 'down');
@@ -181,16 +211,13 @@ async function defer() {
     await run(session, 'wait', '300');
     const dismissed = await read(session);
     check(
-      !dismissed.open &&
-        dismissed.scene === 'entrada' &&
-        dismissed.seen === '1',
-      'outside dismissal failed',
+      !dismissed.intro && dismissed.launcher && dismissed.seen === '1',
+      'outside dismissal or persistent launcher failed',
     );
-    await run(session, 'reload');
-    await run(session, 'wait', '2800');
-    check(!(await read(session)).open, 'outside dismissal was not remembered');
     return {
-      deferred,
+      manualChatSuppressesIntro: true,
+      replay: true,
+      deferred: true,
       dismissed,
       errors: await run(session, 'errors'),
       pass: true,
@@ -203,7 +230,7 @@ async function defer() {
 const results = await Promise.allSettled([
   visit('desktop', 1440, 900),
   visit('mobile', 390, 844),
-  defer(),
+  deferred(),
 ]);
 const report = {
   checkedAt: new Date().toISOString(),
