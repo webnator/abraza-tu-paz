@@ -62,11 +62,16 @@ async function inspect(device, width, height, reduced = false) {
     await run(session, 'mouse', 'move', String(width / 2), String(height / 2));
     await run(session, 'wait', '700');
     const idleA = await read(session);
-    await run(session, 'wait', '1300');
-    const idleB = await read(session);
+    const idleSamples = [idleA];
+    for (let i = 0; i < 6; i++) {
+      await run(session, 'wait', '500');
+      idleSamples.push(await read(session));
+    }
+    const idleB = idleSamples.at(-1);
     if (reduced) {
       check(
-        idleA.matrix === idleB.matrix && !idleA.matrix.startsWith('matrix3d'),
+        idleSamples.every((sample) => sample.matrix === idleA.matrix) &&
+          !idleA.matrix.startsWith('matrix3d'),
         'reduced motion still moves the camera',
       );
       return {
@@ -77,9 +82,14 @@ async function inspect(device, width, height, reduced = false) {
         pass: true,
       };
     }
+    const range = (axis) => {
+      const values = idleSamples.map((sample) => parseFloat(sample[axis]));
+      return Math.max(...values) - Math.min(...values);
+    };
+    const idleTravel = Math.max(range('x'), range('y'));
     check(
-      idleA.matrix.startsWith('matrix3d') && idleA.matrix !== idleB.matrix,
-      `${device}: idle camera is static`,
+      idleA.matrix.startsWith('matrix3d') && idleTravel > 2.5,
+      `${device}: stationary camera drift is too small to see (${idleTravel}px)`,
     );
     await run(
       session,
@@ -151,6 +161,7 @@ async function inspect(device, width, height, reduced = false) {
       device,
       idleA,
       idleB,
+      idleTravel,
       left,
       right,
       paused: true,

@@ -1,6 +1,6 @@
 # Propuesta de ambiente sonoro — 6 de noviembre de 2026
 
-Estado: **muestras preparadas para escuchar; audio aún sin integrar en la web**. El usuario pidió valorar primero el audio y después incorporarlo. No hay reproducción automática, reproductor ni archivos de sonido en `public/`.
+Estado: **primera propuesta escuchada; no encaja y se deja pendiente buscar otra dirección más adelante**. Las muestras se conservan como referencia, sin integrar en la web. No hay reproducción automática, reproductor ni archivos de sonido en `public/`.
 
 ## Muestras
 
@@ -28,4 +28,4 @@ Las cuatro páginas de sus autores indican **CC0**. Se utilizan sus preescuchas 
 
 `node scripts/prepare-ambient-previews.mjs` descarga las fuentes públicas que falten, produce las tres propuestas, el recorrido y el manifiesto con filtros y mediciones. Requiere FFmpeg/FFprobe; no necesita claves ni un servicio de generación de audio.
 
-Pendiente: escuchar y ajustar selección/intensidad con el usuario. Después, integrar mediante activación voluntaria, control de silencio y transiciones continuas por escena. La integración no está realizada en este pase.
+Pendiente: retomar la búsqueda y la dirección sonora cuando lo indique el usuario. No integrar estas muestras por defecto. Después de validar otra propuesta, integrar mediante activación voluntaria, control de silencio y transiciones continuas por escena.

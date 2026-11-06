@@ -64,3 +64,7 @@ El verificador comprueba la lectura en papel y madera, escritorio y móvil: cabe
 - Las transiciones de la verja nivelan la cámara durante el cruce; el jardín y el refugio mantienen sus cámaras anteriores. `</>` ofrece «Movimiento y cámara 3D · entrada» para comparar.
 - Verificación en escritorio, móvil y reducción de movimiento: `entrance-camera-verification.json`. El anclaje de la nota ahora se mide en coordenadas locales del plano compartido, porque la proyección 3D cambia las proporciones aparentes en pantalla; `note-anchor-verification.json` sigue cubriendo papel y madera.
 - Tres muestras de audio y un recorrido de 86s preparados fuera de `public/`. Estado y créditos en `docs/reference/audio-atmosfera-v1.md`. **Pendientes de escucha y de integración posterior.**
+
+### Feedback posterior
+
+El usuario aprueba el gesto 3D del puntero y el chat. Pide que se perciba mejor la cámara en reposo: se amplía solo la deriva automática de la entrada (hasta 8.5px horizontal y 4.6px vertical, menor en móvil), con balanceo lento y pequeños giros. Se conservan los coeficientes y la respuesta del ratón. La verificación exige un desplazamiento visible con el puntero quieto, además de mantener la pausa ante diálogos y la reducción de movimiento. El audio v1 no encaja; la búsqueda se retoma más adelante y no se integra.

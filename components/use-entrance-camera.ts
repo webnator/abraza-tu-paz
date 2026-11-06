@@ -39,12 +39,15 @@ export function useEntranceCamera({
       current.current.x += (target.current.x - current.current.x) * ease;
       current.current.y += (target.current.y - current.current.y) * ease;
       const { x, y } = current.current;
+      // Keep the approved pointer gesture; give the stationary camera a visible,
+      // slow handheld drift rather than a nearly imperceptible sub-pixel change.
+      const idleScale = Math.max(0.7, Math.min(1, innerWidth / 900));
       const values = {
-        x: `${(-x * Math.min(innerWidth * 0.065, 130) + Math.sin(t * 0.32) * 2.2 + Math.sin(t * 0.73) * 0.4).toFixed(3)}px`,
-        y: `${(-y * Math.min(innerHeight * 0.07, 90) + Math.sin(t * 0.42) * 1.3 + Math.sin(t * 0.83) * 0.7).toFixed(3)}px`,
-        rx: `${(y * 2.8 + Math.sin(t * 0.25) * 0.07).toFixed(4)}deg`,
-        ry: `${(-x * 4.4 + Math.sin(t * 0.21) * 0.1).toFixed(4)}deg`,
-        roll: `${(Math.sin(t * 0.28) * 0.055).toFixed(4)}deg`,
+        x: `${(-x * Math.min(innerWidth * 0.065, 130) + (Math.sin(t * 0.7) * 6.5 + Math.sin(t * 0.31) * 2) * idleScale).toFixed(3)}px`,
+        y: `${(-y * Math.min(innerHeight * 0.07, 90) + (Math.sin(t * 0.9) * 3 + Math.sin(t * 0.39) * 1.6) * idleScale).toFixed(3)}px`,
+        rx: `${(y * 2.8 + Math.sin(t * 0.55) * 0.12 * idleScale).toFixed(4)}deg`,
+        ry: `${(-x * 4.4 + Math.sin(t * 0.42) * 0.2 * idleScale).toFixed(4)}deg`,
+        roll: `${(Math.sin(t * 0.35) * 0.075 * idleScale).toFixed(4)}deg`,
       };
       for (const [key, value] of Object.entries(values))
         stage.current?.style.setProperty(`--camera-${key}`, value);
