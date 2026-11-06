@@ -43,3 +43,9 @@ Pedir el logo/identidad vigente y sus archivos originales. Revisar la coherencia
 - Cormorant Garamond elegida como propuesta de navegación: voz editorial más cálida que la sans anterior. Se puede comparar con Nothing You Could Do y Manrope desde el panel, sin cargar fuentes nuevas. El texto «Menú» es mayor, lleva subrayado fino, veladura oscura localizada y permanece visible en móvil. Se conserva el drawer minimalista y sus cuatro atajos al refugio.
 - Pequeña marca de tres estrellas bajo el texto de la madera. Tras la revisión del cliente, se aclaran a madera natural cálida y se amplían del 30% al 40% del ancho del soporte, acercándolas un poco al texto. El texto y el tamaño de la tabla se mantienen. Es geometría SVG decorativa, sin emoji; se puede desactivar para comparar la tabla anterior. La nota de papel no lleva la marca.
 - El verificador del anclaje cubre las dos variantes en escritorio y móvil. Las imágenes y el texto permanecen dentro del mismo plano de la puerta durante el parallax y el zoom.
+
+## Tablilla como objeto de lectura
+
+La petición más reciente sustituye la navegación desde el cartel por una bienvenida centrada sobre el paisaje oscurecido. La verja sigue siendo el acceso al jardín. El detalle conserva la madera y las estrellas; el título tiene más aire sobre él y un relieve hundido. El cierre «Cerrar» queda más arriba que el clavo inferior; se elimina la X y también se puede cerrar fuera o con Escape. El texto se basa en el briefing, pero su adaptación sigue pendiente de Gabriela: ver `docs/reference/bienvenida-jardin.md` y `lib/entrance-welcome.ts`.
+
+El verificador comprueba la lectura en papel y madera, escritorio y móvil: cabe en pantalla, mantiene escena/URL, recibe el foco, bloquea las flechas y devuelve el foco al cartel al cerrar. La prueba del zoom y parallax continúa desde la verja.

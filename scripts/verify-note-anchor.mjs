@@ -100,7 +100,58 @@ async function check(device, width, height, material) {
     'button',
     'click',
     '--name',
-    'Empieza a abrazar tu paz: entrar al jardín',
+    'Leer la bienvenida de Abraza tu Paz',
+    '--exact',
+  );
+  await run(session, 'wait', '500');
+  const welcome = JSON.parse(
+    JSON.parse(
+      await run(
+        session,
+        'eval',
+        `JSON.stringify((() => {
+    const dialog = document.querySelector('.entrance-welcome');
+    const box = dialog.getBoundingClientRect();
+    const copy = dialog.querySelector('.entrance-welcome__reading');
+    return { open: dialog.getAttribute('role') === 'dialog',
+      scene: document.querySelector('.scene').dataset.scene,
+      path: location.pathname,
+      material: dialog.dataset.material,
+      fitsViewport: box.left >= 0 && box.right <= innerWidth + 1 && box.top >= 0 && box.bottom <= innerHeight + 1,
+      copyReadable: copy.clientWidth === copy.scrollWidth && copy.clientHeight > 100,
+      focusInside: dialog.contains(document.activeElement),
+    };
+  })())`,
+      ),
+    ),
+  );
+  await run(
+    session,
+    'screenshot',
+    resolve(review, `welcome-${device}-${material}.png`),
+  );
+  await run(session, 'press', 'ArrowRight');
+  const sceneWhileReading = await run(
+    session,
+    'eval',
+    "document.querySelector('.scene').dataset.scene",
+  );
+  await run(session, 'press', 'Escape');
+  await run(session, 'wait', '150');
+  const focusRestored = await run(
+    session,
+    'eval',
+    "document.activeElement === document.querySelector('.threshold-invitation')",
+  );
+  await run(session, 'snapshot', '-i');
+  await run(
+    session,
+    'find',
+    'role',
+    'button',
+    'click',
+    '--name',
+    'Entrar al jardín por la verja',
     '--exact',
   );
   await run(session, 'wait', '250');
@@ -127,6 +178,9 @@ async function check(device, width, height, material) {
     initial,
     samples,
     maxNormalizedDrift: drift,
+    welcome,
+    sceneWhileReading,
+    focusRestored,
     scene,
     errors,
     pass:
@@ -134,6 +188,15 @@ async function check(device, width, height, material) {
         (s) => s.sameParent && s.textFits && s.material === material,
       ) &&
       initial.noteVisible &&
+      welcome.open &&
+      welcome.scene === 'entrada' &&
+      welcome.path === '/' &&
+      welcome.material === material &&
+      welcome.fitsViewport &&
+      welcome.copyReadable &&
+      welcome.focusInside &&
+      sceneWhileReading.includes('entrada') &&
+      focusRestored === 'true' &&
       drift < 0.00001 &&
       scene.includes('jardin') &&
       !errors,

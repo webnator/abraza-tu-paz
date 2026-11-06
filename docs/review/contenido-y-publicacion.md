@@ -4,6 +4,7 @@ Implementación local en `atp-web-completa`, basada en `immersive-transition-v2`
 
 ## Contenido integrado
 
+- Bienvenida de la tablilla: lectura opcional dentro de la entrada. Adaptación provisional del concepto de jardín aportado; título «Pasa. Hay sitio para ti.» tomado del material del cliente. Texto centralizado y procedencia en `docs/reference/bienvenida-jardin.md`. Pedir aprobación o versión definitiva a Gabriela.
 - Terapia: reconocimiento, mirada profesional, enfoque transpersonal, acompañamiento online y FAQs. No se ha inventado precio, duración o frecuencia.
 - Gabriela: relato basado en el briefing, investigación y vídeo de 2023; álbum de siete polaroids seleccionadas y compuestas por Gabriela, recibido por email el 9 de octubre e integrado el 23 de octubre de 2026. Los rótulos, marcos y orden originales se conservan; los textos de apoyo son descripciones editoriales, no anécdotas atribuidas.
 - Biblioteca: cuatro fichas, portadas y PDFs originales sin modificaciones; categorías Hacer, Leer y Escuchar.
@@ -17,6 +18,8 @@ Implementación local en `atp-web-completa`, basada en `immersive-transition-v2`
 Se ha pedido de forma agrupada confirmar: canal de contacto/enlace de reserva, teléfono actual, precio, duración y frecuencia. La interfaz queda funcional con Instagram como canal conocido.
 
 ## Validación antes de publicación
+
+Validar también la nueva bienvenida de la tablilla con Gabriela o pedirle su texto definitivo antes de publicarla. La propuesta local se identifica como adaptación pendiente en el panel de desarrollo y en su referencia de contenido.
 
 1. Confirmar los datos prácticos y el canal de reserva; incorporarlos al contenido central cuando se reciban.
 2. Validar el texto de Terapia y la explicación transpersonal con Gabriela.

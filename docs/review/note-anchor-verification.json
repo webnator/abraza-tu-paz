@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-06T06:56:31.081Z",
+  "checkedAt": "2026-11-06T07:11:30.739Z",
   "results": [
     {
       "device": "desktop",
@@ -32,7 +32,7 @@
           "y": 0.46139516779559714,
           "widthRatio": 0.05322851264784199,
           "textFits": true,
-          "transform": "matrix(1.035, 0, 0, 1.035, 7.75618, 4.072)",
+          "transform": "matrix(1.035, 0, 0, 1.035, 7.79118, 4.09037)",
           "noteVisible": true
         },
         {
@@ -48,11 +48,11 @@
         {
           "sameParent": true,
           "material": "paper",
-          "x": 0.6309922074400824,
+          "x": 0.6309922665076321,
           "y": 0.46139516779559714,
-          "widthRatio": 0.05322847555574269,
+          "widthRatio": 0.05322851264784199,
           "textFits": true,
-          "transform": "matrix(1.035, 0, 0, 1.035, -7.5825, -3.98081)",
+          "transform": "matrix(1.035, 0, 0, 1.035, -7.51201, -3.9438)",
           "noteVisible": true
         },
         {
@@ -68,15 +68,26 @@
         {
           "sameParent": true,
           "material": "paper",
-          "x": 0.6309922548632345,
-          "y": 0.46139517035594857,
-          "widthRatio": 0.05322848855302496,
+          "x": 0.6309922540074107,
+          "y": 0.46139518882998765,
+          "widthRatio": 0.05322848482027312,
           "textFits": true,
-          "transform": "matrix(1.33478, 0, 0, 1.33478, 0, 0)",
+          "transform": "matrix(1.69051, 0, 0, 1.69051, 0, 0)",
           "noteVisible": true
         }
       ],
       "maxNormalizedDrift": 5.9067549629254756e-8,
+      "welcome": {
+        "open": true,
+        "scene": "entrada",
+        "path": "/",
+        "material": "paper",
+        "fitsViewport": true,
+        "copyReadable": true,
+        "focusInside": true
+      },
+      "sceneWhileReading": "\"entrada\"",
+      "focusRestored": "true",
       "scene": "\"jardin\"",
       "errors": "",
       "pass": true
@@ -109,10 +120,10 @@
           "sameParent": true,
           "material": "paper",
           "x": 0.6309966657863321,
-          "y": 0.4613908537475045,
+          "y": 0.4613908244395683,
           "widthRatio": 0.053231061521947426,
           "textFits": true,
-          "transform": "matrix(1.035, 0, 0, 1.035, 7.79137, 4.08724)",
+          "transform": "matrix(1.035, 0, 0, 1.035, 7.79262, 4.08789)",
           "noteVisible": true
         },
         {
@@ -128,11 +139,11 @@
         {
           "sameParent": true,
           "material": "paper",
-          "x": 0.6309966479127276,
-          "y": 0.46139088305544446,
-          "widthRatio": 0.05323102577473853,
+          "x": 0.6309966930254688,
+          "y": 0.4613908537475045,
+          "widthRatio": 0.053231029580460006,
           "textFits": true,
-          "transform": "matrix(1.035, 0, 0, 1.035, -7.58286, -3.97786)",
+          "transform": "matrix(1.035, 0, 0, 1.035, -7.58139, -3.97708)",
           "noteVisible": true
         },
         {
@@ -148,15 +159,26 @@
         {
           "sameParent": true,
           "material": "paper",
-          "x": 0.6309967490362521,
-          "y": 0.4613908716030878,
-          "widthRatio": 0.053231065144661915,
+          "x": 0.6309966958387034,
+          "y": 0.46139085495398535,
+          "widthRatio": 0.053230988495803815,
           "textFits": true,
-          "transform": "matrix(1.35026, 0, 0, 1.35026, 0, 0)",
-          "noteVisible": false
+          "transform": "matrix(1.39736, 0, 0, 1.39736, 0, 0)",
+          "noteVisible": true
         }
       ],
-      "maxNormalizedDrift": 9.022548885795345e-8,
+      "maxNormalizedDrift": 7.23518843726012e-8,
+      "welcome": {
+        "open": true,
+        "scene": "entrada",
+        "path": "/",
+        "material": "paper",
+        "fitsViewport": true,
+        "copyReadable": true,
+        "focusInside": true
+      },
+      "sceneWhileReading": "\"entrada\"",
+      "focusRestored": "true",
       "scene": "\"jardin\"",
       "errors": "",
       "pass": true
@@ -188,11 +210,11 @@
         {
           "sameParent": true,
           "material": "wood",
-          "x": 0.6309922665076321,
+          "x": 0.6309923255751896,
           "y": 0.46139516779559714,
-          "widthRatio": 0.049550066895764966,
+          "widthRatio": 0.049550103741241865,
           "textFits": true,
-          "transform": "matrix(1.035, 0, 0, 1.035, 7.7911, 4.09033)",
+          "transform": "matrix(1.035, 0, 0, 1.035, 7.78943, 4.08945)",
           "noteVisible": true
         },
         {
@@ -212,7 +234,7 @@
           "y": 0.46139516779559714,
           "widthRatio": 0.049550066895764966,
           "textFits": true,
-          "transform": "matrix(1.035, 0, 0, 1.035, -7.69793, -4.04141)",
+          "transform": "matrix(1.035, 0, 0, 1.035, -7.58355, -3.98136)",
           "noteVisible": true
         },
         {
@@ -228,15 +250,26 @@
         {
           "sameParent": true,
           "material": "wood",
-          "x": 0.6309922939689442,
-          "y": 0.4613952237071695,
-          "widthRatio": 0.049550125670156854,
+          "x": 0.630992220940864,
+          "y": 0.4613952223784294,
+          "widthRatio": 0.04955011625765518,
           "textFits": true,
-          "transform": "matrix(1.33579, 0, 0, 1.33579, 0, 0)",
+          "transform": "matrix(1.61722, 0, 0, 1.61722, 0, 0)",
           "noteVisible": true
         }
       ],
-      "maxNormalizedDrift": 9.561986384631904e-8,
+      "maxNormalizedDrift": 1.1813510714109299e-7,
+      "welcome": {
+        "open": true,
+        "scene": "entrada",
+        "path": "/",
+        "material": "wood",
+        "fitsViewport": true,
+        "copyReadable": true,
+        "focusInside": true
+      },
+      "sceneWhileReading": "\"entrada\"",
+      "focusRestored": "true",
       "scene": "\"jardin\"",
       "errors": "",
       "pass": true
@@ -268,11 +301,11 @@
         {
           "sameParent": true,
           "material": "wood",
-          "x": 0.6309966930254688,
-          "y": 0.46139088305544446,
-          "widthRatio": 0.04955249853347065,
+          "x": 0.6309967381382164,
+          "y": 0.4613908537475045,
+          "widthRatio": 0.04955250207619819,
           "textFits": true,
-          "transform": "matrix(1.035, 0, 0, 1.035, 7.79181, 4.08747)",
+          "transform": "matrix(1.035, 0, 0, 1.035, 7.79127, 4.08718)",
           "noteVisible": true
         },
         {
@@ -292,7 +325,7 @@
           "y": 0.4613908537475045,
           "widthRatio": 0.049552494990743615,
           "textFits": true,
-          "transform": "matrix(1.035, 0, 0, 1.035, -7.58116, -3.97696)",
+          "transform": "matrix(1.035, 0, 0, 1.035, -7.58264, -3.97774)",
           "noteVisible": true
         },
         {
@@ -308,15 +341,26 @@
         {
           "sameParent": true,
           "material": "wood",
-          "x": 0.6309967033689761,
-          "y": 0.46139086980339644,
-          "widthRatio": 0.0495525296093917,
+          "x": 0.630996648382061,
+          "y": 0.46139091633376594,
+          "widthRatio": 0.04955250128516739,
           "textFits": true,
-          "transform": "matrix(1.35014, 0, 0, 1.35014, 0, 0)",
-          "noteVisible": false
+          "transform": "matrix(1.38071, 0, 0, 1.38071, 0, 0)",
+          "noteVisible": true
         }
       ],
-      "maxNormalizedDrift": 9.022548885795345e-8,
+      "maxNormalizedDrift": 9.189419764021878e-8,
+      "welcome": {
+        "open": true,
+        "scene": "entrada",
+        "path": "/",
+        "material": "wood",
+        "fitsViewport": true,
+        "copyReadable": true,
+        "focusInside": true
+      },
+      "sceneWhileReading": "\"entrada\"",
+      "focusRestored": "true",
       "scene": "\"jardin\"",
       "errors": "",
       "pass": true

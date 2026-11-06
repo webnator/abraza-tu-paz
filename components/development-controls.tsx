@@ -131,6 +131,10 @@ export function DevelopmentControls({
               </label>
             ))}
           </fieldset>
+          <p>
+            Bienvenida: adaptación del briefing pendiente de aprobación de
+            Gabriela.
+          </p>
           <p>Solo desarrollo · Se recuerda en este navegador.</p>
         </section>
       ) : null}

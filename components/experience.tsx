@@ -7,6 +7,7 @@ import {
   useState,
   type CSSProperties,
   type ReactNode,
+  type RefObject,
 } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
@@ -20,6 +21,7 @@ import {
 } from '@/components/ui/dialog';
 import { destinations, titleForPath, destinationForPath } from '@/lib/content';
 import { Polaroids } from '@/components/editorial-interactions';
+import { CarvedStars, EntranceWelcome } from '@/components/entrance-welcome';
 import {
   DevelopmentControls,
   developmentEnabled,
@@ -117,13 +119,15 @@ const locations = [
 function SceneLayers({
   scene,
   reload,
-  onEnter,
+  onReadSign,
+  signRef,
   signMaterial,
   woodStars,
 }: {
   scene: Scene;
   reload: number;
-  onEnter?: () => void;
+  onReadSign?: () => void;
+  signRef?: RefObject<HTMLButtonElement | null>;
   signMaterial: EntranceSignMaterial;
   woodStars: boolean;
 }) {
@@ -141,7 +145,7 @@ function SceneLayers({
           </div>
           <div
             className="depth-layer depth-layer--threshold"
-            aria-hidden={onEnter ? undefined : true}
+            aria-hidden={onReadSign ? undefined : true}
           >
             <img
               key={reload}
@@ -151,13 +155,15 @@ function SceneLayers({
             />
             <button
               className="threshold-invitation"
+              ref={signRef}
               data-material={signMaterial}
               data-carved={
                 signMaterial === 'wood' && woodStars ? 'true' : undefined
               }
-              onClick={onEnter}
-              tabIndex={onEnter ? 0 : -1}
-              aria-label="Empieza a abrazar tu paz: entrar al jardín"
+              onClick={onReadSign}
+              tabIndex={onReadSign ? 0 : -1}
+              aria-label="Leer la bienvenida de Abraza tu Paz"
+              aria-haspopup="dialog"
             >
               <img
                 src={
@@ -173,13 +179,7 @@ function SceneLayers({
                 tu paz
               </span>
               {signMaterial === 'wood' && woodStars ? (
-                <svg
-                  className="threshold-invitation__carving"
-                  viewBox="0 0 56 34"
-                  aria-hidden="true"
-                >
-                  <path d="M28 3Q28 16 17 17Q28 18 28 31Q29 18 40 17Q29 16 28 3ZM9 1Q9 7 3 8Q9 9 9 15Q10 9 16 8Q10 7 9 1ZM46 20Q46 25 41 26Q46 27 46 32Q47 27 52 26Q47 25 46 20Z" />
-                </svg>
+                <CarvedStars className="threshold-invitation__carving" />
               ) : null}
             </button>
           </div>
@@ -244,6 +244,7 @@ export function Experience({ children }: { children: ReactNode }) {
   const [sceneIndex, setSceneIndex] = useState(reading ? 2 : 0);
   const [menuOpen, setMenuOpen] = useState(false);
   const [albumOpen, setAlbumOpen] = useState(false);
+  const [welcomeOpen, setWelcomeOpen] = useState(false);
   const [pointedObject, setPointedObject] = useState<string | null>(null);
   const [signMaterial, setSignMaterial] =
     useState<EntranceSignMaterial>('paper');
@@ -269,6 +270,7 @@ export function Experience({ children }: { children: ReactNode }) {
   const panRef = useRef(0);
   const inspectTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const lastFocus = useRef<HTMLElement | null>(null);
+  const signRef = useRef<HTMLButtonElement>(null);
   const scene = scenes[sceneIndex];
   const isGardenPassage =
     transition &&
@@ -560,18 +562,19 @@ export function Experience({ children }: { children: ReactNode }) {
         closeReading();
         return;
       }
-      if (reading || menuOpen || albumOpen || transition) return;
+      if (reading || menuOpen || albumOpen || welcomeOpen || transition) return;
       if (event.key === 'ArrowRight') void goTo(Math.min(sceneIndex + 1, 2));
       if (event.key === 'ArrowLeft') void goTo(Math.max(sceneIndex - 1, 0));
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [reading, menuOpen, albumOpen, transition, sceneIndex, goTo]);
+  }, [reading, menuOpen, albumOpen, welcomeOpen, transition, sceneIndex, goTo]);
   const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
     if (
       !stageRef.current ||
       reading ||
       menuOpen ||
+      welcomeOpen ||
       transition ||
       inspected ||
       reducedMotion
@@ -619,9 +622,11 @@ export function Experience({ children }: { children: ReactNode }) {
     <>
       <div
         ref={stageRef}
-        role={reading || menuOpen || albumOpen ? undefined : 'main'}
+        role={
+          reading || menuOpen || albumOpen || welcomeOpen ? undefined : 'main'
+        }
         aria-label="La experiencia de Abraza tu Paz"
-        className={`experience${transition ? ' is-transitioning' : ''}${inspected ? ' is-inspecting' : ''}${albumOpen ? ' is-viewing-album' : ''}${reading || menuOpen ? ' is-reading' : ''}`}
+        className={`experience${transition ? ' is-transitioning' : ''}${inspected ? ' is-inspecting' : ''}${albumOpen ? ' is-viewing-album' : ''}${reading || menuOpen || welcomeOpen ? ' is-reading' : ''}`}
         style={
           inspected
             ? ({
@@ -685,9 +690,13 @@ export function Experience({ children }: { children: ReactNode }) {
               : undefined
           }
           aria-label={`El ${scene.name.toLowerCase()}`}
-          aria-hidden={reading || menuOpen || albumOpen ? true : undefined}
+          aria-hidden={
+            reading || menuOpen || albumOpen || welcomeOpen ? true : undefined
+          }
           inert={
-            reading || menuOpen || albumOpen || !!transition ? true : undefined
+            reading || menuOpen || albumOpen || welcomeOpen || !!transition
+              ? true
+              : undefined
           }
         >
           <div ref={worldRef} className="scene-world">
@@ -696,7 +705,10 @@ export function Experience({ children }: { children: ReactNode }) {
               reload={reload}
               signMaterial={signMaterial}
               woodStars={woodStars}
-              onEnter={scene.id === 'entrada' ? () => void goTo(1) : undefined}
+              onReadSign={
+                scene.id === 'entrada' ? () => setWelcomeOpen(true) : undefined
+              }
+              signRef={scene.id === 'entrada' ? signRef : undefined}
             />
             <p className="sr-only">{scene.alt}</p>
             <h1 className="sr-only">
@@ -815,8 +827,12 @@ export function Experience({ children }: { children: ReactNode }) {
         <header
           className="masthead menu-typeface"
           data-menu-typeface={menuTypeface}
-          inert={reading || menuOpen || albumOpen ? true : undefined}
-          aria-hidden={reading || menuOpen || albumOpen ? true : undefined}
+          inert={
+            reading || menuOpen || albumOpen || welcomeOpen ? true : undefined
+          }
+          aria-hidden={
+            reading || menuOpen || albumOpen || welcomeOpen ? true : undefined
+          }
         >
           <button
             className="wordmark"
@@ -861,6 +877,13 @@ export function Experience({ children }: { children: ReactNode }) {
           </div>
         ) : null}
       </div>
+      <EntranceWelcome
+        open={welcomeOpen}
+        onOpenChange={setWelcomeOpen}
+        material={signMaterial}
+        woodStars={woodStars}
+        returnFocus={signRef}
+      />
       <Dialog
         open={albumOpen}
         onOpenChange={(open) => {
@@ -978,7 +1001,7 @@ export function Experience({ children }: { children: ReactNode }) {
         onMenuTypefaceChange={changeMenuTypeface}
         woodStars={woodStars}
         onWoodStarsChange={changeWoodStars}
-        blocked={menuOpen || albumOpen}
+        blocked={menuOpen || albumOpen || welcomeOpen}
       />
     </>
   );
