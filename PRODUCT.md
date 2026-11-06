@@ -32,6 +32,7 @@ Documentos de research reproducidos en docs/reference. Fuentes originales en ../
 
 ## Product Principles
 
+- Superficies de interacción cálidas y contornos suaves: evitar ángulos rectos en los nuevos paneles, fotografías y controles para acompañar la sensación de calma. Preferencia explícita del cliente durante la revisión de bienvenida y chat.
 - La web verdadera es el jardín: los elementos y contenidos pertenecen al recorrido inmersivo, no a un micrositio de entrada seguido de otra web convencional. Redistribución del contenido pendiente de revisión sección a sección.
 - La exploración es una invitación.
 - Cada objeto tiene una función.

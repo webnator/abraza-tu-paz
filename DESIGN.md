@@ -12,6 +12,8 @@ colors:
   musgo-hover: "#243a2b"
   tinta-cuerpo: "#514c41"
   papel-fotografia: "#faf8f2"
+  papel-calido: "#e9dfcc"
+  soporte-mensaje: "#ded2bd"
   soporte-cuaderno: "#e8e2d4"
   soporte-floral: "#ead7d8"
   soporte-agua: "#d9e4df"
@@ -53,6 +55,11 @@ typography:
 rounded:
   square: "0"
   circle: "50%"
+  bienvenida: "24px"
+  chat: "20px"
+  fotografia-bienvenida: "16px"
+  mensaje: "14px"
+  control-conversacion: "12px"
 spacing:
   inline-gap: "0.5rem"
   action-gap: "0.65rem"
@@ -205,9 +212,9 @@ Las etiquetas del paisaje usan fondos oscuros translúcidos y las imágenes llev
 
 ## Shapes
 
-La forma principal es rectangular: páginas, imágenes, soportes de cuadernos, bloques de conversación, enlaces de pestañas y botones sólidos tienen esquinas rectas. Los divisores usan un píxel de musgo translúcido, generalmente entre 16% y 25% de opacidad. El carácter material aparece en encuadres y pequeños giros, como la polaroid y el cartel de madera.
+La revisión del cliente pide calidez y contornos suaves en las superficies nuevas de interacción. La bienvenida tiene radio de 24px, la fotografía 16px, el chat 20px y sus controles 12px. Los mensajes usan 14px en todas las esquinas. Se evita el blanco frío: papel cálido `#e9dfcc` y soporte de mensaje `#ded2bd`, manteniendo musgo para el texto y las acciones. Las páginas editoriales anteriores conservan su geometría hasta la revisión sección a sección. Los divisores usan un píxel de musgo translúcido, generalmente entre 16% y 25% de opacidad. El carácter material aparece en encuadres y pequeños giros, como la polaroid y el cartel de madera.
 
-Los círculos se reservan para un control reconocible: puntos de objeto, reproducción y controles de fotografía. Las áreas invisibles de paso siguen la geometría del lugar. La librería UI dispone de radios genéricos, pero la composición construida del sitio utiliza sus variantes rectas y no toma el redondeo genérico como lenguaje principal.
+Los círculos se reservan para controles reconocibles: puntos de objeto, reproducción, fotografías y la bolita del chat. Las áreas invisibles de paso siguen la geometría del lugar. Los radios de bienvenida y conversación se aplican a sus superficies, fotografía y controles para sostener la calma que solicita el cliente.
 
 ## Components
 
@@ -257,11 +264,11 @@ Un botón `</>` de 44px permanece abajo a la izquierda durante el recorrido y la
 
 ### Bienvenida de primera visita
 
-Tras 2,2 segundos de recorrido visible sin otro diálogo ni transición, Gabriela da la bienvenida en un panel hueso **centrado**, de hasta 608px. Fotografía real de 128 × 160px (90 × 114px en móvil), título Cormorant de 2.4rem y cuerpo Manrope de 1rem. Dos párrafos invitan a mirar qué ha traído a la persona y seguir a su ritmo. «Conversar conmigo» abre el chat; el único «Cerrar», Escape y exterior devuelven al jardín. Entrada de 360ms y desplazamiento vertical de 12px; sin movimiento con reducción activada. El fondo lleva veladura musgo al 44% y blur de 6px.
+Tras 2,2 segundos de recorrido visible sin otro diálogo ni transición, Gabriela da la bienvenida en un panel beige cálido **centrado**, de hasta 608px y radio de 24px. Fotografía real de 128 × 160px (90 × 114px en móvil), con radio de 16px; título Cormorant de 2.4rem y cuerpo Manrope de 1rem. Dos párrafos invitan a mirar qué ha traído a la persona y seguir a su ritmo. «Conversar conmigo» abre el chat; el único «Cerrar», Escape y exterior devuelven al jardín. Entrada de 360ms y desplazamiento vertical de 12px; sin movimiento con reducción activada. El fondo lleva veladura musgo al 44% y blur de 6px.
 
 El panel no se repite una vez mostrado en ese navegador. La marca persistente solo contiene que fue visto; no se guardan las elecciones. Las herramientas de desarrollo añaden «Probar primera visita» para borrar esa marca, reiniciar el hilo de prueba y repetir la espera. Las bienvenidas y el árbol de conversación siguen pendientes de aprobación editorial de Gabriela.
 
-El chat es un panel no modal de hasta 400 × 624px, abajo a la derecha, con fondo hueso y cabecera compacta de Gabriela, subtítulo «Conversación guiada» y un único control de minimizar. Los mensajes recibidos usan un soporte beige y los de la persona musgo con texto hueso. Las opciones se agrupan bajo el historial; cada elección añade un turno sin sustituir los anteriores. El historial tiene scroll y permanece al minimizar, navegar y reabrir durante la visita. No se guarda en almacenamiento persistente ni se envía al servidor. La bolita de 56px permite retomarlo desde cualquier escena o lectura; otros diálogos tienen prioridad. El chat usa `.conversation-widget` para separarse del bloque editorial `.conversation` existente. Los enlaces de WhatsApp llevan al número provisional autorizado por el usuario, con un saludo genérico y sin respuestas del hilo.
+El chat es un panel no modal de hasta 400 × 624px, abajo a la derecha, con papel cálido y radio de 20px. Cabecera compacta de Gabriela, subtítulo «Conversación guiada» y un único control de minimizar. Los mensajes recibidos usan un soporte beige y los de la persona musgo con texto hueso; ambos tienen todas sus esquinas redondeadas. Las opciones se agrupan bajo el historial; cada elección añade un turno sin sustituir los anteriores. El historial tiene scroll y permanece al minimizar, navegar y reabrir durante la visita. No se guarda en almacenamiento persistente ni se envía al servidor. La bolita de 56px permite retomarlo desde cualquier escena o lectura; otros diálogos tienen prioridad. El chat usa `.conversation-widget` para separarse del bloque editorial `.conversation` existente. Los enlaces de WhatsApp llevan al número provisional autorizado por el usuario, con un saludo genérico y sin respuestas del hilo.
 
 En escritorio, el puntero desplaza fondo, plano medio, primer plano y mundo del portal con amplitudes diferentes; se suspende durante lectura, menú, inspección y transiciones. Abrir un objeto aproxima el fondo a `1.13` y el primer plano a `1.18` antes de mostrar la lectura. Los objetos usan un círculo claro de `1.75rem` dentro de un área mínima de `44px`; su etiqueta aparece en hover o foco. El hover ilumina el círculo con sol y lo amplía a `1.08`, sin giro. Las flechas izquierda y derecha permiten cambiar de escena.
 

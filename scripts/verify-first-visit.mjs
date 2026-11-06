@@ -36,7 +36,7 @@ const read = async (session) =>
     seen: localStorage.getItem('abraza-tu-paz:welcome-seen:v1'),
     chat: !!chat,
     chatFits: !chat || (cb.top >= -1 && cb.bottom <= innerHeight + 1 && cb.left >= -1 && cb.right <= innerWidth + 1 && chat.scrollWidth <= chat.clientWidth),
-    chatAppearance: !chat || (getComputedStyle(chat).backgroundColor === 'rgb(243, 239, 229)' && parseFloat(getComputedStyle(chat.querySelector('h2')).fontSize) <= 28 && getComputedStyle(chat.querySelector('[data-speaker="gabriela"]')).color === 'rgb(52, 72, 58)'),
+    chatAppearance: !chat || (getComputedStyle(chat).backgroundColor === 'rgb(233, 223, 204)' && parseFloat(getComputedStyle(chat.querySelector('h2')).fontSize) <= 28 && getComputedStyle(chat.querySelector('[data-speaker="gabriela"]')).color === 'rgb(52, 72, 58)'),
     focusInsideChat: !!chat?.contains(document.activeElement),
     messages: [...document.querySelectorAll('.conversation__message')].map(x => ({speaker:x.dataset.speaker,text:x.textContent.trim()})),
     launcher: !!document.querySelector('.conversation-launcher'),

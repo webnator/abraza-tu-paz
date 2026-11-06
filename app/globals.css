@@ -57,6 +57,8 @@
   --atp-sun: #f2c84b;
   --atp-flower: #c83d72;
   --atp-flower-ink: #9b315d;
+  --atp-warm-paper: #e9dfcc;
+  --atp-warm-inset: #ded2bd;
 }
 
 .dark {
@@ -1594,9 +1596,9 @@
   gap: 1.7rem;
   padding: 2rem;
   border: 0;
-  border-radius: 0;
+  border-radius: 24px;
   color: var(--atp-moss);
-  background: var(--atp-bone);
+  background: var(--atp-warm-paper);
   box-shadow: 0 14px 48px rgb(7 16 8 / 28%);
   --tw-ring-shadow: 0 0 #0000;
   translate: -50% -50%;
@@ -1622,6 +1624,7 @@
 .first-visit__greeting img {
   width: 128px;
   height: 160px;
+  border-radius: 16px;
   object-fit: cover;
   object-position: 32% 20%;
 }
@@ -1666,6 +1669,7 @@
   padding: 0.7rem 1.2rem;
   color: var(--atp-bone);
   background: var(--atp-moss);
+  border-radius: 12px;
   text-align: left;
   font-size: 1rem;
   line-height: 1.5;
@@ -1683,6 +1687,7 @@
   align-self: flex-end;
   flex: none;
   min-height: 44px;
+  border-radius: 12px;
   padding-inline: 0.4rem;
   color: var(--atp-earth);
   font-family: var(--font-serif), serif;
@@ -1773,7 +1778,9 @@
   display: flex;
   flex-direction: column;
   color: var(--atp-moss);
-  background: var(--atp-bone);
+  background: var(--atp-warm-paper);
+  border-radius: 20px;
+  overflow: hidden;
   box-shadow: 0 12px 40px rgb(7 16 8 / 30%);
   animation: first-visit-in 260ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
@@ -1809,6 +1816,7 @@
   place-items: center;
   width: 44px;
   height: 44px;
+  border-radius: 50%;
   margin-left: auto;
 }
 .conversation__history {
@@ -1824,8 +1832,8 @@
   max-width: 88%;
   margin-bottom: 0.65rem;
   padding: 0.7rem 0.85rem;
-  border-radius: 8px 8px 8px 0;
-  background: var(--secondary);
+  border-radius: 14px;
+  background: var(--atp-warm-inset);
   font-size: 0.9375rem;
   line-height: 1.6;
   overflow-wrap: anywhere;
@@ -1834,7 +1842,6 @@
   margin-left: auto;
   color: var(--atp-bone);
   background: var(--atp-moss);
-  border-radius: 8px 8px 0 8px;
 }
 .conversation__options {
   flex: none;
@@ -1857,7 +1864,7 @@
   min-height: 44px;
   padding: 0.55rem 0.75rem;
   border: 1px solid rgb(52 72 58 / 30%);
-  border-radius: 6px;
+  border-radius: 12px;
   font-size: 0.875rem;
   line-height: 1.4;
   text-align: left;
