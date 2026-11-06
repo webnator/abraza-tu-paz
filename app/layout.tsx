@@ -1,5 +1,9 @@
 import type { Metadata } from 'next';
-import { Cormorant_Garamond, Manrope } from 'next/font/google';
+import {
+  Cormorant_Garamond,
+  Manrope,
+  Nothing_You_Could_Do,
+} from 'next/font/google';
 import './globals.css';
 import { Experience } from '@/components/experience';
 
@@ -12,6 +16,12 @@ const sans = Manrope({
   variable: '--font-sans',
   subsets: ['latin'],
   weight: ['400', '500', '600'],
+});
+const handwriting = Nothing_You_Could_Do({
+  variable: '--font-handwriting',
+  subsets: ['latin'],
+  weight: '400',
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
@@ -46,7 +56,9 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="es">
-      <body className={`${serif.variable} ${sans.variable}`}>
+      <body
+        className={`${serif.variable} ${sans.variable} ${handwriting.variable}`}
+      >
         <Experience>{children}</Experience>
       </body>
     </html>

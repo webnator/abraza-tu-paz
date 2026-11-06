@@ -55,6 +55,11 @@
     "source": "jardin-refugio-v1.png"
   },
   {
+    "asset": "public/images/nota-entrada-v1.webp",
+    "kind": "built-in image_gen",
+    "source": "nota-entrada-v1.png"
+  },
+  {
     "asset": "public/images/refugio-base.jpg",
     "kind": "existing project asset",
     "source": "immersive-transition-v2"

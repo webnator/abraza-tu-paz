@@ -1274,6 +1274,7 @@
 }
 .masthead {
   z-index: 22;
+  grid-template-columns: 1fr auto;
   padding: 1.6rem 2.6rem;
 }
 .wordmark {
@@ -1340,19 +1341,22 @@
 .threshold-invitation {
   position: absolute;
   z-index: 7;
-  top: 48%;
-  left: 76%;
-  width: 15rem;
-  aspect-ratio: 4/3;
+  top: 46%;
+  left: 64.5%;
+  width: 5%;
+  aspect-ratio: 2/3;
   padding: 0;
   border: none;
-  color: #201d12;
+  pointer-events: auto;
+  color: var(--atp-moss-hover);
   background: none;
-  font-family: var(--font-serif), serif;
-  font-size: 2rem;
-  line-height: 1.03;
-  transform: translate(-50%, -50%) rotate(-6deg);
+  font-family: var(--font-handwriting), cursive;
+  font-size: clamp(0.75rem, 1.8dvh, 1.1rem);
+  font-weight: 400;
+  line-height: 1.25;
+  transform: translate(-50%, -50%) rotate(-4deg);
   text-align: center;
+  filter: brightness(0.76) saturate(0.72);
 }
 .threshold-invitation > img {
   position: absolute;
@@ -1364,21 +1368,31 @@
 .threshold-invitation__text {
   position: absolute;
   display: block;
-  top: 50%;
+  top: 58%;
   left: 50%;
-  width: 80%;
+  width: 82%;
   translate: -50% -50%;
 }
 .threshold-invitation small {
   display: block;
   margin-bottom: 0.45rem;
-  font-size: 1.1rem;
+  font-size: 0.72em;
 }
 .threshold-invitation:hover {
-  color: #201d12;
-  filter: brightness(1.08);
+  filter: brightness(0.82) saturate(0.72);
 }
-.scene--departing .threshold-invitation,
+.scene--departing[data-scene='entrada'] .depth-layer--mid {
+  z-index: 4;
+  transform-origin: var(--passage-x) var(--passage-y);
+  animation: threshold-through var(--threshold-duration) var(--threshold-ease)
+    both;
+}
+.scene--arriving[data-scene='entrada'] .depth-layer--mid {
+  z-index: 4;
+  transform-origin: var(--passage-x) var(--passage-y);
+  animation: threshold-return var(--threshold-duration) var(--threshold-ease)
+    both;
+}
 .scene--departing .refuge-whisper,
 .scene--departing .garden-note {
   animation: passage-ui-out 250ms ease both;
@@ -1441,6 +1455,10 @@
   background: var(--atp-sun);
   color: var(--atp-moss);
   transform: scale(1.08);
+}
+.hotspot[data-pointed] .hotspot__label {
+  opacity: 1;
+  transform: translateX(0);
 }
 .hotspot--video .hotspot__label {
   left: auto;
@@ -1548,7 +1566,6 @@ button:disabled {
 a {
   text-underline-offset: 0.3em;
 }
-.global-menu[data-slot='dialog-content'],
 .editorial-overlay {
   position: fixed;
   z-index: 60;
@@ -1567,10 +1584,48 @@ a {
   outline: none;
 }
 .global-menu[data-slot='dialog-content'] {
+  position: fixed;
+  z-index: 60;
+  inset: 0 0 0 auto;
+  width: min(370px, calc(100vw - 1.25rem));
+  max-width: none;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   gap: 0;
-  animation: editorial-in 450ms cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0;
+  border: 0;
+  border-left: 1px solid rgb(52 72 58 / 16%);
+  border-radius: 0;
+  color: var(--atp-moss);
+  background: var(--atp-bone);
+  box-shadow: none;
+  transform: none;
+  translate: 0 0;
+  animation: none;
+  transition: translate 320ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.global-menu[data-starting-style],
+.global-menu[data-ending-style] {
+  translate: 100% 0;
+}
+.global-menu-backdrop[data-slot='dialog-overlay'] {
+  background: rgb(7 16 8 / 12%);
+  backdrop-filter: none;
+}
+.global-menu .overlay-bar {
+  justify-content: flex-end;
+  min-height: 5.25rem;
+  padding: 1rem 1.5rem;
+}
+.drawer-return {
+  min-height: 44px;
+  align-self: flex-start;
+  margin: 1.5rem 2.5rem 2.5rem;
+  color: var(--atp-earth);
+  font-size: 0.8125rem;
+  text-decoration: underline;
+  text-underline-offset: 0.4em;
 }
 .editorial-overlay {
   display: flex;
@@ -1609,68 +1664,37 @@ a {
   color: var(--atp-flower-ink);
 }
 .global-menu__body {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
-  gap: clamp(3rem, 8vw, 9rem);
-  width: min(1100px, 90%);
+  display: flex;
+  width: 100%;
   flex: 1;
   min-height: 0;
-  align-self: center;
   align-items: center;
-  padding: 1rem 0 2rem;
-}
-.menu-garden {
-  position: relative;
-  height: min(65dvh, 560px);
-}
-.menu-garden img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 55% 50%;
-}
-.menu-garden p {
-  position: absolute;
-  left: 1.7rem;
-  bottom: 1.5rem;
-  margin: 0;
-  font-family: var(--font-serif), serif;
-  font-size: 2.15rem;
-  line-height: 1.06;
-  color: var(--atp-bone);
-  text-shadow: 0 3px 15px rgb(0 0 0 / 70%);
+  padding: 1rem 2.5rem;
+  overflow-y: auto;
 }
 .menu-destinations {
   display: flex;
   flex-direction: column;
-  padding-right: 1rem;
+  padding: 0;
 }
-.menu-destinations a {
+.menu-destinations button {
   display: block;
-  padding: 0.9rem 0;
+  min-height: 44px;
+  padding: 0.7rem 0;
+  color: var(--atp-moss);
+  text-align: left;
   text-decoration: none;
 }
-.menu-destinations a span {
+.menu-destinations button span {
   display: block;
   font-family: var(--font-serif), serif;
-  font-size: clamp(1.8rem, 3vw, 3rem);
-  line-height: 1.03;
+  font-size: 2rem;
+  line-height: 1.15;
 }
-.menu-destinations a small {
-  display: block;
-  margin-top: 0.3rem;
-  font-size: 0.875rem;
-  color: var(--atp-earth);
-}
-.menu-destinations a:hover span,
-.menu-destinations a[aria-current='page'] span {
+.menu-destinations button:hover span {
   color: var(--atp-flower-ink);
 }
-.menu-destinations a:last-child {
-  margin-top: 0.4rem;
-  border-top: 1px solid rgb(52 72 58 / 20%);
-}
-.menu-destinations a:last-child span {
+.menu-destinations button:last-child span {
   color: var(--atp-flower-ink);
 }
 .place-navigation {
@@ -2512,9 +2536,6 @@ a {
   .contact-opening {
     gap: 2rem;
   }
-  .global-menu__body {
-    gap: 3rem;
-  }
   .editorial-navigation {
     gap: 1.5rem;
   }
@@ -2583,21 +2604,8 @@ a {
     overflow-wrap: anywhere;
     hyphens: auto;
   }
-  .threshold-invitation {
-    top: auto;
-    bottom: 16%;
-    left: auto;
-    right: 0.8rem;
-    width: 11rem;
-    font-size: 1.65rem;
-    transform: rotate(-6deg);
-  }
-  .threshold-invitation__text {
-    padding-top: 0;
-  }
-  .threshold-invitation small {
-    font-size: 0.9rem;
-    margin-bottom: 0.3rem;
+  .scene[data-scene='entrada'] .scene-world {
+    margin-left: -14dvh;
   }
   .refuge-whisper {
     display: none;
@@ -2620,7 +2628,6 @@ a {
     font-size: 1.2rem;
     width: 10rem;
   }
-  .global-menu[data-slot='dialog-content'],
   .editorial-overlay {
     inset: 0;
     box-shadow: none;
@@ -2635,27 +2642,6 @@ a {
   .close-control {
     font-size: 0.8125rem;
     gap: 0.4rem;
-  }
-  .global-menu__body {
-    display: block;
-    width: calc(100% - 3rem);
-    overflow-y: auto;
-    padding: 1.4rem 0;
-  }
-  .menu-garden {
-    display: none;
-  }
-  .menu-destinations {
-    padding: 0;
-  }
-  .menu-destinations a {
-    padding: 0.95rem 0;
-  }
-  .menu-destinations a span {
-    font-size: 2.2rem;
-  }
-  .menu-destinations a small {
-    font-size: 0.875rem;
   }
   .place-navigation {
     gap: 1.1rem;

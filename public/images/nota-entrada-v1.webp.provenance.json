@@ -1,0 +1,9 @@
+{
+  "type": "built-in image_gen",
+  "asset": "nota-entrada-v1.png",
+  "source": "../research/generated-assets-v3/nota-entrada-v1.png",
+  "exact_prompt": "Use case: product-mockup. Asset type: transparent cutout for a small physical handwritten note hanging on the stone wall beside an old garden gate in Abraza tu Paz. Generate a single blank, narrow VERTICAL piece of warm ivory heavy handmade paper, roughly a 2:3 portrait sheet. Two tiny holes close to the top corners, connected by a thin natural linen twine forming a small loose arch above the paper so it can hang from a nail. Front-facing near-flat view, slight organic curvature and very subtly irregular deckled edges. Soft dappled afternoon garden light from upper left, warm muted creamy off-white paper, natural fine fibers, tiny believable worn corners, restrained realism not fancy parchment. The central 75% of paper must be clean, completely blank and evenly lit for HTML handwriting overlay. Fully isolated on a genuinely transparent background including around the twine and paper contours. The object should fill most of the frame with a small transparent margin. No words, no letters, no numbers, no handwriting, no illustrations, no foliage, no stone wall, no background, no frame, no watermark, no wood. A real intimate paper note, not a shop sign or UI card.",
+  "createdAt": "2026-11-06",
+  "purpose": "Vertical paper note beside gate, attached to midground parallax; handwriting is real HTML font Nothing You Could Do",
+  "changes": "PNG copied unchanged to research; resized to 768px wide and encoded as WebP with alpha preserved"
+}

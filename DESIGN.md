@@ -162,6 +162,8 @@ La paleta expresa la espiritualidad encarnada de la marca: tiene luz y pulso, pe
 
 **Body Font:** Manrope, con fallback `sans-serif`.
 
+**Handwriting:** Nothing You Could Do, peso 400, variable `--font-handwriting`. Se reserva para la nota física de la entrada; no sustituye la tipografía de navegación ni constituye un logo.
+
 Ambas familias se cargan con pesos 400, 500 y 600. Los títulos editoriales usan 400 y equilibran sus saltos con `text-wrap: balance`. La serif aporta una voz humana y literaria; la sans mantiene las acciones y los textos largos claros.
 
 ### Hierarchy
@@ -183,7 +185,7 @@ Las aperturas combinan imagen y texto con columnas `1.08fr 1fr`; los bloques de 
 
 La biblioteca tiene cuatro columnas de portadas, dos a 1100px y una rejilla móvil `repeat(auto-fit, minmax(min(100%, 9rem), 1fr))`. Las pestañas pueden envolver a otra línea, con altura automática en la lista y controles de `44px`; esta disposición conserva las tres opciones con texto aumentado. La portada del detalle es sticky a `1rem` en escritorio; en móvil pasa a flujo normal, centrada y con máximo de `15rem`.
 
-El menú y la lectura son paneles fijos con margen exterior de `1.2rem` en escritorio. Su cabecera permanece fuera del área desplazable. El contenido se desplaza verticalmente dentro de `.editorial-scroll`, y la navegación de contenido puede desplazarse horizontalmente. A 720px los paneles ocupan la pantalla completa; la cabecera permite envolver sus controles y el menú oculta la fotografía lateral para dar ancho a los destinos. El menú de escritorio utiliza `min(1100px, 90%)` y columnas `1fr 1.2fr`.
+El menú es un drawer derecho a altura completa, de `min(370px, calc(100vw - 1.25rem))`; el jardín sigue visible fuera de él. Cuatro opciones, sin imagen ni subtítulos, y un cierre discreto. En móvil deja al menos una franja del paisaje a la vista. Sus opciones son atajos a los objetos del refugio, no a páginas convencionales. Las superficies lectoras anteriores conservan por ahora su margen de `1.2rem` en escritorio y ocupación completa en móvil; redistribuir ese contenido dentro del jardín es trabajo pendiente de las siguientes revisiones, no un nuevo modelo de web aprobado.
 
 Los únicos puntos de cambio de la composición del sitio son los media queries de **1100px** y **720px**, ambos inclusivos con `max-width`. El comportamiento del paisaje se describe en su componente específico, debajo.
 
@@ -219,9 +221,9 @@ El foco visible de botones y enlaces usa una línea de `2px` separada `5px`. En 
 
 ### Navigation
 
-La marca es serif: `1.8rem` sobre el paisaje y `1.7rem` en los paneles, con tracking `-0.025em`; en móvil pasa a `1.5rem` y `1.4rem`. La cabecera del paisaje coloca marca, nombre de escena y menú en tres posiciones; móvil oculta el nombre de escena y el texto de menú.
+El identificador provisional es serif: `1.8rem` sobre el paisaje y `1.7rem` en los paneles, con tracking `-0.025em`; en móvil pasa a `1.5rem` y `1.4rem`. La cabecera tiene dos extremos: nombre a la izquierda y menú a la derecha, sin etiqueta de escena. El logo definitivo queda pendiente de material y confirmación del cliente, incluida su coherencia con redes.
 
-El menú global usa grandes nombres serif, subtítulos Manrope en tierra y un destino de contacto destacado en bugambilia tinta. El hover y la página activa usan ese mismo tono. Su pie contiene los tres lugares del paisaje y subraya el lugar activo. La navegación de lectura usa texto sans de `0.875rem` y subraya la página activa con agua y grosor `2px`. El menú es un diálogo con cierre accesible; el paisaje queda inerte mientras se consulta el menú o el contenido.
+El drawer muestra cuatro nombres serif de `2rem`: Terapia, Quién te acompaña, Biblioteca y ¿Hablamos? Sin subtítulos, mapa, números o imagen adicional. El contacto conserva el acento bugambilia tinta. Las acciones llevan a los objetos del refugio y dejan visible su etiqueta, sin abrir una superficie editorial. El pie solo ofrece «Seguir explorando». Apertura lateral de `320ms`, sin zoom y sin blur sobre el jardín; Escape y el exterior cierran con foco protegido. La navegación lectora anterior permanece hasta su revisión de contenido.
 
 ### Library Tabs and Resource Covers
 
@@ -240,6 +242,8 @@ El vídeo empieza con una fotografía oscurecida, un círculo de reproducción y
 ### Signature Component: the Landscape
 
 El umbral, el jardín y el refugio son una composición propia de esta superficie. La escena fija ocupa el viewport; un mundo interior de proporción panorámica usa `width: max(100vw, 177.69dvh)` y `height: max(100dvh, 56.28vw)`. Fondo, objetos y áreas de interacción comparten ese sistema de coordenadas. El umbral es transparente y permite ver el jardín real detrás; el paso al refugio acerca la imagen y la vegetación atraviesa el primer plano. Estas decisiones de cámara no imponen el formato de futuras superficies editoriales.
+
+La entrada tiene una nota de papel vertical, colgada junto a la verja dentro de `.depth-layer--mid`. Ancho del 5% del plano, fuente manuscrita proporcionada y papel rebajado en exposición/saturación para convivir con la sombra vegetal. No es un elemento fijo sobre la cámara: sigue el movimiento intermedio y la aproximación al umbral. En móvil el encuadre de entrada se desplaza `-14dvh` para mantener visibles la puerta y la nota. El cartel de madera anterior está conservado como activo, pero ya no se utiliza en la entrada.
 
 En escritorio, el puntero desplaza fondo, plano medio, primer plano y mundo del portal con amplitudes diferentes; se suspende durante lectura, menú, inspección y transiciones. Abrir un objeto aproxima el fondo a `1.13` y el primer plano a `1.18` antes de mostrar la lectura. Los objetos usan un círculo claro de `1.75rem` dentro de un área mínima de `44px`; su etiqueta aparece en hover o foco. El hover ilumina el círculo con sol y lo amplía a `1.08`, sin giro. Las flechas izquierda y derecha permiten cambiar de escena.
 

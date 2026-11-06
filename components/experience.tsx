@@ -105,7 +105,15 @@ const locations = [
   },
 ] as const;
 
-function SceneLayers({ scene, reload }: { scene: Scene; reload: number }) {
+function SceneLayers({
+  scene,
+  reload,
+  onEnter,
+}: {
+  scene: Scene;
+  reload: number;
+  onEnter?: () => void;
+}) {
   return (
     <>
       {scene.id === 'entrada' ? (
@@ -165,8 +173,26 @@ function SceneLayers({ scene, reload }: { scene: Scene; reload: number }) {
         </div>
       )}
       <div className="scene-shade" aria-hidden="true" />
-      <div className="depth-layer depth-layer--mid" aria-hidden="true">
-        <span className="light-orb light-orb--one" />
+      <div
+        className="depth-layer depth-layer--mid"
+        aria-hidden={scene.id === 'entrada' && onEnter ? undefined : true}
+      >
+        <span className="light-orb light-orb--one" aria-hidden="true" />
+        {scene.id === 'entrada' ? (
+          <button
+            className="threshold-invitation"
+            onClick={onEnter}
+            tabIndex={onEnter ? 0 : -1}
+            aria-label="Empieza a abrazar tu paz: entrar al jardín"
+          >
+            <img src="/images/nota-entrada-v1.webp" alt="" />
+            <span className="threshold-invitation__text">
+              <small>Empieza a</small>abrazar
+              <br />
+              tu paz
+            </span>
+          </button>
+        ) : null}
       </div>
       <div className="depth-layer depth-layer--front" aria-hidden="true">
         <picture>
@@ -190,6 +216,7 @@ export function Experience({ children }: { children: ReactNode }) {
   const [sceneIndex, setSceneIndex] = useState(reading ? 2 : 0);
   const [menuOpen, setMenuOpen] = useState(false);
   const [albumOpen, setAlbumOpen] = useState(false);
+  const [pointedObject, setPointedObject] = useState<string | null>(null);
   const [transition, setTransition] = useState<Passage | null>(null);
   const [inspected, setInspected] = useState<{ x: number; y: number } | null>(
     null,
@@ -417,6 +444,29 @@ export function Experience({ children }: { children: ReactNode }) {
       target?.focus();
     }, 250);
   };
+  const visitRefugeObject = (id: string) => {
+    setMenuOpen(false);
+    if (reading) router.push('/');
+    setSceneIndex(2);
+    setInspected(null);
+    setPointedObject(id);
+    panRef.current = 0;
+    stageRef.current?.style.setProperty('--pan-x', '0px');
+    if (inspectTimer.current) clearTimeout(inspectTimer.current);
+    inspectTimer.current = setTimeout(
+      () => {
+        document
+          .querySelector<HTMLButtonElement>(`.hotspot--${id}`)
+          ?.focus({ preventScroll: true });
+      },
+      reducedMotion ? 100 : 380,
+    );
+  };
+  useEffect(() => {
+    if (!pointedObject) return;
+    const timer = setTimeout(() => setPointedObject(null), 6000);
+    return () => clearTimeout(timer);
+  }, [pointedObject]);
   useEffect(
     () => () => {
       if (inspectTimer.current) clearTimeout(inspectTimer.current);
@@ -561,7 +611,11 @@ export function Experience({ children }: { children: ReactNode }) {
           }
         >
           <div ref={worldRef} className="scene-world">
-            <SceneLayers scene={scene} reload={reload} />
+            <SceneLayers
+              scene={scene}
+              reload={reload}
+              onEnter={scene.id === 'entrada' ? () => void goTo(1) : undefined}
+            />
             <p className="sr-only">{scene.alt}</p>
             <h1 className="sr-only">
               {scene.id === 'entrada'
@@ -620,6 +674,7 @@ export function Experience({ children }: { children: ReactNode }) {
                   <button
                     key={item.id}
                     className={`hotspot hotspot--${item.id}`}
+                    data-pointed={pointedObject === item.id ? true : undefined}
                     style={
                       {
                         '--desktop-x': `${item.x}%`,
@@ -667,20 +722,6 @@ export function Experience({ children }: { children: ReactNode }) {
               </>
             ) : null}
           </div>
-          {scene.id === 'entrada' ? (
-            <button
-              className="threshold-invitation"
-              onClick={() => void goTo(1)}
-              aria-label="Empieza a abrazar tu paz: entrar al jardín"
-            >
-              <img src="/images/cartel-madera-v1.webp" alt="" />
-              <span className="threshold-invitation__text">
-                <small>Empieza a</small>abrazar
-                <br />
-                tu paz
-              </span>
-            </button>
-          ) : null}
           {scene.id === 'refugio' ? (
             <p className="refuge-whisper">
               Aquí podemos hablar
@@ -701,9 +742,6 @@ export function Experience({ children }: { children: ReactNode }) {
           >
             abraza tu paz
           </button>
-          <span className="scene-marker" aria-live="polite">
-            {scene.name}
-          </span>
           <button
             className="menu-trigger"
             onClick={() => setMenuOpen(true)}
@@ -770,62 +808,43 @@ export function Experience({ children }: { children: ReactNode }) {
         </DialogContent>
       </Dialog>
       <Dialog open={menuOpen} onOpenChange={setMenuOpen}>
-        <DialogContent className="global-menu" showCloseButton={false}>
+        <DialogContent
+          className="global-menu"
+          backdropClassName="global-menu-backdrop"
+          showCloseButton={false}
+        >
           <div className="overlay-bar">
-            <span className="overlay-wordmark">abraza tu paz</span>
             <DialogClose className="close-control">
               Cerrar <X size={19} aria-hidden="true" />
             </DialogClose>
           </div>
           <DialogTitle className="sr-only">Menú de Abraza tu Paz</DialogTitle>
           <DialogDescription className="sr-only">
-            Accede directamente a terapia, Gabriela, recursos y contacto.
+            Atajos a las sillas, las fotografías y la biblioteca del refugio. La
+            navegación permanece dentro del jardín.
           </DialogDescription>
           <div className="global-menu__body">
-            <div className="menu-garden">
-              <img
-                src="/images/jardin-refugio-v1.webp"
-                alt="El sendero hacia el refugio"
-              />
-              <p>
-                Siempre puedes
-                <br />
-                <em>volver a explorar.</em>
-              </p>
-            </div>
             <nav
               className="menu-destinations"
               aria-label="Contenido de Abraza tu Paz"
             >
-              {destinations.map((item) => (
-                <Link
-                  key={item.id}
-                  href={`/${item.id}`}
-                  aria-current={
-                    destinationForPath(path) === item.id ? 'page' : undefined
-                  }
-                  onClick={() => {
-                    cameFromLandscape.current = false;
-                    setMenuOpen(false);
-                  }}
-                >
-                  <span>{item.title}</span>
-                  <small>{item.subtitle}</small>
-                </Link>
-              ))}
+              {destinations
+                .filter((item) =>
+                  ['terapia', 'gabriela', 'biblioteca', 'contacto'].includes(
+                    item.id,
+                  ),
+                )
+                .map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => visitRefugeObject(item.id)}
+                  >
+                    <span>{item.title}</span>
+                  </button>
+                ))}
             </nav>
           </div>
-          <nav className="place-navigation" aria-label="Recorrer el lugar">
-            {scenes.map((item, index) => (
-              <button
-                key={item.id}
-                onClick={() => void goTo(index)}
-                aria-current={sceneIndex === index ? 'location' : undefined}
-              >
-                {item.name}
-              </button>
-            ))}
-          </nav>
+          <DialogClose className="drawer-return">Seguir explorando</DialogClose>
         </DialogContent>
       </Dialog>
       {reading ? (

@@ -32,11 +32,16 @@ Documentos de research reproducidos en docs/reference. Fuentes originales en ../
 
 ## Product Principles
 
+- La web verdadera es el jardín: los elementos y contenidos pertenecen al recorrido inmersivo, no a un micrositio de entrada seguido de otra web convencional. Redistribución del contenido pendiente de revisión sección a sección.
 - La exploración es una invitación.
 - Cada objeto tiene una función.
 - Reconocimiento humano antes de etiquetas.
 - El visitante debe poder encontrar información y contactar directamente.
 - La paz no implica controlar o eliminar todo malestar.
+
+## Pending Client Decisions
+
+- Logo e identidad vigentes: pedir originales y revisar coherencia con las redes antes de reemplazar el identificador provisional de cabecera. Pendiente explícito del 6 de noviembre de 2026.
 
 ## Accessibility & Inclusion
 
