@@ -5,6 +5,11 @@
     "source": "immersive-transition-v2"
   },
   {
+    "asset": "public/images/cartel-madera-clavada-v1.webp",
+    "kind": "built-in image_gen",
+    "source": "cartel-madera-clavada-v1.png"
+  },
+  {
     "asset": "public/images/cartel-madera-v1.webp",
     "kind": "built-in image_gen",
     "source": "cartel-madera-v1.png"

@@ -35,3 +35,11 @@ Pedir el logo/identidad vigente y sus archivos originales. Revisar la coherencia
 - Detector ejecutado una vez; conserva avisos de documentación auxiliar de tokens del sistema previo. No se cambia la estética aprobada para silenciarlos.
 - Capturas en `.impeccable/review/entrada-nov06-small.png`, `entrada-nov06-mobile-final.png` y `drawer-nov06-desktop.png`.
 - Vista real del navegador de la aplicación actualizada para cargar la fuente nueva y dejar la entrada visible. Sin despliegue.
+
+## Variantes reversibles y navegación — segundo pase
+
+- Papel conservado sin cambios. Nueva tablilla vertical clavada a la piedra, generada con `image_gen` y optimizada con alfa en `public/images/cartel-madera-clavada-v1.webp`. Original y prompt exacto en `../research/generated-assets-v3/cartel-madera-clavada-v1.*`; procedencia junto al activo servido. El activo horizontal de madera anterior también sigue conservado.
+- Botón de desarrollo `</>` en la esquina inferior izquierda, disponible en todas las escenas y rutas locales. Panel sencillo con papel/madera, estrellas talladas y tres alternativas tipográficas para el menú; recuerda la elección por navegador. Se cierra al abrir menú o álbum para respetar sus diálogos y foco. No se renderiza en producción.
+- Cormorant Garamond elegida como propuesta de navegación: voz editorial más cálida que la sans anterior. Se puede comparar con Nothing You Could Do y Manrope desde el panel, sin cargar fuentes nuevas. El texto «Menú» es mayor, lleva subrayado fino, veladura oscura localizada y permanece visible en móvil. Se conserva el drawer minimalista y sus cuatro atajos al refugio.
+- Pequeña marca de tres estrellas bajo el texto de la madera, como un grabado oscuro con borde iluminado. Es geometría SVG decorativa, sin emoji; se puede desactivar para comparar la tabla anterior. La nota de papel no lleva la marca.
+- El verificador del anclaje cubre las dos variantes en escritorio y móvil. Las imágenes y el texto permanecen dentro del mismo plano de la puerta durante el parallax y el zoom.

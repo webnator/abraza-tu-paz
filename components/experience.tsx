@@ -20,6 +20,15 @@ import {
 } from '@/components/ui/dialog';
 import { destinations, titleForPath, destinationForPath } from '@/lib/content';
 import { Polaroids } from '@/components/editorial-interactions';
+import {
+  DevelopmentControls,
+  developmentEnabled,
+  entranceSignStorageKey,
+  menuTypefaceStorageKey,
+  woodStarsStorageKey,
+  type EntranceSignMaterial,
+  type MenuTypeface,
+} from '@/components/development-controls';
 
 type SceneId = 'entrada' | 'jardin' | 'refugio';
 type Scene = {
@@ -109,10 +118,14 @@ function SceneLayers({
   scene,
   reload,
   onEnter,
+  signMaterial,
+  woodStars,
 }: {
   scene: Scene;
   reload: number;
   onEnter?: () => void;
+  signMaterial: EntranceSignMaterial;
+  woodStars: boolean;
 }) {
   return (
     <>
@@ -138,16 +151,36 @@ function SceneLayers({
             />
             <button
               className="threshold-invitation"
+              data-material={signMaterial}
+              data-carved={
+                signMaterial === 'wood' && woodStars ? 'true' : undefined
+              }
               onClick={onEnter}
               tabIndex={onEnter ? 0 : -1}
               aria-label="Empieza a abrazar tu paz: entrar al jardín"
             >
-              <img src="/images/nota-entrada-v1.webp" alt="" />
+              <img
+                src={
+                  signMaterial === 'wood'
+                    ? '/images/cartel-madera-clavada-v1.webp'
+                    : '/images/nota-entrada-v1.webp'
+                }
+                alt=""
+              />
               <span className="threshold-invitation__text">
                 <small>Empieza a</small>abrazar
                 <br />
                 tu paz
               </span>
+              {signMaterial === 'wood' && woodStars ? (
+                <svg
+                  className="threshold-invitation__carving"
+                  viewBox="0 0 56 34"
+                  aria-hidden="true"
+                >
+                  <path d="M28 3Q28 16 17 17Q28 18 28 31Q29 18 40 17Q29 16 28 3ZM9 1Q9 7 3 8Q9 9 9 15Q10 9 16 8Q10 7 9 1ZM46 20Q46 25 41 26Q46 27 46 32Q47 27 52 26Q47 25 46 20Z" />
+                </svg>
+              ) : null}
             </button>
           </div>
         </>
@@ -212,6 +245,10 @@ export function Experience({ children }: { children: ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [albumOpen, setAlbumOpen] = useState(false);
   const [pointedObject, setPointedObject] = useState<string | null>(null);
+  const [signMaterial, setSignMaterial] =
+    useState<EntranceSignMaterial>('paper');
+  const [menuTypeface, setMenuTypeface] = useState<MenuTypeface>('serif');
+  const [woodStars, setWoodStars] = useState(true);
   const [transition, setTransition] = useState<Passage | null>(null);
   const [inspected, setInspected] = useState<{ x: number; y: number } | null>(
     null,
@@ -237,6 +274,49 @@ export function Experience({ children }: { children: ReactNode }) {
     transition &&
     ((sceneIndex === 1 && transition.toIndex === 2) ||
       (sceneIndex === 2 && transition.toIndex === 1));
+
+  useEffect(() => {
+    if (!developmentEnabled) return;
+    try {
+      const saved = window.localStorage.getItem(entranceSignStorageKey);
+      if (saved === 'paper' || saved === 'wood') setSignMaterial(saved);
+      const savedTypeface = window.localStorage.getItem(menuTypefaceStorageKey);
+      if (
+        savedTypeface === 'serif' ||
+        savedTypeface === 'handwriting' ||
+        savedTypeface === 'sans'
+      )
+        setMenuTypeface(savedTypeface);
+      if (window.localStorage.getItem(woodStarsStorageKey) === 'false')
+        setWoodStars(false);
+    } catch {
+      /* Storage can be unavailable; switching still works in memory. */
+    }
+  }, []);
+  const changeSignMaterial = (material: EntranceSignMaterial) => {
+    setSignMaterial(material);
+    try {
+      window.localStorage.setItem(entranceSignStorageKey, material);
+    } catch {
+      /* The choice remains active until the page is reloaded. */
+    }
+  };
+  const changeMenuTypeface = (typeface: MenuTypeface) => {
+    setMenuTypeface(typeface);
+    try {
+      window.localStorage.setItem(menuTypefaceStorageKey, typeface);
+    } catch {
+      /* Keep the choice in memory. */
+    }
+  };
+  const changeWoodStars = (visible: boolean) => {
+    setWoodStars(visible);
+    try {
+      window.localStorage.setItem(woodStarsStorageKey, String(visible));
+    } catch {
+      /* Keep the choice in memory. */
+    }
+  };
 
   useEffect(() => {
     const media = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -581,7 +661,12 @@ export function Experience({ children }: { children: ReactNode }) {
             aria-hidden="true"
           >
             <div className="scene-world">
-              <SceneLayers scene={scenes[transition.toIndex]} reload={reload} />
+              <SceneLayers
+                scene={scenes[transition.toIndex]}
+                reload={reload}
+                signMaterial={signMaterial}
+                woodStars={woodStars}
+              />
             </div>
           </section>
         ) : null}
@@ -609,6 +694,8 @@ export function Experience({ children }: { children: ReactNode }) {
             <SceneLayers
               scene={scene}
               reload={reload}
+              signMaterial={signMaterial}
+              woodStars={woodStars}
               onEnter={scene.id === 'entrada' ? () => void goTo(1) : undefined}
             />
             <p className="sr-only">{scene.alt}</p>
@@ -726,7 +813,8 @@ export function Experience({ children }: { children: ReactNode }) {
           ) : null}
         </section>
         <header
-          className="masthead"
+          className="masthead menu-typeface"
+          data-menu-typeface={menuTypeface}
           inert={reading || menuOpen || albumOpen ? true : undefined}
           aria-hidden={reading || menuOpen || albumOpen ? true : undefined}
         >
@@ -743,7 +831,7 @@ export function Experience({ children }: { children: ReactNode }) {
             aria-label="Abrir menú"
           >
             <span>Menú</span>
-            <Menu size={20} aria-hidden="true" />
+            <Menu size={19} strokeWidth={1.35} aria-hidden="true" />
           </button>
         </header>
         {isGardenPassage ? (
@@ -804,7 +892,8 @@ export function Experience({ children }: { children: ReactNode }) {
       </Dialog>
       <Dialog open={menuOpen} onOpenChange={setMenuOpen}>
         <DialogContent
-          className="global-menu"
+          className="global-menu menu-typeface"
+          data-menu-typeface={menuTypeface}
           backdropClassName="global-menu-backdrop"
           showCloseButton={false}
         >
@@ -882,6 +971,15 @@ export function Experience({ children }: { children: ReactNode }) {
           </div>
         </main>
       ) : null}
+      <DevelopmentControls
+        material={signMaterial}
+        onMaterialChange={changeSignMaterial}
+        menuTypeface={menuTypeface}
+        onMenuTypefaceChange={changeMenuTypeface}
+        woodStars={woodStars}
+        onWoodStarsChange={changeWoodStars}
+        blocked={menuOpen || albumOpen}
+      />
     </>
   );
 }

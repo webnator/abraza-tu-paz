@@ -16,6 +16,7 @@ const measurement = `JSON.stringify((() => {
   const n = note.getBoundingClientRect();
   const text = note.querySelector('.threshold-invitation__text');
   return { sameParent: note.parentElement === gate.parentElement,
+    material: note.dataset.material,
     x: (n.left + n.width / 2 - g.left) / g.width,
     y: (n.top + n.height / 2 - g.top) / g.height,
     widthRatio: n.width / g.width,
@@ -26,11 +27,48 @@ const measurement = `JSON.stringify((() => {
 })())`;
 const measure = async (session) =>
   JSON.parse(JSON.parse(await run(session, 'eval', measurement)));
-async function check(device, width, height) {
-  const session = `atp-note-anchor-${device}`;
+async function check(device, width, height, material) {
+  const session = `atp-note-anchor-${device}-${material}`;
   await run(session, 'set', 'viewport', String(width), String(height));
   await run(session, 'open', 'http://localhost:3000/');
   await run(session, 'wait', '500');
+  await run(session, 'snapshot', '-i');
+  await run(
+    session,
+    'find',
+    'role',
+    'button',
+    'click',
+    '--name',
+    'Controles de desarrollo',
+    '--exact',
+  );
+  await run(session, 'snapshot', '-i');
+  await run(
+    session,
+    'find',
+    'role',
+    'radio',
+    'click',
+    '--name',
+    material === 'wood' ? 'Madera clavada' : 'Papel',
+    '--exact',
+  );
+  await run(
+    session,
+    'eval',
+    "document.querySelector('.threshold-invitation > img').decode().then(() => true)",
+  );
+  await run(
+    session,
+    'find',
+    'role',
+    'button',
+    'click',
+    '--name',
+    'Cerrar controles de desarrollo',
+    '--exact',
+  );
   const initial = await measure(session);
   const samples = [initial];
   for (const [x, y] of [
@@ -49,7 +87,11 @@ async function check(device, width, height) {
     await run(session, 'wait', '850');
     samples.push(await measure(session));
   }
-  await run(session, 'screenshot', resolve(review, `${device}.png`));
+  await run(
+    session,
+    'screenshot',
+    resolve(review, `${device}-${material}.png`),
+  );
   await run(session, 'snapshot', '-i');
   await run(
     session,
@@ -81,13 +123,16 @@ async function check(device, width, height) {
   );
   const result = {
     device,
+    material,
     initial,
     samples,
     maxNormalizedDrift: drift,
     scene,
     errors,
     pass:
-      samples.every((s) => s.sameParent && s.textFits) &&
+      samples.every(
+        (s) => s.sameParent && s.textFits && s.material === material,
+      ) &&
       initial.noteVisible &&
       drift < 0.00001 &&
       scene.includes('jardin') &&
@@ -97,8 +142,10 @@ async function check(device, width, height) {
   return result;
 }
 const results = await Promise.all([
-  check('desktop', 1440, 900),
-  check('mobile', 390, 844),
+  check('desktop', 1440, 900, 'paper'),
+  check('mobile', 390, 844, 'paper'),
+  check('desktop', 1440, 900, 'wood'),
+  check('mobile', 390, 844, 'wood'),
 ]);
 const report = {
   checkedAt: new Date().toISOString(),

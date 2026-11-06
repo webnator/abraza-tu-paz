@@ -10,6 +10,8 @@ npm run dev -- --port 3000
 
 Se utiliza el proyecto React/Vinext existente y su configuración de Sites. Esta iteración no se ha desplegado.
 
+El botón `</>` de la esquina inferior izquierda abre las variantes de desarrollo: cartel de papel o madera clavada, estrellas talladas y tipografía del menú. Las elecciones se recuerdan en este navegador. El panel y sus preferencias locales no se aplican al build de producción; allí se conserva el papel y se utiliza Cormorant para el menú.
+
 ## Contenido y rutas
 
 `/terapia`, `/gabriela`, `/biblioteca`, `/reflexiones`, `/proyectos`, `/contacto`.
