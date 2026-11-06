@@ -1381,6 +1381,9 @@
 .threshold-invitation:hover {
   filter: brightness(0.82) saturate(0.72);
 }
+.passage-zone--entrada {
+  z-index: 1;
+}
 .scene--departing[data-scene='entrada'] .depth-layer--mid {
   z-index: 4;
   transform-origin: var(--passage-x) var(--passage-y);
