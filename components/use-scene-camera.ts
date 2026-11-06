@@ -2,9 +2,9 @@
 
 import { useCallback, useEffect, useRef, type RefObject } from 'react';
 
-// One shared camera for the entrance world, including its physical sign and hit areas.
+// One shared camera for every scene, including its objects and hit areas.
 // The existing depth layers keep their own smaller pointer parallax underneath it.
-export function useEntranceCamera({
+export function useSceneCamera({
   stage,
   enabled,
   paused,

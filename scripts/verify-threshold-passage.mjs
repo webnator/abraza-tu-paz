@@ -144,7 +144,14 @@ async function inspect(device, width, height, reduced = false) {
         await run(
           session,
           'eval',
-          'window.travelAnimations.forEach(a => a.finish())',
+          `window.endpointPose = null;
+          window.endpointObserver = new MutationObserver(() => {
+            if (document.querySelector('[data-threshold-travel]')) return;
+            window.endpointPose = ${read};
+            window.endpointObserver.disconnect();
+          });
+          window.endpointObserver.observe(document.querySelector('.experience'), {attributes:true,subtree:true});
+          window.travelAnimations.forEach(a => a.finish())`,
         );
       }
       await run(
@@ -161,9 +168,16 @@ async function inspect(device, width, height, reduced = false) {
       );
       const last = frames.at(-1);
       if (last) {
+        // Observe the React handoff itself. The live handheld camera resumes
+        // afterwards and legitimately moves while the CLI retrieves the state.
+        const endpointAtCommit = await evaluate(session, 'window.endpointPose');
+        check(
+          endpointAtCommit,
+          `${device}/${direction}: missing handoff snapshot`,
+        );
         const jump = Math.max(
           ...['x', 'y', 'width', 'height'].map((k) =>
-            Math.abs(last.garden[k] - settled.garden[k]),
+            Math.abs(last.garden[k] - endpointAtCommit.garden[k]),
           ),
         );
         check(
@@ -175,6 +189,7 @@ async function inspect(device, width, height, reduced = false) {
           initial,
           frames,
           settled,
+          endpointAtCommit,
           endpointJump: jump,
         });
       } else journeys.push({ direction, settled });

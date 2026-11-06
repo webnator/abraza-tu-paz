@@ -15,7 +15,7 @@ Se conserva el movimiento 3D del puntero, la deriva de reposo y la posición del
 - La capa vegetal original se presenta en dos mitades con una unión suavizada dentro de su zona central. Ambas se desplazan desde los lados y hacia abajo, con opacidad progresiva. El regreso invierte el recorrido.
 - Una ampliación fotográfica periférica aporta el campo de visión que faltaba bajo la foto reducida. La fotografía central aprobada continúa por encima, sin sustituirse. Esa extensión evita descubrir su borde rectangular durante el paso.
 - Las imágenes del siguiente espacio, incluido el primer plano transparente, se decodifican antes de iniciar el recorrido.
-- Con reducción de movimiento se cambia de estado directamente, conservando los controles. La cámara de reposo empieza suavemente desde cero al volver a la entrada.
+- Con reducción de movimiento se cambia de estado directamente, conservando los controles. Tras extender la cámara 3D a las tres escenas, el gesto y la fase de reposo se conservan durante todo el recorrido; solo se pausan mientras se atraviesa cada paso.
 
 ## Verificación
 

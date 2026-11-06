@@ -9,7 +9,8 @@ export const developmentEnabled = process.env.NODE_ENV !== 'production';
 export const entranceSignStorageKey = 'abraza-tu-paz:dev:entrance-sign';
 export const menuTypefaceStorageKey = 'abraza-tu-paz:dev:menu-typeface';
 export const woodStarsStorageKey = 'abraza-tu-paz:dev:wood-stars';
-export const entranceCameraStorageKey = 'abraza-tu-paz:dev:entrance-camera';
+// Preserve the saved choice from the original entrance-only experiment.
+export const sceneCameraStorageKey = 'abraza-tu-paz:dev:entrance-camera';
 
 const signOptions: { value: EntranceSignMaterial; label: string }[] = [
   { value: 'paper', label: 'Papel' },
@@ -23,8 +24,8 @@ export function DevelopmentControls({
   onMenuTypefaceChange,
   woodStars,
   onWoodStarsChange,
-  entranceCamera,
-  onEntranceCameraChange,
+  sceneCamera,
+  onSceneCameraChange,
   open,
   onOpenChange,
   onReplayFirstVisit,
@@ -36,8 +37,8 @@ export function DevelopmentControls({
   onMenuTypefaceChange: (typeface: MenuTypeface) => void;
   woodStars: boolean;
   onWoodStarsChange: (visible: boolean) => void;
-  entranceCamera: boolean;
-  onEntranceCameraChange: (enabled: boolean) => void;
+  sceneCamera: boolean;
+  onSceneCameraChange: (enabled: boolean) => void;
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onReplayFirstVisit: () => void;
@@ -118,10 +119,10 @@ export function DevelopmentControls({
           <label>
             <input
               type="checkbox"
-              checked={entranceCamera}
-              onChange={(event) => onEntranceCameraChange(event.target.checked)}
+              checked={sceneCamera}
+              onChange={(event) => onSceneCameraChange(event.target.checked)}
             />
-            <span>Movimiento y cámara 3D · entrada</span>
+            <span>Movimiento y cámara 3D · todas las escenas</span>
           </label>
           <fieldset>
             <legend>Tipografía del menú</legend>

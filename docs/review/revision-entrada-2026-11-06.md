@@ -74,3 +74,11 @@ El usuario aprueba el gesto 3D del puntero y el chat. Pide que se perciba mejor 
 Se corrige el borde inferior de la foto reducida y la aparición brusca de las plantas. Entrada y jardín comparten ahora un único fondo persistente, con una extensión periférica de la fotografía para cubrir el campo de visión durante el paso. Las plantas entran suavemente desde los lados y se retiran al regresar. El encuadre móvil, la nivelación de la cámara y los planos parten de su posición real y se resuelven en un solo recorrido de 2100ms, sin pausa ni sustitución de imagen al terminar.
 
 Se mantienen el cartel anclado a la verja, las variantes papel/madera, la cámara 3D y la deriva aprobadas. No se modifica el recorrido al refugio, el chat o el audio. Detalles, pruebas y prompt del activo nuevo: `../reference/transicion-entrada-jardin.md`.
+
+### Cámara extendida al jardín y al refugio
+
+Por petición del usuario, la cámara aprobada deja de ser exclusiva de la entrada. `use-scene-camera.ts` aplica los mismos coeficientes de perspectiva, desplazamiento, giro e inercia a las tres escenas, conservando sus capas de parallax. Se mantiene un único bucle de cámara y su pose/fase continúa entre escenas; durante lecturas, menús, inspecciones y transiciones se congela. Todos los objetos y áreas de clic comparten el mundo transformado. El encuadre móvil de la entrada continúa integrado en el recorrido del umbral.
+
+El control `</>` pasa a «Movimiento y cámara 3D · todas las escenas» y conserva la elección almacenada del ensayo anterior. Reducción de movimiento respeta las tres escenas. Se mantienen la oclusión al refugio, chat, audio y contenido.
+
+Verificación: `scripts/verify-scene-camera.mjs` recorre entrada → jardín → refugio → jardín → entrada en escritorio y móvil, comprueba deriva en reposo, cuatro posiciones de puntero, cobertura de la imagen, pausa ante menú y álbum y ausencia de errores. Caso adicional con reducción de movimiento en móvil. Informe `scene-camera-verification.json`; el comando anterior `verify-entrance-camera.mjs` delega en este verificador. `verify-threshold-passage.mjs` continúa pasando en ambos sentidos y mide el salto en el mismo cambio de estado, antes de que se reanude la deriva normal. Build y TypeScript correctos.
