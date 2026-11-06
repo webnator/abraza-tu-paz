@@ -296,7 +296,7 @@
 .light-orb {
   position: absolute;
   border-radius: 999px;
-  background: rgb(255 239 178 / 16%);
+  background: rgb(255 239 178 / 24%);
   filter: blur(24px);
   animation: breathe 7s ease-in-out infinite alternate;
 }
@@ -944,7 +944,7 @@
 }
 @keyframes breathe {
   to {
-    opacity: 0.45;
+    opacity: 0.55;
     transform: translate(1rem, -0.8rem) scale(1.2);
   }
 }
@@ -1673,6 +1673,7 @@
   position: absolute;
   right: calc(100% + 0.75rem);
   padding: 0.45rem 0.7rem;
+  border-radius: 12px;
   color: var(--atp-moss);
   background: var(--atp-bone);
   font-family: var(--font-serif), serif;
