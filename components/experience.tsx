@@ -128,7 +128,7 @@ function SceneLayers({
           </div>
           <div
             className="depth-layer depth-layer--threshold"
-            aria-hidden="true"
+            aria-hidden={onEnter ? undefined : true}
           >
             <img
               key={reload}
@@ -136,6 +136,19 @@ function SceneLayers({
               alt=""
               fetchPriority="high"
             />
+            <button
+              className="threshold-invitation"
+              onClick={onEnter}
+              tabIndex={onEnter ? 0 : -1}
+              aria-label="Empieza a abrazar tu paz: entrar al jardín"
+            >
+              <img src="/images/nota-entrada-v1.webp" alt="" />
+              <span className="threshold-invitation__text">
+                <small>Empieza a</small>abrazar
+                <br />
+                tu paz
+              </span>
+            </button>
           </div>
         </>
       ) : (
@@ -173,26 +186,8 @@ function SceneLayers({
         </div>
       )}
       <div className="scene-shade" aria-hidden="true" />
-      <div
-        className="depth-layer depth-layer--mid"
-        aria-hidden={scene.id === 'entrada' && onEnter ? undefined : true}
-      >
+      <div className="depth-layer depth-layer--mid" aria-hidden="true">
         <span className="light-orb light-orb--one" aria-hidden="true" />
-        {scene.id === 'entrada' ? (
-          <button
-            className="threshold-invitation"
-            onClick={onEnter}
-            tabIndex={onEnter ? 0 : -1}
-            aria-label="Empieza a abrazar tu paz: entrar al jardín"
-          >
-            <img src="/images/nota-entrada-v1.webp" alt="" />
-            <span className="threshold-invitation__text">
-              <small>Empieza a</small>abrazar
-              <br />
-              tu paz
-            </span>
-          </button>
-        ) : null}
       </div>
       <div className="depth-layer depth-layer--front" aria-hidden="true">
         <picture>

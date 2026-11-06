@@ -1,0 +1,150 @@
+{
+  "checkedAt": "2026-11-06T06:35:48.381Z",
+  "results": [
+    {
+      "device": "desktop",
+      "initial": {
+        "sameParent": true,
+        "x": 0.6400966014338857,
+        "y": 0.46139516779559714,
+        "widthRatio": 0.05322847555574269,
+        "textFits": true,
+        "transform": "matrix(1.035, 0, 0, 1.035, 0, 0)",
+        "noteVisible": true
+      },
+      "samples": [
+        {
+          "sameParent": true,
+          "x": 0.6400966014338857,
+          "y": 0.46139516779559714,
+          "widthRatio": 0.05322847555574269,
+          "textFits": true,
+          "transform": "matrix(1.035, 0, 0, 1.035, 0, 0)",
+          "noteVisible": true
+        },
+        {
+          "sameParent": true,
+          "x": 0.6400966611118543,
+          "y": 0.46139516779559714,
+          "widthRatio": 0.05322851264784199,
+          "textFits": true,
+          "transform": "matrix(1.035, 0, 0, 1.035, 7.78952, 4.0895)",
+          "noteVisible": true
+        },
+        {
+          "sameParent": true,
+          "x": 0.6400966014338857,
+          "y": 0.46139516779559714,
+          "widthRatio": 0.05322847555574269,
+          "textFits": true,
+          "transform": "matrix(1.035, 0, 0, 1.035, 8, 4.2)",
+          "noteVisible": true
+        },
+        {
+          "sameParent": true,
+          "x": 0.6400966014338857,
+          "y": 0.46139516779559714,
+          "widthRatio": 0.05322847555574269,
+          "textFits": true,
+          "transform": "matrix(1.035, 0, 0, 1.035, -7.58203, -3.98056)",
+          "noteVisible": true
+        },
+        {
+          "sameParent": true,
+          "x": 0.6400966014338857,
+          "y": 0.46139516779559714,
+          "widthRatio": 0.05322847555574269,
+          "textFits": true,
+          "transform": "matrix(1.035, 0, 0, 1.035, -8, -4.2)",
+          "noteVisible": true
+        },
+        {
+          "sameParent": true,
+          "x": 0.6400966654298581,
+          "y": 0.46139517322317025,
+          "widthRatio": 0.05322851244020949,
+          "textFits": true,
+          "transform": "matrix(1.34955, 0, 0, 1.34955, 0, 0)",
+          "noteVisible": true
+        }
+      ],
+      "maxNormalizedDrift": 6.399597241024679e-8,
+      "scene": "\"jardin\"",
+      "errors": "",
+      "pass": true
+    },
+    {
+      "device": "mobile",
+      "initial": {
+        "sameParent": true,
+        "x": 0.6400989618723075,
+        "y": 0.4613908244395683,
+        "widthRatio": 0.05323099763896801,
+        "textFits": true,
+        "transform": "matrix(1.035, 0, 0, 1.035, 0, 0)",
+        "noteVisible": true
+      },
+      "samples": [
+        {
+          "sameParent": true,
+          "x": 0.6400989618723075,
+          "y": 0.4613908244395683,
+          "widthRatio": 0.05323099763896801,
+          "textFits": true,
+          "transform": "matrix(1.035, 0, 0, 1.035, 0, 0)",
+          "noteVisible": true
+        },
+        {
+          "sameParent": true,
+          "x": 0.6400989339824074,
+          "y": 0.4613908537475045,
+          "widthRatio": 0.053231029580460006,
+          "textFits": true,
+          "transform": "matrix(1.035, 0, 0, 1.035, 7.7913, 4.0872)",
+          "noteVisible": true
+        },
+        {
+          "sameParent": true,
+          "x": 0.6400989618723075,
+          "y": 0.4613908537475045,
+          "widthRatio": 0.05323099763896801,
+          "textFits": true,
+          "transform": "matrix(1.035, 0, 0, 1.035, 8, 4.19668)",
+          "noteVisible": true
+        },
+        {
+          "sameParent": true,
+          "x": 0.6400989618723075,
+          "y": 0.4613908537475045,
+          "widthRatio": 0.05323099763896801,
+          "textFits": true,
+          "transform": "matrix(1.035, 0, 0, 1.035, -7.58474, -3.97885)",
+          "noteVisible": true
+        },
+        {
+          "sameParent": true,
+          "x": 0.6400989618723075,
+          "y": 0.4613908537475045,
+          "widthRatio": 0.05323099763896801,
+          "textFits": true,
+          "transform": "matrix(1.035, 0, 0, 1.035, -8, -4.19668)",
+          "noteVisible": true
+        },
+        {
+          "sameParent": true,
+          "x": 0.6400988725761669,
+          "y": 0.4613908909789896,
+          "widthRatio": 0.053230993898928526,
+          "textFits": true,
+          "transform": "matrix(1.35058, 0, 0, 1.35058, 0, 0)",
+          "noteVisible": false
+        }
+      ],
+      "maxNormalizedDrift": 8.929614059294266e-8,
+      "scene": "\"jardin\"",
+      "errors": "",
+      "pass": true
+    }
+  ],
+  "pass": true
+}

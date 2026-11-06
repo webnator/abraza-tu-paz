@@ -286,8 +286,14 @@
   transform: translate3d(var(--back-x), var(--back-y), 0) scale(1.035);
 }
 .depth-layer--threshold {
-  z-index: 0;
+  z-index: 2;
   transform: translate3d(var(--back-x), var(--back-y), 0) scale(1.035);
+}
+.scene[data-scene='entrada'] .scene-shade {
+  z-index: 3;
+}
+.scene[data-scene='entrada'] .depth-layer--mid {
+  z-index: 4;
 }
 .depth-layer--mid {
   z-index: 2;
@@ -1341,9 +1347,9 @@
 .threshold-invitation {
   position: absolute;
   z-index: 7;
-  top: 46%;
-  left: 64.5%;
-  width: 5%;
+  top: 46.14%;
+  left: 64.01%;
+  width: 4.83%;
   aspect-ratio: 2/3;
   padding: 0;
   border: none;
@@ -1383,18 +1389,6 @@
 }
 .passage-zone--entrada {
   z-index: 1;
-}
-.scene--departing[data-scene='entrada'] .depth-layer--mid {
-  z-index: 4;
-  transform-origin: var(--passage-x) var(--passage-y);
-  animation: threshold-through var(--threshold-duration) var(--threshold-ease)
-    both;
-}
-.scene--arriving[data-scene='entrada'] .depth-layer--mid {
-  z-index: 4;
-  transform-origin: var(--passage-x) var(--passage-y);
-  animation: threshold-return var(--threshold-duration) var(--threshold-ease)
-    both;
 }
 .scene--departing .refuge-whisper,
 .scene--departing .garden-note {

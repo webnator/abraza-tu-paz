@@ -6,9 +6,9 @@ La web es el jardín: el parallax no es una portada que conduce a una «web verd
 
 ## Cambios realizados
 
-- Nota vertical junto a la verja, unida al plano intermedio del parallax y al mismo mundo espacial que la puerta. Ya no es un botón fijo sobre el viewport. Participa en el acercamiento al cruzar el umbral.
+- Nota vertical junto a la verja, dentro del mismo contenedor que la imagen de puerta y piedra (`.depth-layer--threshold`). La primera incorporación al plano intermedio aún producía deslizamiento relativo; se corrige uniéndola al plano exacto de la puerta, con idéntica transformación y transición heredadas.
 - Papel colgado con cordel y contorno alfa real. Letra manuscrita `Nothing You Could Do`, no una serif ni una fuente de sistema. El texto sigue siendo HTML accesible.
-- Tras la corrección del cliente durante la revisión: ancho del 5% del plano, aproximadamente un tercio del área del primer papel propuesto; tipografía proporcionada, exposición al 76% y saturación al 72% para integrarlo en los tonos apagados de la entrada. Se mantiene la tinta musgo oscura.
+- Tras la corrección del cliente durante la revisión: tamaño aproximado de un tercio del área del primer papel propuesto; ancho local 4.83% que compensa la escala base de la puerta, tipografía proporcionada, exposición al 76% y saturación al 72% para integrarlo en los tonos apagados de la entrada. Se mantiene la tinta musgo oscura.
 - Eliminado el nombre de escena de la cabecera. La orientación accesible permanece en los nombres de escenas y controles.
 - Drawer derecho de 370px como máximo en escritorio, sin imagen, subtítulos, números ni mapa adicional; cuatro opciones: Terapia, Quién te acompaña, Biblioteca y ¿Hablamos? Fondo hueso, veladura mínima, cierre con Escape y retorno al recorrido.
 - Los cuatro atajos llevan a los objetos correspondientes del refugio y los señalan. No abren un panel editorial desde el drawer. No se ha redistribuido ni eliminado contenido de las rutas anteriores: esa integración continúa pendiente de las próximas revisiones.
@@ -29,7 +29,7 @@ Pedir el logo/identidad vigente y sus archivos originales. Revisar la coherencia
 
 - TypeScript y build correctos.
 - Escritorio 1440 × 900 y móvil 390 × 844 inspeccionados conjuntamente. La nota móvil permanece dentro del encuadre: x=270.6, ancho=90.9, derecha=361.5; texto sin desbordamiento y fuente manuscrita cargada.
-- El movimiento de puntero cambia la posición de la nota de x=940.4 a x=913.7, con transformaciones del plano intermedio de +13.78 a −12.89px. No permanece fija.
+- Prueba de regresión `scripts/verify-note-anchor.mjs`: la imagen de la puerta y el cartel tienen el mismo padre. Su anclaje relativo se mantiene durante el movimiento del puntero, el easing intermedio y el zoom al entrar. Variación normalizada máxima menor de `0.0000001`, tanto en escritorio como en móvil. Informe en `note-anchor-verification.json`.
 - Atajo Terapia comprobado: URL `/`, escena `refugio`, sin `.editorial-overlay`, foco y señal sobre la silla de Terapia.
 - Detector ejecutado una vez; conserva avisos de documentación auxiliar de tokens del sistema previo. No se cambia la estética aprobada para silenciarlos.
 - Capturas en `.impeccable/review/entrada-nov06-small.png`, `entrada-nov06-mobile-final.png` y `drawer-nov06-desktop.png`.
