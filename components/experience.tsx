@@ -25,6 +25,11 @@ import { CarvedStars, EntranceWelcome } from '@/components/entrance-welcome';
 import { GuidedConversation } from '@/components/guided-conversation';
 import { useEntranceCamera } from '@/components/use-entrance-camera';
 import {
+  captureThresholdView,
+  useThresholdPassage,
+  type ThresholdView,
+} from '@/components/use-threshold-passage';
+import {
   FirstVisitWelcome,
   useFirstVisitWelcome,
 } from '@/components/first-visit-welcome';
@@ -75,6 +80,23 @@ const scenes: Scene[] = [
     alt: 'Dos sillas, una taza de matcha, libros y fotografías en un refugio abierto al jardín.',
   },
 ];
+function sceneSources(scene: Scene, mobile: boolean) {
+  if (scene.id === 'entrada')
+    return [
+      scenes[1].image,
+      scenes[1].foreground,
+      '/images/jardin-overscan-v1.jpg',
+      '/images/entrada-umbral-v2.webp',
+      scene.foreground,
+    ];
+  return [
+    mobile && scene.mobileImage ? scene.mobileImage : scene.image,
+    mobile && scene.mobileForeground
+      ? scene.mobileForeground
+      : scene.foreground,
+    ...(scene.id === 'jardin' ? ['/images/jardin-overscan-v1.jpg'] : []),
+  ];
+}
 const locations = [
   {
     id: 'biblioteca',
@@ -130,6 +152,7 @@ function SceneLayers({
   signRef,
   signMaterial,
   woodStars,
+  showThreshold = scene.id === 'entrada',
 }: {
   scene: Scene;
   reload: number;
@@ -137,109 +160,133 @@ function SceneLayers({
   signRef?: RefObject<HTMLButtonElement | null>;
   signMaterial: EntranceSignMaterial;
   woodStars: boolean;
+  showThreshold?: boolean;
 }) {
   return (
     <>
-      {scene.id === 'entrada' ? (
-        <>
-          <div className="portal-world" aria-hidden="true">
-            <img
-              key={reload}
-              src={scenes[1].image}
-              alt=""
-              fetchPriority="high"
-            />
-          </div>
-          <div
-            className="depth-layer depth-layer--threshold"
-            aria-hidden={onReadSign ? undefined : true}
-          >
-            <img
-              key={reload}
-              src="/images/entrada-umbral-v2.webp"
-              alt=""
-              fetchPriority="high"
-            />
-            <button
-              className="threshold-invitation"
-              ref={signRef}
-              data-material={signMaterial}
-              data-carved={
-                signMaterial === 'wood' && woodStars ? 'true' : undefined
-              }
-              onClick={onReadSign}
-              tabIndex={onReadSign ? 0 : -1}
-              aria-label="Leer la bienvenida de Abraza tu Paz"
-              aria-haspopup="dialog"
-            >
-              <img
-                src={
-                  signMaterial === 'wood'
-                    ? '/images/cartel-madera-clavada-v1.webp'
-                    : '/images/nota-entrada-v1.webp'
-                }
-                alt=""
-              />
-              <span className="threshold-invitation__text">
-                <small>Empieza a</small>abrazar
-                <br />
-                tu paz
-              </span>
-              {signMaterial === 'wood' && woodStars ? (
-                <CarvedStars className="threshold-invitation__carving" />
-              ) : null}
-            </button>
-          </div>
-        </>
+      {scene.id !== 'refugio' ? (
+        <div
+          className="depth-layer depth-layer--back garden-backdrop"
+          aria-hidden="true"
+        >
+          <img
+            className="garden-backdrop__overscan"
+            src="/images/jardin-overscan-v1.jpg"
+            alt=""
+            fetchPriority="high"
+          />
+          <img
+            className="garden-backdrop__original"
+            key={reload}
+            src={scenes[1].image}
+            alt=""
+            fetchPriority="high"
+          />
+        </div>
       ) : (
         <div className="depth-layer depth-layer--back" aria-hidden="true">
           <picture>
             {scene.mobileImage ? (
               <source media="(max-width: 720px)" srcSet={scene.mobileImage} />
             ) : null}
-            <img
-              key={reload}
-              src={scene.image}
-              alt=""
-              fetchPriority={scene.id === 'jardin' ? 'high' : 'auto'}
-            />
+            <img key={reload} src={scene.image} alt="" />
           </picture>
-          {scene.id === 'refugio' ? (
-            <>
-              <img
-                className="inhabited-photo"
-                src="/photographs/gabriela-cotidiana.webp"
-                alt=""
-              />
-              <img
-                className="table-photo table-photo--one"
-                src="/photographs/polaroid-paris.webp"
-                alt=""
-              />
-              <img
-                className="table-photo table-photo--two"
-                src="/photographs/polaroid-septiembre-2026.webp"
-                alt=""
-              />
-            </>
-          ) : null}
+          <img
+            className="inhabited-photo"
+            src="/photographs/gabriela-cotidiana.webp"
+            alt=""
+          />
+          <img
+            className="table-photo table-photo--one"
+            src="/photographs/polaroid-paris.webp"
+            alt=""
+          />
+          <img
+            className="table-photo table-photo--two"
+            src="/photographs/polaroid-septiembre-2026.webp"
+            alt=""
+          />
         </div>
       )}
+      {showThreshold ? (
+        <div
+          className="depth-layer depth-layer--threshold"
+          aria-hidden={onReadSign ? undefined : true}
+        >
+          <img
+            key={reload}
+            src="/images/entrada-umbral-v2.webp"
+            alt=""
+            fetchPriority="high"
+          />
+          <button
+            className="threshold-invitation"
+            ref={signRef}
+            data-material={signMaterial}
+            data-carved={
+              signMaterial === 'wood' && woodStars ? 'true' : undefined
+            }
+            onClick={onReadSign}
+            tabIndex={onReadSign ? 0 : -1}
+            aria-label="Leer la bienvenida de Abraza tu Paz"
+            aria-haspopup="dialog"
+          >
+            <img
+              src={
+                signMaterial === 'wood'
+                  ? '/images/cartel-madera-clavada-v1.webp'
+                  : '/images/nota-entrada-v1.webp'
+              }
+              alt=""
+            />
+            <span className="threshold-invitation__text">
+              <small>Empieza a</small>abrazar
+              <br />
+              tu paz
+            </span>
+            {signMaterial === 'wood' && woodStars ? (
+              <CarvedStars className="threshold-invitation__carving" />
+            ) : null}
+          </button>
+        </div>
+      ) : null}
       <div className="scene-shade" aria-hidden="true" />
       <div className="depth-layer depth-layer--mid" aria-hidden="true">
         <span className="light-orb light-orb--one" aria-hidden="true" />
       </div>
-      <div className="depth-layer depth-layer--front" aria-hidden="true">
-        <picture>
-          {scene.mobileForeground ? (
-            <source
-              media="(max-width: 720px)"
-              srcSet={scene.mobileForeground}
-            />
-          ) : null}
-          <img key={reload} src={scene.foreground} alt="" />
-        </picture>
-      </div>
+      {scene.id !== 'refugio' ? (
+        <div
+          className="depth-layer depth-layer--front garden-foreground"
+          aria-hidden="true"
+        >
+          {['left', 'right'].map((side) => (
+            <div key={side} className={`garden-frond garden-frond--${side}`}>
+              <img src={scenes[1].foreground} alt="" />
+            </div>
+          ))}
+        </div>
+      ) : null}
+      {showThreshold ? (
+        <div
+          className="depth-layer depth-layer--front entrance-foreground"
+          aria-hidden="true"
+        >
+          <img src={scenes[0].foreground} alt="" />
+        </div>
+      ) : null}
+      {scene.id === 'refugio' ? (
+        <div className="depth-layer depth-layer--front" aria-hidden="true">
+          <picture>
+            {scene.mobileForeground ? (
+              <source
+                media="(max-width: 720px)"
+                srcSet={scene.mobileForeground}
+              />
+            ) : null}
+            <img key={reload} src={scene.foreground} alt="" />
+          </picture>
+        </div>
+      ) : null}
     </>
   );
 }
@@ -273,6 +320,7 @@ export function Experience({ children }: { children: ReactNode }) {
   const [reducedMotion, setReducedMotion] = useState(false);
   const stageRef = useRef<HTMLDivElement>(null);
   const worldRef = useRef<HTMLDivElement>(null);
+  const thresholdStart = useRef<ThresholdView | null>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const cameFromLandscape = useRef(false);
   const touch = useRef<{ start: number; pan: number; moved: boolean } | null>(
@@ -308,6 +356,10 @@ export function Experience({ children }: { children: ReactNode }) {
     transition &&
     ((sceneIndex === 1 && transition.toIndex === 2) ||
       (sceneIndex === 2 && transition.toIndex === 1));
+  const isThresholdPassage =
+    !!transition &&
+    ((sceneIndex === 0 && transition.toIndex === 1) ||
+      (sceneIndex === 1 && transition.toIndex === 0));
 
   useEffect(() => {
     if (!developmentEnabled) return;
@@ -405,17 +457,7 @@ export function Experience({ children }: { children: ReactNode }) {
     );
   }, [path, router]);
   useEffect(() => {
-    const assets = [
-      window.innerWidth <= 720 && scene.mobileImage
-        ? scene.mobileImage
-        : scene.image,
-      window.innerWidth <= 720 && scene.mobileForeground
-        ? scene.mobileForeground
-        : scene.foreground,
-      ...(scene.id === 'entrada'
-        ? [scenes[1].image, '/images/entrada-umbral-v2.webp']
-        : []),
-    ];
+    const assets = sceneSources(scene, window.innerWidth <= 720);
     setLoadError(false);
     const images = assets.map((source) => {
       const image = new Image();
@@ -460,19 +502,26 @@ export function Experience({ children }: { children: ReactNode }) {
     stageRef.current?.style.setProperty('--pan-x', '0px');
   }, [transition]);
   useEffect(() => {
-    if (!transition) return;
+    if (!transition || isThresholdPassage) return;
     const timer = window.setTimeout(
       finishTransition,
       isGardenPassage ? 1800 : 1500,
     );
     return () => window.clearTimeout(timer);
-  }, [transition, isGardenPassage, finishTransition]);
+  }, [transition, isGardenPassage, isThresholdPassage, finishTransition]);
+  useThresholdPassage({
+    world: worldRef,
+    active: isThresholdPassage,
+    entering: transition?.toIndex === 1,
+    start: thresholdStart,
+    finish: finishTransition,
+    reducedMotion,
+  });
   const goTo = useCallback(
     async (index: number) => {
       setMenuOpen(false);
       if (index === sceneIndex || transition || busy) return;
       if (reading) router.push('/');
-      resetParallax();
       setInspected(null);
       const anchors = [
         { x: 54, y: 51 },
@@ -495,19 +544,34 @@ export function Experience({ children }: { children: ReactNode }) {
           100
         : origin.y;
       setBusy(true);
-      const image = new Image();
-      image.src =
-        window.innerWidth <= 720 && scenes[index].mobileImage
-          ? scenes[index].mobileImage!
-          : scenes[index].image;
       try {
-        await image.decode();
+        // Decode the foreground too: arriving plants must never appear late
+        // just because their transparent texture was still loading.
+        await Promise.all(
+          sceneSources(scenes[index], window.innerWidth <= 720).map(
+            async (source) => {
+              const image = new Image();
+              image.src = source;
+              await image.decode();
+            },
+          ),
+        );
       } catch {
         setLoadError(true);
         setBusy(false);
         return;
       }
       setBusy(false);
+      // Keep the exact current pose as the first frame, including an unfinished
+      // pointer easing or a mobile pan. All planes settle together from here.
+      thresholdStart.current = worldRef.current
+        ? captureThresholdView(worldRef.current)
+        : null;
+      resetParallax();
+      if (sceneIndex < 2 && index < 2) {
+        panRef.current = 0;
+        stageRef.current?.style.setProperty('--pan-x', '0px');
+      }
       if (reducedMotion) {
         setSceneIndex(index);
         setPauseRevealed(false);
@@ -696,11 +760,12 @@ export function Experience({ children }: { children: ReactNode }) {
         }}
         aria-busy={busy || transition ? true : undefined}
       >
-        {transition ? (
+        {transition && !isThresholdPassage ? (
           <section
             className="scene scene--arriving"
             data-scene={scenes[transition.toIndex].id}
             data-origin={scene.id}
+            data-threshold-view={scenes[transition.toIndex].id}
             style={
               {
                 '--passage-x': transition.x,
@@ -720,8 +785,12 @@ export function Experience({ children }: { children: ReactNode }) {
           </section>
         ) : null}
         <section
-          className={`scene${transition ? ' scene--departing' : ''}`}
+          className={`scene${transition && !isThresholdPassage ? ' scene--departing' : ''}`}
           data-scene={scene.id}
+          data-threshold-view={
+            isThresholdPassage ? scenes[transition!.toIndex].id : scene.id
+          }
+          data-threshold-travel={isThresholdPassage ? 'true' : undefined}
           data-destination={
             transition ? scenes[transition.toIndex].id : undefined
           }
@@ -743,6 +812,10 @@ export function Experience({ children }: { children: ReactNode }) {
               reload={reload}
               signMaterial={signMaterial}
               woodStars={woodStars}
+              showThreshold={
+                scene.id === 'entrada' ||
+                (isThresholdPassage && transition?.toIndex === 0)
+              }
               onReadSign={
                 scene.id === 'entrada' ? () => setWelcomeOpen(true) : undefined
               }

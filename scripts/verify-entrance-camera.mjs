@@ -131,7 +131,12 @@ async function inspect(device, width, height, reduced = false) {
     await clickMoving(session, '.passage-zone--entrada');
     await run(session, 'wait', '300');
     await run(session, 'screenshot', resolve(folder, `${device}-crossing.png`));
-    await run(session, 'wait', '1400');
+    await run(
+      session,
+      'wait',
+      '--fn',
+      "!document.querySelector('[data-threshold-travel]')",
+    );
     const garden = await read(session);
     check(
       garden.scene === 'jardin' &&
@@ -151,7 +156,12 @@ async function inspect(device, width, height, reduced = false) {
       'Volver a la entrada por el sendero',
       '--exact',
     );
-    await run(session, 'wait', '1600');
+    await run(
+      session,
+      'wait',
+      '--fn',
+      "!document.querySelector('[data-threshold-travel]')",
+    );
     const returned = await read(session);
     check(
       returned.scene === 'entrada' && returned.matrix.startsWith('matrix3d'),

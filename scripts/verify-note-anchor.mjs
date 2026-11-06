@@ -168,7 +168,12 @@ async function check(device, width, height, material) {
   await clickPhysical(session, '.passage-zone--entrada');
   await run(session, 'wait', '250');
   samples.push(await measure(session));
-  await run(session, 'wait', '1350');
+  await run(
+    session,
+    'wait',
+    '--fn',
+    "!document.querySelector('[data-threshold-travel]')",
+  );
   const scene = await run(
     session,
     'eval',

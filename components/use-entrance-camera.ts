@@ -22,6 +22,7 @@ export function useEntranceCamera({
   useEffect(() => {
     if (!enabled || reducedMotion) {
       target.current = current.current = { x: 0, y: 0 };
+      elapsed.current = 0;
       ['x', 'y', 'rx', 'ry', 'roll'].forEach((key) =>
         stage.current?.style.removeProperty(`--camera-${key}`),
       );

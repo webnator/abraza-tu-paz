@@ -68,3 +68,9 @@ El verificador comprueba la lectura en papel y madera, escritorio y móvil: cabe
 ### Feedback posterior
 
 El usuario aprueba el gesto 3D del puntero y el chat. Pide que se perciba mejor la cámara en reposo: se amplía solo la deriva automática de la entrada (hasta 8.5px horizontal y 4.6px vertical, menor en móvil), con balanceo lento y pequeños giros. Se conservan los coeficientes y la respuesta del ratón. La verificación exige un desplazamiento visible con el puntero quieto, además de mantener la pausa ante diálogos y la reducción de movimiento. El audio v1 no encaja; la búsqueda se retoma más adelante y no se integra.
+
+### Transición de la verja — continuidad en ambos sentidos
+
+Se corrige el borde inferior de la foto reducida y la aparición brusca de las plantas. Entrada y jardín comparten ahora un único fondo persistente, con una extensión periférica de la fotografía para cubrir el campo de visión durante el paso. Las plantas entran suavemente desde los lados y se retiran al regresar. El encuadre móvil, la nivelación de la cámara y los planos parten de su posición real y se resuelven en un solo recorrido de 2100ms, sin pausa ni sustitución de imagen al terminar.
+
+Se mantienen el cartel anclado a la verja, las variantes papel/madera, la cámara 3D y la deriva aprobadas. No se modifica el recorrido al refugio, el chat o el audio. Detalles, pruebas y prompt del activo nuevo: `../reference/transicion-entrada-jardin.md`.
