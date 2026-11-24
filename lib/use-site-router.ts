@@ -9,7 +9,11 @@ export function useSiteRouter() {
   return useMemo(() => process.env.NEXT_PUBLIC_GITHUB_PAGES === 'true'
     ? {
         ...router,
-        push(href: string) { window.location.assign(pagesHref(href)); },
+        push(href: string) {
+          const returningToRefuge = href === '/' &&
+            document.querySelector('.scene[data-scene="refugio"]');
+          window.location.assign(pagesHref(returningToRefuge ? '/#refugio' : href));
+        },
         replace(href: string) { window.location.replace(pagesHref(href)); },
       }
     : router, [router]);

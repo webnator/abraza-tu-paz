@@ -485,6 +485,11 @@ export function Experience({ children }: { children: ReactNode }) {
   }, [path, reading]);
   useEffect(() => {
     // Old album links also enter the existing refuge, never a second photo page.
+    if (path === '/' && window.location.hash === '#refugio') {
+      setSceneIndex(2);
+      setAlbumOpen(false);
+      return;
+    }
     if (window.location.hash !== '#polaroids') {
       setAlbumOpen(false);
       return;
@@ -669,7 +674,8 @@ export function Experience({ children }: { children: ReactNode }) {
     setAlbumOpen(false);
     setInspected(null);
     if (window.location.hash === '#polaroids')
-      window.history.replaceState(window.history.state, '', '/');
+      window.history.replaceState(window.history.state, '',
+        process.env.NEXT_PUBLIC_GITHUB_PAGES === 'true' ? '/abraza-tu-paz/' : '/');
     window.setTimeout(() => {
       const target = lastFocus.current?.isConnected
         ? lastFocus.current
