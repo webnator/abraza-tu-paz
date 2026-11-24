@@ -9,8 +9,9 @@ import {
   type ReactNode,
   type RefObject,
 } from 'react';
-import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import Link from '@/components/site-link';
+import { usePathname } from 'next/navigation';
+import { useSiteRouter } from '@/lib/use-site-router';
 import { Menu, X, Plus, Play } from 'lucide-react';
 import {
   Dialog,
@@ -327,7 +328,7 @@ function SceneLayers({
 
 export function Experience({ children }: { children: ReactNode }) {
   const path = usePathname();
-  const router = useRouter();
+  const router = useSiteRouter();
   const reading = path !== '/';
   const [sceneIndex, setSceneIndex] = useState(reading ? 2 : 0);
   const [menuOpen, setMenuOpen] = useState(false);

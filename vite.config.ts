@@ -73,6 +73,9 @@ export default defineConfig(async () => {
 
   return {
     base: githubPages ? `${pagesBasePath}/` : '/',
+    define: {
+      'process.env.NEXT_PUBLIC_GITHUB_PAGES': JSON.stringify(String(githubPages)),
+    },
     css: { postcss: { plugins: [tailwindcss()] } },
     server: isCodexSeatbeltSandbox
       ? { watch: { useFsEvents: false, usePolling: true } }

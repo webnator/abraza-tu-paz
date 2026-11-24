@@ -36,6 +36,8 @@ npm run build:pages
 
 El build usa `basePath: '/abraza-tu-paz'`, rutas con barra final y un prefijo equivalente para imágenes, audio y PDFs. `scripts/build-pages.mjs` prepara el artefacto estático y verifica las referencias locales. `scripts/pages-prerender.mjs` corrige únicamente las solicitudes internas del prerender de Vinext beta.5 para respetar el prefijo y la barra final; no se carga en desarrollo ni en el navegador. El desarrollo local y la configuración de Sites conservan sus rutas originales.
 
+En Pages, los enlaces y cambios de página cargan los documentos HTML exportados mediante navegación nativa. Así no dependen del transporte de navegación de un servidor Vinext; las interacciones del jardín, el chat y los lectores siguen funcionando en el navegador. En desarrollo se conserva el router original.
+
 ## Comprobaciones locales
 
 ```sh

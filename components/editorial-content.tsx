@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from '@/components/site-link';
 import { ExternalLink, MessageCircle } from 'lucide-react';
 import {
   Accordion,
