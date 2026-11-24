@@ -1,0 +1,10 @@
+{
+  "provider": "image_gen built-in",
+  "role": "photographic transparent prop; original garden preserved",
+  "reference": "jardin-refugio-v1.webp",
+  "prompt": "Use case: photorealistic-natural. Asset type: transparent prop cutout for an existing photographed secret garden website. Attached garden is a lighting/material reference ONLY. Generate only a thin sagging piece of natural flax twine with THREE small aged cream paper envelopes hanging from it by tiny wooden clothespins, like letters left for someone walking through a garden. Twine goes from the top left corner to upper right; envelopes hang at slightly different heights, each separate, clearly visible front face, slightly different natural rotations. Photographic straight-on three-quarter view, restrained realistic warm afternoon dappled lighting from upper left, soft olive reflected shadows, ivory textured paper with gently worn edges. Folded triangular envelope flaps visible, one has a tiny muted dusty rose wax seal and another has a tiny pressed olive leaf. Intimate everyday materials, no decoration beyond those details. No readable writing, no labels, no frame, no branch or trees, no sky, no landscape, no background or rectangular matte, no people. TRUE transparent alpha around twine and envelopes. Composition panoramic 16:9 with the twine and envelopes occupying most of the image while remaining fully within frame. Fine clean organic edges, high resolution, matching garden photo.",
+  "generatedOriginal": "/Users/unalaptop/.codex/generated_images/01a06188-9ade-7953-a757-430df6b137ba/exec-e66c905b-b999-4d66-a61e-e92d7bf13489.png",
+  "served": "garden-letters-v1.png",
+  "optimization": "sips -Z 1024; preserve true alpha",
+  "status": "local-review"
+}

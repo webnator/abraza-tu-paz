@@ -3,10 +3,10 @@
 // docs/reference/bienvenida-jardin.md.
 export const entranceWelcome = {
   status: 'pending-client-approval',
-  title: 'Pasa. Hay sitio para ti.',
+  title: 'A tu tiempo.',
   paragraphs: [
-    'Este espacio es un jardín que se descubre, como la vida: con luces y sombras, con cosas que florecen y otras que se van secando. No hace falta que todo esté perfecto para aprender a habitarlo.',
-    'Recórrelo a tu ritmo. Detente donde algo despierte tu curiosidad; toca los objetos y sigue el sendero hasta el refugio. Quizás algo resuene contigo. Lo que no, puedes dejarlo pasar.',
-    'Si buscas algo concreto, el menú siempre está disponible.',
+    'Quizá has llegado porque algo duele, algo está cambiando o necesitas encontrar otra manera de estar.',
+    'Esta entrada es un lugar para detenerte antes de dar un paso. No hace falta tener claro qué buscas ni estar listo para empezar un proceso.',
+    'Puedes quedarte aquí, mirar desde fuera o atravesar la verja cuando quieras. Tú decides hasta dónde llegar hoy.',
   ],
 } as const;

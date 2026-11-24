@@ -1,0 +1,42 @@
+{
+  "checkedAt": "2026-11-06T13:45:25.740Z",
+  "results": [
+    {
+      "device": "desktop",
+      "resting": {
+        "scene": "jardin",
+        "audio": 0,
+        "oldMessage": false,
+        "letters": 3,
+        "anchored": true
+      },
+      "titles": [
+        "Cuando no sabes por dónde empezar",
+        "Una cosa a la vez",
+        "También puedes quedarte aquí"
+      ],
+      "audioDuration": 29.490167,
+      "audioStopsOnClose": true,
+      "water": {
+        "active": "water",
+        "audio": 0,
+        "ripple": "pond-circle"
+      },
+      "menu": {
+        "fits": true,
+        "links": 3
+      },
+      "errors": "",
+      "pass": true
+    },
+    {
+      "pass": false,
+      "error": "Command failed: agent-browser --session atp-discoveries-mobile wait .water-pause\n✗ page.waitForSelector: Timeout 25000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.water-pause') to be visible\u001b[22m\n\n"
+    },
+    {
+      "pass": false,
+      "error": "Command failed: agent-browser --session atp-discoveries-reduced wait .water-pause\n✗ page.waitForSelector: Timeout 25000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.water-pause') to be visible\u001b[22m\n\n"
+    }
+  ],
+  "pass": false
+}

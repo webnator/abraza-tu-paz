@@ -23,6 +23,14 @@ import { destinations, titleForPath, destinationForPath } from '@/lib/content';
 import { Polaroids } from '@/components/editorial-interactions';
 import { CarvedStars, EntranceWelcome } from '@/components/entrance-welcome';
 import { GuidedConversation } from '@/components/guided-conversation';
+import {
+  GardenDiscovery,
+  GardenObjects,
+} from '@/components/garden-discoveries';
+import {
+  discoveryPositions,
+  type DiscoverySelection,
+} from '@/lib/garden-discoveries';
 import { useSceneCamera } from '@/components/use-scene-camera';
 import {
   captureThresholdView,
@@ -66,9 +74,9 @@ const scenes: Scene[] = [
   {
     id: 'jardin',
     name: 'Jardín',
-    image: '/images/jardin-refugio-v1.webp',
-    foreground: '/images/jardin-primer-plano.webp',
-    alt: 'El sendero rodea un estanque y conduce a un pequeño refugio de piedra, visible entre las plantas.',
+    image: '/images/jardin-analogico-v6.jpg',
+    foreground: '', // Foreground objects are already part of the photograph.
+    alt: 'Bajo una pérgola, un banco con cuaderno y auriculares, un estanque y un tronco con cartas acompañan el sendero hacia el consultorio de madera.',
   },
   {
     id: 'refugio',
@@ -84,17 +92,14 @@ function sceneSources(scene: Scene, mobile: boolean) {
   if (scene.id === 'entrada')
     return [
       scenes[1].image,
-      scenes[1].foreground,
-      '/images/jardin-overscan-v1.jpg',
       '/images/entrada-umbral-v2.webp',
       scene.foreground,
     ];
   return [
     mobile && scene.mobileImage ? scene.mobileImage : scene.image,
-    mobile && scene.mobileForeground
-      ? scene.mobileForeground
-      : scene.foreground,
-    ...(scene.id === 'jardin' ? ['/images/jardin-overscan-v1.jpg'] : []),
+    ...(scene.id === 'refugio'
+      ? [mobile && scene.mobileForeground ? scene.mobileForeground : scene.foreground]
+      : []),
   ];
 }
 const locations = [
@@ -153,6 +158,8 @@ function SceneLayers({
   signMaterial,
   woodStars,
   showThreshold = scene.id === 'entrada',
+  onDiscover,
+  onGardenFocus,
 }: {
   scene: Scene;
   reload: number;
@@ -161,17 +168,22 @@ function SceneLayers({
   signMaterial: EntranceSignMaterial;
   woodStars: boolean;
   showThreshold?: boolean;
+  onDiscover?: (
+    selection: DiscoverySelection,
+    target: HTMLButtonElement,
+  ) => void;
+  onGardenFocus?: (x: number) => void;
 }) {
   return (
     <>
       {scene.id !== 'refugio' ? (
         <div
           className="depth-layer depth-layer--back garden-backdrop"
-          aria-hidden="true"
+          aria-hidden={onDiscover ? undefined : true}
         >
           <img
             className="garden-backdrop__overscan"
-            src="/images/jardin-overscan-v1.jpg"
+            src={scenes[1].image}
             alt=""
             fetchPriority="high"
           />
@@ -182,9 +194,17 @@ function SceneLayers({
             alt=""
             fetchPriority="high"
           />
+          <GardenObjects
+            active={scene.id === 'jardin' && !!onDiscover}
+            onSelect={onDiscover}
+            onFocus={onGardenFocus}
+          />
         </div>
       ) : (
-        <div className="depth-layer depth-layer--back" aria-hidden="true">
+        <div
+          className="depth-layer depth-layer--back"
+          aria-hidden={onDiscover ? undefined : true}
+        >
           <picture>
             {scene.mobileImage ? (
               <source media="(max-width: 720px)" srcSet={scene.mobileImage} />
@@ -206,6 +226,20 @@ function SceneLayers({
             src="/photographs/polaroid-septiembre-2026.webp"
             alt=""
           />
+          <button
+            className="refuge-welcome-object"
+            type="button"
+            tabIndex={onDiscover ? 0 : -1}
+            disabled={!onDiscover}
+            aria-label="Leer la bienvenida del refugio en el cuaderno"
+            aria-haspopup="dialog"
+            onFocus={() => onGardenFocus?.(55)}
+            onClick={(event) =>
+              onDiscover?.({ kind: 'refuge' }, event.currentTarget)
+            }
+          >
+            <span className="garden-object__hint">Hay una silla para ti</span>
+          </button>
         </div>
       )}
       {showThreshold ? (
@@ -251,18 +285,18 @@ function SceneLayers({
         </div>
       ) : null}
       <div className="scene-shade" aria-hidden="true" />
-      <div className="depth-layer depth-layer--mid" aria-hidden="true">
-        <span className="light-orb light-orb--one" aria-hidden="true" />
-      </div>
+      {scene.id === 'refugio' ? (
+        <div className="depth-layer depth-layer--mid" aria-hidden="true">
+          <span className="light-orb light-orb--one" aria-hidden="true" />
+        </div>
+      ) : null}
       {scene.id !== 'refugio' ? (
         <div
           className="depth-layer depth-layer--front garden-foreground"
           aria-hidden="true"
         >
           {['left', 'right'].map((side) => (
-            <div key={side} className={`garden-frond garden-frond--${side}`}>
-              <img src={scenes[1].foreground} alt="" />
-            </div>
+            <div key={side} className={`garden-frond garden-frond--${side}`} />
           ))}
         </div>
       ) : null}
@@ -312,7 +346,8 @@ export function Experience({ children }: { children: ReactNode }) {
   const [inspected, setInspected] = useState<{ x: number; y: number } | null>(
     null,
   );
-  const [pauseRevealed, setPauseRevealed] = useState(false);
+  const [discovery, setDiscovery] = useState<DiscoverySelection | null>(null);
+  const [discoveryOpen, setDiscoveryOpen] = useState(false);
   const [matcha, setMatcha] = useState(false);
   const [loadError, setLoadError] = useState(false);
   const [reload, setReload] = useState(0);
@@ -335,13 +370,15 @@ export function Experience({ children }: { children: ReactNode }) {
       menuOpen ||
       albumOpen ||
       welcomeOpen ||
+      discoveryOpen ||
       developmentOpen ||
       conversationOpen ||
       !!transition ||
       busy ||
       loadError,
   );
-  const modalOpen = menuOpen || albumOpen || welcomeOpen || firstVisit.open;
+  const modalOpen =
+    menuOpen || albumOpen || welcomeOpen || discoveryOpen || firstVisit.open;
   const sceneCamera = useSceneCamera({
     stage: stageRef,
     enabled: sceneCameraEnabled,
@@ -502,7 +539,6 @@ export function Experience({ children }: { children: ReactNode }) {
     if (!transition) return;
     setSceneIndex(transition.toIndex);
     setTransition(null);
-    setPauseRevealed(false);
     setMatcha(false);
     panRef.current = 0;
     stageRef.current?.style.setProperty('--pan-x', '0px');
@@ -531,7 +567,7 @@ export function Experience({ children }: { children: ReactNode }) {
       setInspected(null);
       const anchors = [
         { x: 54, y: 51 },
-        { x: 60.3, y: 32.5 },
+        { x: 56, y: 34 },
         { x: 54, y: 35 },
       ];
       const origin =
@@ -580,7 +616,6 @@ export function Experience({ children }: { children: ReactNode }) {
       }
       if (reducedMotion) {
         setSceneIndex(index);
-        setPauseRevealed(false);
         return;
       }
       setTransition({ toIndex: index, x: `${x}%`, y: `${y}%` });
@@ -595,6 +630,24 @@ export function Experience({ children }: { children: ReactNode }) {
       reducedMotion,
     ],
   );
+  const openDiscovery = (
+    selection: DiscoverySelection,
+    target: HTMLButtonElement,
+  ) => {
+    if (touch.current?.moved || busy || transition) return;
+    lastFocus.current = target;
+    const point =
+      selection.kind === 'refuge' && window.innerWidth <= 720
+        ? { x: 55, y: 65 }
+        : discoveryPositions[selection.kind];
+    setInspected(point);
+    setDiscovery(selection);
+    setDiscoveryOpen(true);
+  };
+  const closeDiscovery = () => {
+    setDiscoveryOpen(false);
+    setInspected(null);
+  };
   const openObject = (href: string, x: number, y: number) => {
     if (touch.current?.moved || busy || transition) return;
     cameFromLandscape.current = true;
@@ -663,11 +716,6 @@ export function Experience({ children }: { children: ReactNode }) {
     [],
   );
   useEffect(() => {
-    if (sceneIndex !== 1 || reading || modalOpen || transition) return;
-    const timer = setTimeout(() => setPauseRevealed(true), 6000);
-    return () => clearTimeout(timer);
-  }, [sceneIndex, reading, modalOpen, transition]);
-  useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
       if (reading && event.key === 'Escape') {
         event.preventDefault();
@@ -730,11 +778,29 @@ export function Experience({ children }: { children: ReactNode }) {
     );
     stageRef.current.style.setProperty('--pan-x', `${panRef.current}px`);
   };
+  const visitGardenObject = (kind: 'bench' | 'letters' | 'water') => {
+    setMenuOpen(false);
+    if (reading) router.push('/');
+    setSceneIndex(1);
+    setInspected(null);
+    if (inspectTimer.current) clearTimeout(inspectTimer.current);
+    inspectTimer.current = setTimeout(
+      () => {
+        focusObject(discoveryPositions[kind].x);
+        const target = document.querySelector<HTMLButtonElement>(
+          kind === 'letters' ? '.garden-letter--0' : `.garden-object--${kind}`,
+        );
+        if (target) openDiscovery({ kind }, target);
+      },
+      reducedMotion ? 50 : 380,
+    );
+  };
   return (
     <>
       <div
         ref={stageRef}
         data-scene-camera={sceneCameraEnabled ? 'true' : 'false'}
+        data-discovery={discoveryOpen ? discovery?.kind : undefined}
         role={reading || modalOpen ? undefined : 'main'}
         aria-label="La experiencia de Abraza tu Paz"
         className={`experience${transition ? ' is-transitioning' : ''}${inspected ? ' is-inspecting' : ''}${albumOpen ? ' is-viewing-album' : ''}${reading || menuOpen || welcomeOpen || firstVisit.open ? ' is-reading' : ''}`}
@@ -822,6 +888,8 @@ export function Experience({ children }: { children: ReactNode }) {
                 scene.id === 'entrada' ||
                 (isThresholdPassage && transition?.toIndex === 0)
               }
+              onDiscover={scene.id !== 'entrada' ? openDiscovery : undefined}
+              onGardenFocus={focusObject}
               onReadSign={
                 scene.id === 'entrada' ? () => setWelcomeOpen(true) : undefined
               }
@@ -848,7 +916,7 @@ export function Experience({ children }: { children: ReactNode }) {
                 <button
                   className="passage-zone passage-zone--jardin"
                   onClick={() => !touch.current?.moved && void goTo(2)}
-                  onFocus={() => focusObject(60.3)}
+                  onFocus={() => focusObject(56)}
                   aria-label="Entrar al refugio al final del sendero"
                 >
                   <span className="destination-hint">El refugio</span>
@@ -858,17 +926,6 @@ export function Experience({ children }: { children: ReactNode }) {
                   onClick={() => !touch.current?.moved && void goTo(0)}
                   aria-label="Volver a la entrada por el sendero"
                 />
-                {pauseRevealed ? (
-                  <button
-                    className="garden-note"
-                    onClick={() => setPauseRevealed(false)}
-                    aria-label="Guardar la pregunta junto al agua"
-                  >
-                    ¿Y si no necesitas
-                    <br />
-                    resolverlo hoy?
-                  </button>
-                ) : null}
               </>
             ) : null}
             {scene.id === 'refugio' ? (
@@ -933,13 +990,6 @@ export function Experience({ children }: { children: ReactNode }) {
               </>
             ) : null}
           </div>
-          {scene.id === 'refugio' ? (
-            <p className="refuge-whisper">
-              Aquí podemos hablar
-              <br />
-              de lo que de verdad importa.
-            </p>
-          ) : null}
         </section>
         <header
           className="masthead menu-typeface"
@@ -996,6 +1046,16 @@ export function Experience({ children }: { children: ReactNode }) {
         material={signMaterial}
         woodStars={woodStars}
         returnFocus={signRef}
+      />
+      <GardenDiscovery
+        selection={discovery}
+        open={discoveryOpen}
+        onClose={closeDiscovery}
+        returnFocus={lastFocus}
+        onRefugeAction={(id) => {
+          closeDiscovery();
+          visitRefugeObject(id);
+        }}
       />
       <FirstVisitWelcome
         open={firstVisit.open}
@@ -1085,6 +1145,21 @@ export function Experience({ children }: { children: ReactNode }) {
                     <span>{item.title}</span>
                   </button>
                 ))}
+            </nav>
+            <nav className="garden-shortcuts" aria-label="Pausas en el jardín">
+              <p>Un momento en el jardín</p>
+              <button type="button" onClick={() => visitGardenObject('bench')}>
+                Escuchar en el banco
+              </button>
+              <button
+                type="button"
+                onClick={() => visitGardenObject('letters')}
+              >
+                Cartas al alma
+              </button>
+              <button type="button" onClick={() => visitGardenObject('water')}>
+                Quedarme junto al agua
+              </button>
             </nav>
           </div>
         </DialogContent>

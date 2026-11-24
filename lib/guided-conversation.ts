@@ -132,7 +132,7 @@ export const conversationFlow: Record<ConversationNodeId, ConversationNode> = {
   },
   garden: {
     messages: [
-      'El sendero lleva a un refugio. Allí encontrarás fotografías, recursos y un lugar para conocer cómo acompaño.',
+      'En el jardín puedes sentarte en el banco para escuchar una lectura, encontrar cartas entre los árboles o quedarte un momento junto al agua. El sendero lleva también a un refugio, donde puedes conocer cómo acompaño.',
       'No hace falta verlo todo hoy. Puedes acercarte a lo que te despierte curiosidad.',
     ],
     options: [resources, therapy, explore],

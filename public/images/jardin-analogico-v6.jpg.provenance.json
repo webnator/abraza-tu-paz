@@ -1,0 +1,31 @@
+{
+  "asset": "jardin-analogico-v6.jpg",
+  "date": "2026-11-06",
+  "method": "built-in image_gen",
+  "tool": "image_gen.imagegen",
+  "model": "not exposed by the built-in tool",
+  "generation_calls": 1,
+  "edit_target": "jardin-analogico-v5.png",
+  "original_generated_file": "/Users/unalaptop/.codex/generated_images/01a1b160-2fff-7bc1-a438-f3d54ef5f108/exec-b30e96eb-8533-4866-9513-dc89cc39019d.png",
+  "native_output_dimensions": {
+    "width": 1672,
+    "height": 941
+  },
+  "status": "Integrated into the local garden and entrance preview for client review; not deployed.",
+  "user_request": "Iluminación de mañana más suave y menos uniforme, trabajando luces y sombras; consultorio un poco desenfocado para realzar la primera parte del jardín, banco, estanque y tronco.",
+  "project_visual_direction": [
+    "Conservar realismo fotográfico y distribución de v5, basada en el croquis del usuario.",
+    "Pérgola y banco con cuaderno y auriculares a la izquierda; sendero de stepping stones; estanque con pequeña entrada de agua en el centro-derecha; tronco con libro y cartas y espejo arqueado ante murete a la derecha; cabaña de consulta al fondo.",
+    "Mantener helechos, buganvilla y aves del paraíso, escala doméstica y jardín abierto sobre grama y tierra.",
+    "Luz suave de mañana, menos dominante amarilla; zonas irregulares de luz tamizada por hojas alternan con sombras suaves y con detalle.",
+    "Realzar banco, estanque y tronco mediante textura, foco y luminosidad moderada.",
+    "Desenfoque gradual hacia el consultorio y el fondo; mantener la cabaña reconocible sin protagonismo.",
+    "Evitar iluminación plana, HDR, dramatismo, halos, niebla mágica, superficies de render o exceso de saturación."
+  ],
+  "review": "La luz presenta parches más definidos sobre el banco, el sendero y el tronco, entre zonas de sombra con detalle. El consultorio y su entorno distante están desenfocados, conservando la silueta de la cabaña, la puerta abierta y las sillas reconocibles. El banco, sus objetos, el tronco y sus objetos se mantienen definidos; el borde cercano del estanque tiene más detalle que su parte posterior. Se conserva la composición general y la vegetación.",
+  "prompt": "Use case: lighting-weather.\nInput image: Image 1, jardin-analogico-v5.png, is the exact photograph to edit.\nTask: change ONLY lighting, exposure balance and natural depth of field. Preserve the scene and all object geometry.\n\nLighting: replace the rather uniformly warm illumination with SOFT EARLY MORNING DAYLIGHT that has a believable direction and more nuanced light-and-shadow variation. Use gently warm, nearly neutral side light entering from the upper left, filtered by real leaves and pergola beams, balanced by soft cooler ambient light in the shade. Make several broad, irregular, SOFT-EDGED patches of light across parts of the stone bench, individual stepping stones, grass, pond rim and stump tabletop. Between these patches retain meaningful quiet pockets of soft shade in the ferns, under the bench, along the pond bank and near the pergola posts. Subtle directional modelling should reveal porous stone and bark textures. Do not illuminate every object equally. Soft morning light does not mean a flat wash: retain natural tonal separation and local changes in exposure, with gentle penumbras rather than harsh sunspots or crushed blacks. Reduce the yellow-gold cast. Natural greens, restrained warm highlights, quiet slightly cooler shadows, gentle photographic highlight roll-off.\n\nVisual emphasis: the foreground and middle garden are the subjects — the stone bench with notebook and headphones on the left, the pond and its rim, and the stump with book and letters on the right. Keep their material textures and recognizable details well defined, with modest natural brightness drawing the eye to them. The water remains dark, subdued and softly rippled, with small low-glare reflections. Preserve the small flowing water inlet.\n\nDepth of field: keep the bench, stump, their objects, foreground path and pond visually clear. Introduce a subtle, optically plausible, progressive falloff of focus into the far background, so the distant consultation CABIN and planting immediately around it are GENTLY OUT OF FOCUS. Its roof, doorway and seating should remain recognizable, while fine wood grain and interior details soften. The cabin should also be a little quieter in exposure and local contrast than the front garden. No heavy blur, artificial cutout edges, radial blur, miniature/tilt-shift look, giant bokeh or mist. Preserve the same perspective and camera position.\n\nStrict invariants: exact same wide 16:9 framing and composition; do not move, add, delete or redesign anything. Preserve pergola, bench, notebook, headphones, every stepping stone, pond and inlet, stump, closed book and letters, arched mirror and short stone backing wall, consultation cabin, all existing ferns, bougainvillea and bird-of-paradise plants. Mirror reflections must remain physically believable under the revised lighting.\n\nPhotographic finish: preserve the natural analog photographic character and restrained fine grain. No global repainting, CGI smoothness, HDR, clarity halos, artificial bloom, orange cinematic grade, visible sunbeams, magical atmosphere, fairy-tale look, text or watermark. One edited photograph.",
+  "source_asset": "../research/jardin-fotografico-2026-11-06/jardin-analogico-v6.png",
+  "source_provenance": "../research/jardin-fotografico-2026-11-06/prompt-y-procedencia-v6.json",
+  "integrated_on": "2026-11-24",
+  "conversion": "sips JPEG quality 88; original dimensions retained; no visual edits"
+}

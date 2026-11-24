@@ -8,7 +8,9 @@ Una experiencia inmersiva de tres espacios —entrada, jardín y refugio— con 
 npm run dev -- --port 3000
 ```
 
-Se utiliza el proyecto React/Vinext existente y su configuración de Sites. Esta iteración no se ha desplegado.
+Se utiliza el proyecto React/Vinext existente y su configuración de Sites. La publicación estática en GitHub Pages tiene su propio comando, documentado más abajo.
+
+El jardín utiliza la fotografía `public/images/jardin-analogico-v6.jpg`, trabajada con Williams el 6 de noviembre e integrada para la revisión con cliente del 24 de noviembre. Su original y prompt se conservan en `../research/jardin-fotografico-2026-11-06/`. Banco, cartas del tronco, estanque y acceso al consultorio tienen zonas clicables ajustadas a esta composición; ya no se superponen los objetos ni el follaje del jardín anterior. Si el puerto 3000 está ocupado, iniciar con `npm run dev -- --port 3001`.
 
 El botón `</>` de la esquina inferior izquierda abre las variantes de desarrollo: cartel de papel o madera clavada, estrellas talladas y tipografía del menú. Las elecciones se recuerdan en este navegador. El panel y sus preferencias locales no se aplican al build de producción; allí se conserva el papel y se utiliza Cormorant para el menú.
 
@@ -24,7 +26,17 @@ Cada recurso tiene una ruta bajo `/biblioteca/`. Las reflexiones tienen sus prop
 
 Los textos se definen en `lib/content.ts` y `components/editorial-content.tsx`. Las interacciones editoriales están en `components/editorial-interactions.tsx`; las escenas y el menú, en `components/experience.tsx`.
 
-## Verificación
+## GitHub Pages
+
+La publicación está configurada para `https://webnator.github.io/abraza-tu-paz/`, con el repositorio `webnator/abraza-tu-paz`. Los pushes a `main` ejecutan `.github/workflows/pages.yml`: instalan dependencias, comprueban TypeScript, exportan las 15 páginas y despliegan el directorio `out/` en Pages.
+
+```sh
+npm run build:pages
+```
+
+El build usa `basePath: '/abraza-tu-paz'`, rutas con barra final y un prefijo equivalente para imágenes, audio y PDFs. `scripts/build-pages.mjs` prepara el artefacto estático y verifica las referencias locales. `scripts/pages-prerender.mjs` corrige únicamente las solicitudes internas del prerender de Vinext beta.5 para respetar el prefijo y la barra final; no se carga en desarrollo ni en el navegador. El desarrollo local y la configuración de Sites conservan sus rutas originales.
+
+## Comprobaciones locales
 
 ```sh
 npx tsc --noEmit

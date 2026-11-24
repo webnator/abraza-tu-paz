@@ -1,0 +1,17 @@
+{
+  "date": "2026-11-24",
+  "url": "http://localhost:3001/",
+  "asset": "/images/jardin-analogico-v6.jpg",
+  "source": "../research/jardin-fotografico-2026-11-06/jardin-analogico-v6.png",
+  "result": "Latest photographic garden integrated for local client review; not deployed.",
+  "checks": {
+    "typescript": "passed: npx tsc --noEmit",
+    "whitespace": "passed: git diff --check",
+    "desktop_1440x900": "Inspected screenshot; latest garden loaded, no old object overlays; bench opened by actual pointer click; letter, water and cabin entry opened by keyboard.",
+    "mobile_390x844": "Inspected screenshot; latest garden loaded; existing panoramic crop and focus panning preserved; bench opened by keyboard and reading panel fit the viewport.",
+    "lint": "Targeted oxlint reported existing effect, raw image and accessibility rules in the surrounding components. Type checking passes. No unrelated lint refactor performed during meeting preparation.",
+    "design_detector": "Ran once; palette and type ramp advisories belong to existing styles and the previously stale design sidecar. No new colors, fonts or components introduced."
+  },
+  "preserved": ["entry and refuge scenes", "camera and transitions", "reading and audio controls", "editorial drafts", "menu and contact flows"],
+  "changes": ["latest garden also visible behind entry gate", "removed old foreground image and prop overlays", "repositioned bench, letters, pond and cabin click areas", "attached image provenance"]
+}

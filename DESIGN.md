@@ -280,6 +280,10 @@ Las transiciones del umbral duran `2.1s`, con un único jardín persistente, ext
 
 ## Do's and Don'ts
 
+### Jardín fotográfico vigente · 24 de noviembre de 2026
+
+El jardín y la vista tras la verja usan `public/images/jardin-analogico-v6.jpg`, derivada del original del 6 de noviembre y con procedencia adjunta. Mantiene la pérgola, banco con cuaderno y auriculares a la izquierda, estanque con entrada de agua en el centro-derecha, tronco con libro y cartas y espejo arqueado a la derecha, y consultorio desenfocado al fondo. Las zonas de interacción siguen estos objetos en el mismo plano fotográfico. Se retiran las superposiciones de objetos y follaje del jardín anterior para respetar la composición y el realismo acordados; la cámara y los recorridos existentes se conservan.
+
 ### Do's
 
 - **Do** mantener hueso y musgo como base y dar a sol y bugambilia el peso de un acento.

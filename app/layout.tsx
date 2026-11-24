@@ -5,6 +5,7 @@ import {
   Nothing_You_Could_Do,
 } from 'next/font/google';
 import './globals.css';
+import './garden-discoveries.css';
 import { Experience } from '@/components/experience';
 
 const serif = Cormorant_Garamond({

@@ -1,0 +1,10 @@
+{
+  "status": "temporary-review-narration",
+  "voice": "macOS Mónica (es_ES), system speech synthesis; not Gabriela",
+  "wordsPerMinute": 142,
+  "transcript": "Puedes escuchar estas palabras como quien se sienta un momento en un banco. Tal vez llegas con muchas cosas en la cabeza, o con una sensación a la que todavía no sabes ponerle nombre. Por un momento, puedes dejar que este lugar te acompañe. Mira algo que esté cerca: una hoja, una sombra, la luz que se refleja en el agua. No necesitas encontrar una respuesta mientras estás aquí. Puedes escuchar lo que hay a tu alrededor y reconocer cómo estás hoy. Cuando quieras, puedes seguir caminando. También puedes quedarte un poco más.",
+  "output": "/audio/un-momento-contigo-demo.mp3",
+  "duration": 29.490167,
+  "processing": "MP3 128kbps; loudnorm I=-20 LUFS, TP=-3dB, LRA=6",
+  "replacement": "Gabriela to approve the copy and supply the final recording."
+}

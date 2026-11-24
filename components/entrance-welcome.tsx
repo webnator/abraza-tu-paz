@@ -57,7 +57,7 @@ export function EntranceWelcome({
         <div
           className="entrance-welcome__reading"
           tabIndex={0}
-          aria-label="Bienvenida al jardín"
+          aria-label="La entrada: a tu tiempo"
         >
           <DialogTitle className="entrance-welcome__title">
             {entranceWelcome.title}

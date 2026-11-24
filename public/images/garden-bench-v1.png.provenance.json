@@ -1,0 +1,11 @@
+{
+  "provider": "image_gen built-in",
+  "role": "photographic transparent prop; original garden preserved",
+  "reference": "jardin-refugio-v1.webp",
+  "prompt": "Use case: photorealistic-natural. Asset type: transparent prop cutout for an existing photographed Mediterranean secret garden website. The attached garden is a LIGHTING AND PERSPECTIVE reference only; do not reproduce its landscape or bench. Generate ONLY a small still life that will sit on the near wooden garden bench: one slim sage-green linen notebook, a cream folded handwritten letter resting across its cover, and a pair of small vintage brown leather on-ear wired headphones lying beside it, wire loosely curled. No device screen. The notebook is closed, landscape oriented in the image and viewed from above at a shallow 25 degree angle, its top surface follows a rustic seat receding up and to the right. Composition compact, all items completely visible, no detached scraps. Dappled warm sunlight from upper left, muted olive and cream, slightly weathered materials, realistic fine detail and natural photographic softness matching reference. No readable text or labels. No wood surface, no bench, no background, no floor, no people, no floating shadows or base. Genuine transparent alpha around the entire prop group. Landscape image 3:2 with tight but safe transparent margins.",
+  "cleanupPrompt": "Background extraction edit. Preserve exactly the notebook, letter and headphones in the supplied image, their textures, light, shape, angle and composition. Remove ALL background haze, colored glow, diffuse surrounding light, drop shadows and gradients outside the actual solid objects and cable. The empty space around and between the objects must be genuinely fully transparent alpha, with clean natural antialiased edges. No opaque or translucent backdrop anywhere, no ground or surface. Keep holes inside headphone band and cable loops transparent too. Do not add any objects or text.",
+  "generatedOriginal": "/Users/unalaptop/.codex/generated_images/01a06188-9ade-7953-a757-430df6b137ba/exec-656638d2-4d66-46c6-ba14-5e1b3bf083b4.png",
+  "served": "garden-bench-v1.png",
+  "optimization": "sips -Z 1024; preserve true alpha",
+  "status": "local-review"
+}
