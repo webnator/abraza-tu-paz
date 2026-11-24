@@ -75,7 +75,7 @@ const scenes: Scene[] = [
   {
     id: 'jardin',
     name: 'Jardín',
-    image: '/images/jardin-analogico-v6.jpg',
+    image: '/images/jardin-analogico-v7.jpg',
     foreground: '', // Foreground objects are already part of the photograph.
     alt: 'Bajo una pérgola, un banco con cuaderno y auriculares, un estanque y un tronco con cartas acompañan el sendero hacia el consultorio de madera.',
   },

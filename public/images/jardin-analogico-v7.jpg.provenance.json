@@ -1,0 +1,39 @@
+{
+  "asset": "jardin-analogico-v7.jpg",
+  "date": "2026-11-24",
+  "method": "built-in image_gen",
+  "tool": "image_gen.imagegen",
+  "model": "not exposed by the built-in tool",
+  "generation_calls": 1,
+  "edit_target": "../jardin-fotografico-2026-11-06/jardin-analogico-v6.png",
+  "reference_images": [
+    {
+      "file": "../jardin-fotografico-2026-11-06/jardin-analogico-v6.png",
+      "role": "Única imagen a editar; conservar composición, objetos y desenfoque."
+    },
+    {
+      "file": "../../site/public/images/entrada-base.jpg",
+      "role": "Referencia de iluminación y respuesta de color; el usuario considera correcta la luz de la entrada."
+    }
+  ],
+  "original_generated_file": "/Users/unalaptop/.codex/generated_images/01a1b160-2fff-7bc1-a438-f3d54ef5f108/exec-b7ac4bdf-3529-4a83-8bf1-ac08afd9ee5a.png",
+  "native_output_dimensions": {
+    "width": 1672,
+    "height": 941
+  },
+  "status": "Iluminación del jardín armonizada con la entrada para Abraza tu Paz.",
+  "user_request": "Ajustar la iluminación del jardín interior para que se parezca a la entrada. La iluminación de la entrada es la buena.",
+  "project_visual_direction": [
+    "La entrada es ahora la referencia de iluminación y color para la continuidad entre escenas.",
+    "Luz natural cálida y localizada, sombras de vegetación profundas con detalle, verdes oliva y tonos minerales terrosos.",
+    "Conservar realismo fotográfico y grano fino; evitar luz plana grisácea, sombras lavadas, tinte naranja uniforme o fantasía.",
+    "Conservar la distribución de v6: pérgola y banco a la izquierda, estanque y entrada de agua en el centro-derecha, tronco y espejo a la derecha, consultorio desenfocado al fondo.",
+    "Las zonas clicables y las interacciones deben mantener sus coordenadas; este cambio afecta únicamente a la fotografía."
+  ],
+  "review": "El resultado tiene parches de sol más cálidos sobre banco, piedras, helechos y tronco, rodeados de sombras más profundas y verdes menos grisáceos. La distribución se conserva visualmente, así como el desenfoque del consultorio. La imagen se acerca a la exposición y calidez de la entrada sin trasladar el arco o la verja al jardín.",
+  "prompt": "Use case: lighting-weather.\nTask: relight ONE existing garden photograph to match the lighting and photographic colour response of its entrance. Output one landscape photograph with the exact same 16:9 framing as Image 1.\n\nInput roles:\nIMAGE 1 (jardin-analogico-v6.png) is the ONLY EDIT TARGET. Keep this exact garden, camera, framing, perspective, subject placement, textures and depth of field.\nIMAGE 2 (entrada-base.jpg, the stone entrance with bougainvillea) is a LIGHTING AND COLOUR REFERENCE ONLY. It shows the entrance to the same garden, photographed during the same visit. Do not import its archway, walls, gate, paving or scenery into Image 1.\n\nRequested change: bring the garden interior into the same photographic lighting world as Image 2. Image 1 currently has a pale, rather even green-grey exposure and lifted shadows. Match Image 2's warm natural filtered sunlight, richer earthy tonality and deep but readable foliage shadows. The two photographs should look like consecutive shots taken with the same film, camera settings and white balance, simply from either side of the entrance.\n\nLighting treatment: sunlight enters from the upper left through real leaves and pergola beams. Bright but restrained warm patches touch selected portions of the stone bench, its notebook and headphones, individual stepping stones, the pond's low stone rim and the stump tabletop with its closed book and letters. Surround these highlights with noticeably deeper, cooler olive-green and earthy-brown shade. Retain actual leaf-shaped broken light and soft yet legible shadow boundaries with a physically consistent direction. Make the side planting and upper canopy quieter and darker, as in the entrance reference, allowing the lit foreground objects to stand out. The grass in shade should be a natural dark green, not neon or grey; the aged stone should acquire the same believable warm mineral highlights seen at the entrance. Avoid a global orange tint: warmth belongs mainly to lit surfaces. No added light sources, sunbeams, mist or glow. Preserve realistic exposure and photographic texture rather than theatrical grading. Do not crush shadow detail to black.\n\nStrict invariants: change ONLY lighting, white balance and tonal response in Image 1. Do not shift the camera, crop, move, add, remove or redesign any object or plant. Keep every pergola post and beam; the long stone bench with notebook and headphones on the left; the same separate stepping stones and grassy soil; the centre-right pond with its small water inlet; the right-hand stump with closed book and letters; the arched mirror and its short stone backing; all ferns, bougainvillea and bird-of-paradise plants. Retain the consultation cabin at the exact same location and scale, with its existing gentle optical background blur and recognizable doorway and chairs. Keep the bench, pond and stump clear and tactile. The mirror must reflect the same physically plausible garden under the revised illumination, without becoming a bright light source. Preserve the restrained water reflections and small natural ripples.\n\nFinish: a convincing real analog location photograph, subtle fine film grain, ordinary bark, porous stone, real leaves, gentle highlight roll-off. Photographic realism is more important than prettiness. No fairy-tale atmosphere, CGI sheen, painterly textures, artificial clarity, HDR, broad milky haze, added saturation, vignette filter, text, watermark, diagram, collage or split view.",
+  "source_asset": "../research/jardin-luz-entrada-2026-11-24/jardin-analogico-v7.png",
+  "source_provenance": "../research/jardin-luz-entrada-2026-11-24/prompt-y-procedencia-v7.json",
+  "conversion": "sips JPEG quality 88; original dimensions retained; no additional visual edits",
+  "integrated_on": "2026-11-24"
+}

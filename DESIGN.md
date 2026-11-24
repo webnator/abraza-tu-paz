@@ -282,7 +282,7 @@ Las transiciones del umbral duran `2.1s`, con un único jardín persistente, ext
 
 ### Jardín fotográfico vigente · 24 de noviembre de 2026
 
-El jardín y la vista tras la verja usan `public/images/jardin-analogico-v6.jpg`, derivada del original del 6 de noviembre y con procedencia adjunta. Mantiene la pérgola, banco con cuaderno y auriculares a la izquierda, estanque con entrada de agua en el centro-derecha, tronco con libro y cartas y espejo arqueado a la derecha, y consultorio desenfocado al fondo. Las zonas de interacción siguen estos objetos en el mismo plano fotográfico. Se retiran las superposiciones de objetos y follaje del jardín anterior para respetar la composición y el realismo acordados; la cámara y los recorridos existentes se conservan.
+El jardín y la vista tras la verja usan `public/images/jardin-analogico-v7.jpg`, con procedencia adjunta. La entrada es la referencia de iluminación elegida por Williams: sol cálido localizado, sombra vegetal profunda con detalle y tonos terrosos naturales. La v7 armoniza el jardín con esa luz y conserva la distribución de v6: pérgola, banco con cuaderno y auriculares a la izquierda, estanque con entrada de agua en el centro-derecha, tronco con libro y cartas y espejo arqueado a la derecha, y consultorio desenfocado al fondo. Las zonas de interacción siguen estos objetos en el mismo plano fotográfico. No se superponen los objetos ni el follaje del jardín anterior; la cámara y los recorridos existentes se conservan.
 
 ### Do's
 

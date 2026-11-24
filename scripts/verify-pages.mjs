@@ -27,7 +27,7 @@ for (const page of pages) {
   }
 }
 if (pages.length !== 15) errors.push(`Expected 15 HTML pages, found ${pages.length}`);
-if (!readFileSync(join(root, 'index.html'), 'utf8').includes('jardin-analogico-v6.jpg'))
+if (!readFileSync(join(root, 'index.html'), 'utf8').includes('jardin-analogico-v7.jpg'))
   errors.push('The home page does not include the latest garden.');
 if (errors.length) throw new Error(errors.join('\n'));
 console.log(`Verified ${pages.length} static pages and ${references} local references.`);
